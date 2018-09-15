@@ -1,0 +1,50 @@
+﻿<Page x:Class="Project_Alphonse_Elric.Views.RechargePage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded" mc:Ignorable="d">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <DrillInNavigationTransitionInfo />
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--#region Title-->
+        <Grid x:Name="TitleGrid" Grid.Row="0" Canvas.ZIndex="1" Style="{StaticResource TitleBarGrid}">
+            <TextBlock x:Name="TitleText" Style="{StaticResource TitleBarText}" Text="Ricarica" />
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Content-->
+        <ProgressRing x:Name="StatusProgressRing" Grid.Row="1" Style="{StaticResource ProgressRingBrowser}" />
+        <WebView x:Name="PageWebView" Grid.Row="1" NavigationCompleted="pageWebView_NavigationCompleted" />
+        <!--#endregion-->
+
+        <!--#region VisualStateManager-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TitleGrid.Height" Value="104" />
+                        <Setter Target="TitleText.FontWeight" Value="Light" />
+                        <Setter Target="TitleText.FontSize" Value="46" />
+                        <Setter Target="TitleText.Text" Value="Ricarica" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

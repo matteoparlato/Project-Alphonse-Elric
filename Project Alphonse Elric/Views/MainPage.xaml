@@ -1,0 +1,232 @@
+﻿<Page x:Class="Project_Alphonse_Elric.Views.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
+
+	<Page.Transitions>
+		<TransitionCollection>
+			<NavigationThemeTransition>
+				<DrillInNavigationTransitionInfo />
+			</NavigationThemeTransition>
+		</TransitionCollection>
+	</Page.Transitions>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!--#region Title-->
+		<Grid x:Name="TitleGrid" Grid.Row="0" Canvas.ZIndex="1" Style="{ThemeResource TitleBarGrid}">
+			<TextBlock x:Name="TitleText" Style="{ThemeResource TitleBarText}" Text="Ciao Edward!" />
+		</Grid>
+		<!--#endregion-->
+
+		<!--#region Content-->
+		<ScrollViewer Grid.Row="1">
+			<Grid>
+				<!--  Margin="16,0,16,0"  -->
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="3*" />
+					<ColumnDefinition Width="10*" />
+					<ColumnDefinition Width="3*" />
+				</Grid.ColumnDefinitions>
+
+				<Grid x:Name="ContentGrid" Grid.Column="1" Padding="0,18,0,10">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0" Margin="0,0,0,18" Style="{ThemeResource TitleTextBlockStyle}" Text="I tuoi consumi in Italia" TextAlignment="Center" TextWrapping="Wrap" />
+
+					<GridView Grid.Row="1" HorizontalAlignment="Center" animations:ReorderGridAnimation.Duration="250" IsItemClickEnabled="False" ScrollViewer.VerticalScrollMode="Disabled" SelectionMode="None">
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 8.65625 3 C 8.13281 3 7.61719 3.1875 7.1875 3.53125 L 7.125 3.5625 L 7.09375 3.59375 L 3.96875 6.8125 L 4 6.84375 C 3.03516 7.73438 2.73828 9.06641 3.15625 10.2188 C 3.16016 10.2266 3.15234 10.2422 3.15625 10.25 C 4.00391 12.6758 6.17188 17.3594 10.4063 21.5938 C 14.6563 25.8438 19.4023 27.9258 21.75 28.8438 L 21.7813 28.8438 C 22.9961 29.25 24.3125 28.9609 25.25 28.1563 L 28.4063 25 C 29.2344 24.1719 29.2344 22.7344 28.4063 21.9063 L 24.3438 17.8438 L 24.3125 17.7813 C 23.4844 16.9531 22.0156 16.9531 21.1875 17.7813 L 19.1875 19.7813 C 18.4648 19.4336 16.7422 18.543 15.0938 16.9688 C 13.457 15.4063 12.6211 13.6094 12.3125 12.9063 L 14.3125 10.9063 C 15.1523 10.0664 15.168 8.66797 14.2813 7.84375 L 14.3125 7.8125 L 14.2188 7.71875 L 10.2188 3.59375 L 10.1875 3.5625 L 10.125 3.53125 C 9.69531 3.1875 9.17969 3 8.65625 3 Z M 8.65625 5 C 8.73047 5 8.80469 5.03516 8.875 5.09375 L 12.875 9.1875 L 12.9688 9.28125 C 12.9609 9.27344 13.0273 9.37891 12.9063 9.5 L 10.4063 12 L 9.9375 12.4375 L 10.1563 13.0625 C 10.1563 13.0625 11.3047 16.1367 13.7188 18.4375 L 13.9375 18.625 C 16.2617 20.7461 19 21.9063 19 21.9063 L 19.625 22.1875 L 22.5938 19.2188 C 22.7656 19.0469 22.7344 19.0469 22.9063 19.2188 L 27 23.3125 C 27.1719 23.4844 27.1719 23.4219 27 23.5938 L 23.9375 26.6563 C 23.4766 27.0508 22.9883 27.1328 22.4063 26.9375 C 20.1406 26.0469 15.7383 24.1133 11.8125 20.1875 C 7.85547 16.2305 5.78906 11.7422 5.03125 9.5625 C 4.87891 9.15625 4.98828 8.55469 5.34375 8.25 L 5.40625 8.1875 L 8.4375 5.09375 C 8.50781 5.03516 8.58203 5 8.65625 5 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Chiamate effettuate" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.VoiceTime, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.VoiceExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 2 5 L 2 25 L 7 25 L 7 30.0938 L 8.625 28.7813 L 13.3438 25 L 30 25 L 30 5 Z M 4 7 L 28 7 L 28 23 L 12.6563 23 L 12.375 23.2188 L 9 25.9063 L 9 23 L 4 23 Z M 8 12 L 8 14 L 24 14 L 24 12 Z M 8 16 L 8 18 L 20 18 L 20 16 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="SMS inviati" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.SMSCount, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.SMSExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 2 5 L 2 25 L 7 25 L 7 30.0938 L 8.625 28.7813 L 13.3438 25 L 30 25 L 30 5 Z M 4 7 L 28 7 L 28 23 L 12.6563 23 L 12.375 23.2188 L 9 25.9063 L 9 23 L 4 23 Z M 23 10 C 21.8945 10 21 10.8945 21 12 C 21 13.1055 21.8945 14 23 14 C 24.1055 14 25 13.1055 25 12 C 25 10.8945 24.1055 10 23 10 Z M 11.9063 12.2813 L 6.28125 17.9063 L 7.71875 19.3125 L 11.9063 15.125 L 16.9063 20.125 L 17.5938 19.4063 L 19.6875 17.3125 L 22.2813 19.9063 L 23.7188 18.5 L 20.4063 15.1875 L 19.6875 14.5 L 16.875 17.3125 L 12.5938 13 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="MMS inviati" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.MMSCount, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.MMSExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 16 7 C 13.3516 7 11.0508 8.23828 9.40625 10.0625 C 9.26953 10.0469 9.14844 10 9 10 C 6.80078 10 5 11.8008 5 14 C 3.26953 15.0547 2 16.8359 2 19 C 2 22.3008 4.69922 25 8 25 L 24 25 C 27.3008 25 30 22.3008 30 19 C 30 15.8438 27.5117 13.3164 24.4063 13.0938 C 23.1836 9.57422 19.9258 7 16 7 Z M 16 9 C 19.2773 9 22.0117 11.2539 22.7813 14.2813 L 22.9688 15.0625 L 23.8125 15.0313 C 24.0234 15.0195 24.0703 15 24 15 C 26.2188 15 28 16.7813 28 19 C 28 21.2188 26.2188 23 24 23 L 8 23 C 5.78125 23 4 21.2188 4 19 C 4 17.3398 5.00781 15.9219 6.4375 15.3125 L 7.125 15.0313 L 7.03125 14.2813 C 7.01172 14.1172 7 14.0234 7 14 C 7 12.8828 7.88281 12 9 12 C 9.14063 12 9.29688 12.0195 9.46875 12.0625 L 10.0938 12.2188 L 10.4688 11.7188 C 11.75 10.0742 13.75 9 16 9 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Dati consumati" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.DataUsed, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Local.DataExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+					</GridView>
+
+					<TextBlock Grid.Row="2" Margin="0,32,0,8" Style="{ThemeResource TitleTextBlockStyle}" Text="I tuoi consumi nel mondo" TextAlignment="Center" TextWrapping="Wrap" />
+
+					<GridView Grid.Row="3" HorizontalAlignment="Center" animations:ReorderGridAnimation.Duration="250" IsItemClickEnabled="False" ScrollViewer.VerticalScrollMode="Disabled" SelectionMode="None">
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 8.65625 3 C 8.13281 3 7.61719 3.1875 7.1875 3.53125 L 7.125 3.5625 L 7.09375 3.59375 L 3.96875 6.8125 L 4 6.84375 C 3.03516 7.73438 2.73828 9.06641 3.15625 10.2188 C 3.16016 10.2266 3.15234 10.2422 3.15625 10.25 C 4.00391 12.6758 6.17188 17.3594 10.4063 21.5938 C 14.6563 25.8438 19.4023 27.9258 21.75 28.8438 L 21.7813 28.8438 C 22.9961 29.25 24.3125 28.9609 25.25 28.1563 L 28.4063 25 C 29.2344 24.1719 29.2344 22.7344 28.4063 21.9063 L 24.3438 17.8438 L 24.3125 17.7813 C 23.4844 16.9531 22.0156 16.9531 21.1875 17.7813 L 19.1875 19.7813 C 18.4648 19.4336 16.7422 18.543 15.0938 16.9688 C 13.457 15.4063 12.6211 13.6094 12.3125 12.9063 L 14.3125 10.9063 C 15.1523 10.0664 15.168 8.66797 14.2813 7.84375 L 14.3125 7.8125 L 14.2188 7.71875 L 10.2188 3.59375 L 10.1875 3.5625 L 10.125 3.53125 C 9.69531 3.1875 9.17969 3 8.65625 3 Z M 8.65625 5 C 8.73047 5 8.80469 5.03516 8.875 5.09375 L 12.875 9.1875 L 12.9688 9.28125 C 12.9609 9.27344 13.0273 9.37891 12.9063 9.5 L 10.4063 12 L 9.9375 12.4375 L 10.1563 13.0625 C 10.1563 13.0625 11.3047 16.1367 13.7188 18.4375 L 13.9375 18.625 C 16.2617 20.7461 19 21.9063 19 21.9063 L 19.625 22.1875 L 22.5938 19.2188 C 22.7656 19.0469 22.7344 19.0469 22.9063 19.2188 L 27 23.3125 C 27.1719 23.4844 27.1719 23.4219 27 23.5938 L 23.9375 26.6563 C 23.4766 27.0508 22.9883 27.1328 22.4063 26.9375 C 20.1406 26.0469 15.7383 24.1133 11.8125 20.1875 C 7.85547 16.2305 5.78906 11.7422 5.03125 9.5625 C 4.87891 9.15625 4.98828 8.55469 5.34375 8.25 L 5.40625 8.1875 L 8.4375 5.09375 C 8.50781 5.03516 8.58203 5 8.65625 5 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Chiamate effettuate" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.VoiceTime, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.VoiceExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 2 5 L 2 25 L 7 25 L 7 30.0938 L 8.625 28.7813 L 13.3438 25 L 30 25 L 30 5 Z M 4 7 L 28 7 L 28 23 L 12.6563 23 L 12.375 23.2188 L 9 25.9063 L 9 23 L 4 23 Z M 8 12 L 8 14 L 24 14 L 24 12 Z M 8 16 L 8 18 L 20 18 L 20 16 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="SMS inviati" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.SMSCount, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.SMSExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 2 5 L 2 25 L 7 25 L 7 30.0938 L 8.625 28.7813 L 13.3438 25 L 30 25 L 30 5 Z M 4 7 L 28 7 L 28 23 L 12.6563 23 L 12.375 23.2188 L 9 25.9063 L 9 23 L 4 23 Z M 23 10 C 21.8945 10 21 10.8945 21 12 C 21 13.1055 21.8945 14 23 14 C 24.1055 14 25 13.1055 25 12 C 25 10.8945 24.1055 10 23 10 Z M 11.9063 12.2813 L 6.28125 17.9063 L 7.71875 19.3125 L 11.9063 15.125 L 16.9063 20.125 L 17.5938 19.4063 L 19.6875 17.3125 L 22.2813 19.9063 L 23.7188 18.5 L 20.4063 15.1875 L 19.6875 14.5 L 16.875 17.3125 L 12.5938 13 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="MMS inviati" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.MMSCount, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.MMSExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 16 7 C 13.3516 7 11.0508 8.23828 9.40625 10.0625 C 9.26953 10.0469 9.14844 10 9 10 C 6.80078 10 5 11.8008 5 14 C 3.26953 15.0547 2 16.8359 2 19 C 2 22.3008 4.69922 25 8 25 L 24 25 C 27.3008 25 30 22.3008 30 19 C 30 15.8438 27.5117 13.3164 24.4063 13.0938 C 23.1836 9.57422 19.9258 7 16 7 Z M 16 9 C 19.2773 9 22.0117 11.2539 22.7813 14.2813 L 22.9688 15.0625 L 23.8125 15.0313 C 24.0234 15.0195 24.0703 15 24 15 C 26.2188 15 28 16.7813 28 19 C 28 21.2188 26.2188 23 24 23 L 8 23 C 5.78125 23 4 21.2188 4 19 C 4 17.3398 5.00781 15.9219 6.4375 15.3125 L 7.125 15.0313 L 7.03125 14.2813 C 7.01172 14.1172 7 14.0234 7 14 C 7 12.8828 7.88281 12 9 12 C 9.14063 12 9.29688 12.0195 9.46875 12.0625 L 10.0938 12.2188 L 10.4688 11.7188 C 11.75 10.0742 13.75 9 16 9 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Dati consumati" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.DataUsed, Mode=TwoWay}" />
+									<TextBlock HorizontalAlignment="Center" Text="Consumi extrasoglia" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.Roaming.DataExtra, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+					</GridView>
+
+					<TextBlock Grid.Row="4" Margin="0,32,0,8" Style="{ThemeResource TitleTextBlockStyle}" Text="Altri consumi iliad" TextAlignment="Center" TextWrapping="Wrap" />
+
+					<GridView Grid.Row="5" Margin="0,0,0,58" HorizontalAlignment="Center" animations:ReorderGridAnimation.Duration="250" IsItemClickEnabled="False" ScrollViewer.VerticalScrollMode="Disabled" SelectionMode="None">
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 21 4 C 19.207 4 17.582 4.33594 16.3125 4.96875 C 15.043 5.60156 14 6.63281 14 8 L 14 12 C 14 12.1289 14.043 12.2539 14.0625 12.375 C 13.1328 12.1328 12.1016 12 11 12 C 9.20703 12 7.58203 12.3359 6.3125 12.9688 C 5.04297 13.6016 4 14.6328 4 16 L 4 24 C 4 25.3672 5.04297 26.3984 6.3125 27.0313 C 7.58203 27.6641 9.20703 28 11 28 C 12.793 28 14.418 27.6641 15.6875 27.0313 C 16.957 26.3984 18 25.3672 18 24 L 18 23.5938 C 18.918 23.8359 19.9219 24 21 24 C 22.793 24 24.418 23.6641 25.6875 23.0313 C 26.957 22.3984 28 21.3672 28 20 L 28 8 C 28 6.63281 26.957 5.60156 25.6875 4.96875 C 24.418 4.33594 22.793 4 21 4 Z M 21 6 C 22.5234 6 23.8789 6.32813 24.7813 6.78125 C 25.6836 7.23438 26 7.71094 26 8 C 26 8.28906 25.6836 8.76563 24.7813 9.21875 C 23.8789 9.67188 22.5234 10 21 10 C 19.4766 10 18.1211 9.67188 17.2188 9.21875 C 16.3164 8.76563 16 8.28906 16 8 C 16 7.71094 16.3164 7.23438 17.2188 6.78125 C 18.1211 6.32813 19.4766 6 21 6 Z M 16 10.8438 C 16.1055 10.9023 16.2031 10.9766 16.3125 11.0313 C 17.582 11.6641 19.207 12 21 12 C 22.793 12 24.418 11.6641 25.6875 11.0313 C 25.7969 10.9766 25.8945 10.9023 26 10.8438 L 26 12 C 26 12.2891 25.6836 12.7656 24.7813 13.2188 C 23.8789 13.6719 22.5234 14 21 14 C 19.4766 14 18.1211 13.6719 17.2188 13.2188 C 16.3164 12.7656 16 12.2891 16 12 Z M 11 14 C 12.5234 14 13.8789 14.3281 14.7813 14.7813 C 15.6836 15.2344 16 15.7109 16 16 C 16 16.2891 15.6836 16.7656 14.7813 17.2188 C 13.8789 17.6719 12.5234 18 11 18 C 9.47656 18 8.12109 17.6719 7.21875 17.2188 C 6.31641 16.7656 6 16.2891 6 16 C 6 15.7109 6.31641 15.2344 7.21875 14.7813 C 8.12109 14.3281 9.47656 14 11 14 Z M 26 14.8438 L 26 16 C 26 16.2891 25.6836 16.7656 24.7813 17.2188 C 23.8789 17.6719 22.5234 18 21 18 C 19.8633 18 18.8359 17.8125 18 17.5313 L 18 16 C 18 15.8711 17.957 15.7461 17.9375 15.625 C 18.8672 15.8672 19.8984 16 21 16 C 22.793 16 24.418 15.6641 25.6875 15.0313 C 25.7969 14.9766 25.8945 14.9023 26 14.8438 Z M 6 18.8438 C 6.10547 18.9023 6.20313 18.9766 6.3125 19.0313 C 7.58203 19.6641 9.20703 20 11 20 C 12.793 20 14.418 19.6641 15.6875 19.0313 C 15.7969 18.9766 15.8945 18.9023 16 18.8438 L 16 20 C 16 20.2891 15.6836 20.7656 14.7813 21.2188 C 13.8789 21.6719 12.5234 22 11 22 C 9.47656 22 8.12109 21.6719 7.21875 21.2188 C 6.31641 20.7656 6 20.2891 6 20 Z M 26 18.8438 L 26 20 C 26 20.2891 25.6836 20.7656 24.7813 21.2188 C 23.8789 21.6719 22.5234 22 21 22 C 19.8633 22 18.8359 21.8398 18 21.5625 L 18 19.625 C 18.918 19.8672 19.918 20 21 20 C 22.793 20 24.418 19.6641 25.6875 19.0313 C 25.7969 18.9766 25.8945 18.9023 26 18.8438 Z M 6 22.8438 C 6.10547 22.9023 6.20313 22.9766 6.3125 23.0313 C 7.58203 23.6641 9.20703 24 11 24 C 12.793 24 14.418 23.6641 15.6875 23.0313 C 15.7969 22.9766 15.8945 22.9023 16 22.8438 L 16 24 C 16 24.2891 15.6836 24.7656 14.7813 25.2188 C 13.8789 25.6719 12.5234 26 11 26 C 9.47656 26 8.12109 25.6719 7.21875 25.2188 C 6.31641 24.7656 6 24.2891 6 24 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Consumo totale" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.TotalConsumes, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 21 4 C 19.207 4 17.582 4.33594 16.3125 4.96875 C 15.043 5.60156 14 6.63281 14 8 L 14 12 C 14 12.1289 14.043 12.2539 14.0625 12.375 C 13.1328 12.1328 12.1016 12 11 12 C 9.20703 12 7.58203 12.3359 6.3125 12.9688 C 5.04297 13.6016 4 14.6328 4 16 L 4 24 C 4 25.3672 5.04297 26.3984 6.3125 27.0313 C 7.58203 27.6641 9.20703 28 11 28 C 12.793 28 14.418 27.6641 15.6875 27.0313 C 16.957 26.3984 18 25.3672 18 24 L 18 23.5938 C 18.918 23.8359 19.9219 24 21 24 C 22.793 24 24.418 23.6641 25.6875 23.0313 C 26.957 22.3984 28 21.3672 28 20 L 28 8 C 28 6.63281 26.957 5.60156 25.6875 4.96875 C 24.418 4.33594 22.793 4 21 4 Z M 21 6 C 22.5234 6 23.8789 6.32813 24.7813 6.78125 C 25.6836 7.23438 26 7.71094 26 8 C 26 8.28906 25.6836 8.76563 24.7813 9.21875 C 23.8789 9.67188 22.5234 10 21 10 C 19.4766 10 18.1211 9.67188 17.2188 9.21875 C 16.3164 8.76563 16 8.28906 16 8 C 16 7.71094 16.3164 7.23438 17.2188 6.78125 C 18.1211 6.32813 19.4766 6 21 6 Z M 16 10.8438 C 16.1055 10.9023 16.2031 10.9766 16.3125 11.0313 C 17.582 11.6641 19.207 12 21 12 C 22.793 12 24.418 11.6641 25.6875 11.0313 C 25.7969 10.9766 25.8945 10.9023 26 10.8438 L 26 12 C 26 12.2891 25.6836 12.7656 24.7813 13.2188 C 23.8789 13.6719 22.5234 14 21 14 C 19.4766 14 18.1211 13.6719 17.2188 13.2188 C 16.3164 12.7656 16 12.2891 16 12 Z M 11 14 C 12.5234 14 13.8789 14.3281 14.7813 14.7813 C 15.6836 15.2344 16 15.7109 16 16 C 16 16.2891 15.6836 16.7656 14.7813 17.2188 C 13.8789 17.6719 12.5234 18 11 18 C 9.47656 18 8.12109 17.6719 7.21875 17.2188 C 6.31641 16.7656 6 16.2891 6 16 C 6 15.7109 6.31641 15.2344 7.21875 14.7813 C 8.12109 14.3281 9.47656 14 11 14 Z M 26 14.8438 L 26 16 C 26 16.2891 25.6836 16.7656 24.7813 17.2188 C 23.8789 17.6719 22.5234 18 21 18 C 19.8633 18 18.8359 17.8125 18 17.5313 L 18 16 C 18 15.8711 17.957 15.7461 17.9375 15.625 C 18.8672 15.8672 19.8984 16 21 16 C 22.793 16 24.418 15.6641 25.6875 15.0313 C 25.7969 14.9766 25.8945 14.9023 26 14.8438 Z M 6 18.8438 C 6.10547 18.9023 6.20313 18.9766 6.3125 19.0313 C 7.58203 19.6641 9.20703 20 11 20 C 12.793 20 14.418 19.6641 15.6875 19.0313 C 15.7969 18.9766 15.8945 18.9023 16 18.8438 L 16 20 C 16 20.2891 15.6836 20.7656 14.7813 21.2188 C 13.8789 21.6719 12.5234 22 11 22 C 9.47656 22 8.12109 21.6719 7.21875 21.2188 C 6.31641 20.7656 6 20.2891 6 20 Z M 26 18.8438 L 26 20 C 26 20.2891 25.6836 20.7656 24.7813 21.2188 C 23.8789 21.6719 22.5234 22 21 22 C 19.8633 22 18.8359 21.8398 18 21.5625 L 18 19.625 C 18.918 19.8672 19.918 20 21 20 C 22.793 20 24.418 19.6641 25.6875 19.0313 C 25.7969 18.9766 25.8945 18.9023 26 18.8438 Z M 6 22.8438 C 6.10547 22.9023 6.20313 22.9766 6.3125 23.0313 C 7.58203 23.6641 9.20703 24 11 24 C 12.793 24 14.418 23.6641 15.6875 23.0313 C 15.7969 22.9766 15.8945 22.9023 16 22.8438 L 16 24 C 16 24.2891 15.6836 24.7656 14.7813 25.2188 C 13.8789 25.6719 12.5234 26 11 26 C 9.47656 26 8.12109 25.6719 7.21875 25.2188 C 6.31641 24.7656 6 24.2891 6 24 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Credito residuo" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.RemainingCredit, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+
+						<controls:DropShadowPanel Margin="5,5" HorizontalAlignment="Center" VerticalAlignment="Center" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.1" Color="{ThemeResource CardShadow}">
+							<StackPanel MinWidth="130" Padding="5,5" Background="{ThemeResource CardBackground}">
+								<Viewbox Width="32" Height="32" Margin="-8,10,0,0">
+									<Path Data="M 17 4 C 14.8008 4 13 5.80078 13 8 C 13 9.48047 13.8281 10.7773 15.0313 11.4688 C 15.0117 11.6445 15 11.8164 15 12 C 15 14.75 17.25 17 20 17 C 22.75 17 25 14.75 25 12 C 25 9.55078 23.207 7.48047 20.875 7.0625 C 20.4531 5.30859 18.8789 4 17 4 Z M 17 6 C 17.8125 6 18.4961 6.47266 18.8125 7.15625 C 17.5039 7.48047 16.3945 8.33594 15.7188 9.46875 C 15.2891 9.10938 15 8.60938 15 8 C 15 6.88281 15.8828 6 17 6 Z M 20 9 C 21.668 9 23 10.332 23 12 C 23 13.668 21.668 15 20 15 C 18.332 15 17 13.668 17 12 C 17 10.332 18.332 9 20 9 Z M 11.4688 16 C 8.27344 16 4.03125 17.75 4.03125 17.75 L 4.78125 19.625 C 4.78125 19.625 9.07813 18 11.4688 18 C 12.4375 18 14.0898 18.5938 15.4375 19.2813 C 16.1094 19.625 16.7109 19.9844 17.1563 20.2813 C 17.3789 20.4297 17.5664 20.5625 17.6875 20.6563 C 17.7461 20.7031 17.7891 20.7578 17.8125 20.7813 L 17.9688 21 C 18.0469 21.2227 18.0234 21.4727 17.875 21.6875 C 17.6836 21.957 17.3438 22.0625 17.0313 21.9688 L 17 21.9688 L 12.6563 19.875 L 11.8125 21.6875 L 16.25 23.8125 L 16.2813 23.8125 L 16.3438 23.8438 C 17.5 24.25 18.793 23.8477 19.5 22.8438 C 19.8984 22.2773 20.0156 21.6133 19.9375 20.9688 L 24.75 20.1563 C 25.2813 20.0664 25.7695 20.3984 25.9375 20.9063 C 26.1172 21.4453 25.8633 21.9922 25.3438 22.2188 C 23.8789 22.8633 21.5234 23.8281 19.4063 24.625 C 18.3477 25.0234 17.3359 25.375 16.5625 25.625 C 16.1758 25.75 15.8398 25.8438 15.5938 25.9063 C 15.3477 25.9688 15.1484 26 15.25 26 C 15.3125 26 14.9102 25.9102 14.4375 25.6563 C 13.9648 25.4023 13.3711 25.0313 12.7813 24.6563 C 12.1914 24.2813 11.582 23.9023 11 23.5938 C 10.418 23.2852 9.89453 23 9.1875 23 C 7.55078 23 6.09375 23.625 6.09375 23.625 L 6.875 25.4688 C 6.875 25.4688 8.09766 25 9.1875 25 C 9.16016 25 9.58594 25.0898 10.0625 25.3438 C 10.5391 25.5977 11.1289 25.9688 11.7188 26.3438 C 12.3086 26.7188 12.8984 27.0977 13.4688 27.4063 C 14.0391 27.7148 14.5391 28 15.25 28 C 15.5898 28 15.7852 27.9258 16.0938 27.8438 C 16.4023 27.7617 16.7773 27.6641 17.1875 27.5313 C 18.0078 27.2656 19.0156 26.9063 20.0938 26.5 C 22.2461 25.6914 24.6328 24.7344 26.1563 24.0625 C 27.6016 23.4258 28.3438 21.7461 27.8438 20.25 C 27.3672 18.8203 25.8945 17.9414 24.4063 18.1875 L 18.9375 19.0938 C 18.9336 19.0898 18.9141 19.0977 18.9063 19.0938 C 18.875 19.0703 18.8438 19.0234 18.8125 19 L 18.5313 18.7813 L 18.5313 18.8125 C 18.4453 18.75 18.3828 18.6914 18.2813 18.625 C 17.7617 18.2813 17.0859 17.8789 16.3438 17.5 C 14.8555 16.7422 13.1094 16 11.4688 16 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+								</Viewbox>
+								<StackPanel Margin="0,8,0,0">
+									<TextBlock HorizontalAlignment="Center" Text="Prossimo rinnovo" />
+									<TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" Foreground="{StaticResource SystemControlForegroundAccentBrush}" Text="{x:Bind AccountDetails.NextRenewal, Mode=TwoWay}" />
+								</StackPanel>
+							</StackPanel>
+						</controls:DropShadowPanel>
+					</GridView>
+				</Grid>
+			</Grid>
+		</ScrollViewer>
+		<!--#endregion-->
+
+		<!--#region VisualStateManager-->
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="WindowStates" CurrentStateChanged="WindowStates_CurrentStateChanged">
+				<VisualState x:Name="WideState">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="640" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="TitleGrid.Height" Value="104" />
+						<Setter Target="TitleText.FontWeight" Value="Light" />
+						<Setter Target="TitleText.FontSize" Value="46" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="NarrowState">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="0" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="ContentGrid.(Grid.Column)" Value="0" />
+						<Setter Target="ContentGrid.(Grid.ColumnSpan)" Value="3" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+	</Grid>
+</Page>

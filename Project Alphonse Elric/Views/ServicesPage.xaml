@@ -1,0 +1,378 @@
+﻿<Page x:Class="Project_Alphonse_Elric.Views.ServicesPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:helpers="using:Helpers" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
+
+	<Page.Transitions>
+		<TransitionCollection>
+			<NavigationThemeTransition>
+				<DrillInNavigationTransitionInfo />
+			</NavigationThemeTransition>
+		</TransitionCollection>
+	</Page.Transitions>
+
+	<Page.Resources>
+		<helpers:BooleanToVisibilityConverter x:Key="Converter" />
+	</Page.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!--#region Title-->
+		<Grid x:Name="TitleGrid" Grid.Row="0" Canvas.ZIndex="1" Style="{ThemeResource TitleBarGrid}">
+			<TextBlock x:Name="TitleText" Style="{ThemeResource TitleBarText}" Text="OPZIONI E SERVIZI" />
+		</Grid>
+		<!--#endregion-->
+
+		<!--#region Content-->
+		<ScrollViewer Grid.Row="1">
+			<Grid>
+				<!--  Margin="16,0,16,0"  -->
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="3*" />
+					<ColumnDefinition Width="10*" />
+					<ColumnDefinition Width="3*" />
+				</Grid.ColumnDefinitions>
+
+				<StackPanel x:Name="ContentStackPanel" Grid.Column="1" Padding="16,18,16,10">
+					<!--#region Opzioni-->
+					<TextBlock Margin="0,0,0,18" Style="{ThemeResource TitleTextBlockStyle}" Text="Opzioni" TextAlignment="Center" TextWrapping="Wrap" />
+
+					<!--#region Servizio 4G LTE-->
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
+							<Path Data="M 16 4 C 9.38281 4 4 9.38281 4 16 C 4 20.8633 6.92578 25.0547 11.0938 26.9375 L 11.5938 24.9688 C 8.28125 23.3398 6 19.9375 6 16 C 6 10.4844 10.4844 6 16 6 C 21.5156 6 26 10.4844 26 16 C 26 19.9375 23.7227 23.3398 20.4063 24.9688 L 20.9063 26.9375 C 25.0781 25.0547 28 20.8633 28 16 C 28 9.38281 22.6172 4 16 4 Z M 16 9 C 12.1406 9 9 12.1406 9 16 C 9 18.543 10.3711 20.7734 12.4063 22 L 12.9375 19.9375 C 11.7617 19.0234 11 17.6055 11 16 C 11 13.2422 13.2422 11 16 11 C 18.7578 11 21 13.2422 21 16 C 21 17.6055 20.2383 19.0234 19.0625 19.9375 L 19.5938 22 C 21.6289 20.7734 23 18.543 23 16 C 23 12.1406 19.8594 9 16 9 Z M 16 14 C 14.8945 14 14 14.8945 14 16 C 14 16.7383 14.4023 17.3711 15 17.7188 L 15 28 L 17 28 L 17 17.7188 C 17.5977 17.3711 18 16.7383 18 16 C 18 14.8945 17.1055 14 16 14 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Servizio 4G LTE" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Il servizio 4G+ viene attivato automaticamente sulla rete mobile iliad. Questo servizio richiede un telefono 4G compatibile con la rete mobile iliad." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" IsChecked="True" IsEnabled="False" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Blocco numeri a pagamento-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 8.65625 3 C 8.13281 3 7.61719 3.1875 7.1875 3.53125 L 7.125 3.5625 L 7.09375 3.59375 L 3.96875 6.8125 L 4 6.84375 C 3.03516 7.73438 2.73828 9.06641 3.15625 10.2188 C 3.16016 10.2266 3.15234 10.2422 3.15625 10.25 C 4.00391 12.6758 6.17188 17.3594 10.4063 21.5938 C 14.6563 25.8438 19.4023 27.9258 21.75 28.8438 L 21.7813 28.8438 C 22.9961 29.25 24.3125 28.9609 25.25 28.1563 L 28.4063 25 C 29.2344 24.1719 29.2344 22.7344 28.4063 21.9063 L 24.3438 17.8438 L 24.3125 17.7813 C 23.4844 16.9531 22.0156 16.9531 21.1875 17.7813 L 19.1875 19.7813 C 18.4648 19.4336 16.7422 18.543 15.0938 16.9688 C 13.457 15.4063 12.6211 13.6094 12.3125 12.9063 L 14.3125 10.9063 C 15.1523 10.0664 15.168 8.66797 14.2813 7.84375 L 14.3125 7.8125 L 14.2188 7.71875 L 10.2188 3.59375 L 10.1875 3.5625 L 10.125 3.53125 C 9.69531 3.1875 9.17969 3 8.65625 3 Z M 8.65625 5 C 8.73047 5 8.80469 5.03516 8.875 5.09375 L 12.875 9.1875 L 12.9688 9.28125 C 12.9609 9.27344 13.0273 9.37891 12.9063 9.5 L 10.4063 12 L 9.9375 12.4375 L 10.1563 13.0625 C 10.1563 13.0625 11.3047 16.1367 13.7188 18.4375 L 13.9375 18.625 C 16.2617 20.7461 19 21.9063 19 21.9063 L 19.625 22.1875 L 22.5938 19.2188 C 22.7656 19.0469 22.7344 19.0469 22.9063 19.2188 L 27 23.3125 C 27.1719 23.4844 27.1719 23.4219 27 23.5938 L 23.9375 26.6563 C 23.4766 27.0508 22.9883 27.1328 22.4063 26.9375 C 20.1406 26.0469 15.7383 24.1133 11.8125 20.1875 C 7.85547 16.2305 5.78906 11.7422 5.03125 9.5625 C 4.87891 9.15625 4.98828 8.55469 5.34375 8.25 L 5.40625 8.1875 L 8.4375 5.09375 C 8.50781 5.03516 8.58203 5 8.65625 5 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Blocco numeri a pagamento" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Blocca le chiamate verso i numeri a pagamento." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidNumbers, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Sblocco connessione dati oltre forfait-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 4 5 L 4 27 L 28 27 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 6 11 L 26 11 L 26 25 L 6 25 Z M 16 13 C 13.25 13 11 15.25 11 18 C 11 20.75 13.25 23 16 23 C 18.75 23 21 20.75 21 18 C 21 15.25 18.75 13 16 13 Z M 16 15 C 16.457 15 16.8945 15.1016 17.2813 15.2813 L 13.2813 19.2813 C 13.1016 18.8945 13 18.457 13 18 C 13 16.332 14.332 15 16 15 Z M 18.7188 16.7188 C 18.8984 17.1055 19 17.543 19 18 C 19 19.668 17.668 21 16 21 C 15.543 21 15.1055 20.8984 14.7188 20.7188 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Sblocco connessione dati oltre il traffico dati incluso nella promozione" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questa opzione consente di sbloccare la navigazione in Internet dopo che hai raggiunto al soglia prevista dalla tua promozione. Si consiglia di non abilitare questa opzione in quanto potrebbe comportare spese extra." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_8" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockLocal, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Sblocco consumo dei dati in Italia oltre i 50€-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 4 5 L 4 27 L 28 27 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 6 11 L 26 11 L 26 25 L 6 25 Z M 16 13 C 13.25 13 11 15.25 11 18 C 11 20.75 13.25 23 16 23 C 18.75 23 21 20.75 21 18 C 21 15.25 18.75 13 16 13 Z M 16 15 C 16.457 15 16.8945 15.1016 17.2813 15.2813 L 13.2813 19.2813 C 13.1016 18.8945 13 18.457 13 18 C 13 16.332 14.332 15 16 15 Z M 18.7188 16.7188 C 18.8984 17.1055 19 17.543 19 18 C 19 19.668 17.668 21 16 21 C 15.543 21 15.1055 20.8984 14.7188 20.7188 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Sblocco consumo dei dati in Italia oltre i 50€ fatturati" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questa opzione ti consente di sbloccare la navigazione in Internet dopo che hai superato la soglia di 50€. Si consiglia di non abilitare questa opzione in quanto potrebbe comportare spese extra." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_10" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockItaly, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 4 5 L 4 27 L 28 27 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 6 11 L 26 11 L 26 25 L 6 25 Z M 16 13 C 13.25 13 11 15.25 11 18 C 11 20.75 13.25 23 16 23 C 18.75 23 21 20.75 21 18 C 21 15.25 18.75 13 16 13 Z M 16 15 C 16.457 15 16.8945 15.1016 17.2813 15.2813 L 13.2813 19.2813 C 13.1016 18.8945 13 18.457 13 18 C 13 16.332 14.332 15 16 15 Z M 18.7188 16.7188 C 18.8984 17.1055 19 17.543 19 18 C 19 19.668 17.668 21 16 21 C 15.543 21 15.1055 20.8984 14.7188 20.7188 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questa opzione ti consente di sbloccare la navigazione in Internet dopo che hai superato la soglia di 50€. Si consiglia di non abilitare questa opzione in quanto potrebbe comportare spese extra." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_9" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockRoaming, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+					<!--#endregion-->
+
+					<!--#region Servizi-->
+					<TextBlock Margin="0,32,0,18" Style="{ThemeResource TitleTextBlockStyle}" Text="Servizi" TextAlignment="Center" TextWrapping="Wrap" />
+
+					<!--#region Blocco numeri nascosti-->
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 16 7 C 12.1563 7 8.625 7.61328 6.6875 8.28125 C 5.07813 8.83594 4 10.332 4 12.0313 L 4 15 C 4 16.0938 4.90625 17 6 17 L 10 17 C 11.0938 17 12 16.0938 12 15 L 12 13.0938 C 12.7852 12.8906 14.3359 12.5625 16 12.5625 C 17.6641 12.5625 19.2148 12.8906 20 13.0938 L 20 15 C 20 16.0938 20.9063 17 22 17 L 26 17 C 27.0938 17 28 16.0938 28 15 L 28 12.0313 C 28 10.332 26.9219 8.83594 25.3125 8.28125 C 23.375 7.61328 19.8438 7 16 7 Z M 16 9 C 19.625 9 23.1133 9.62109 24.6563 10.1563 C 25.4648 10.4375 26 11.1719 26 12.0313 L 26 15 L 22 15 L 22 11.5938 L 21.2813 11.375 C 21.2813 11.375 18.6016 10.5625 16 10.5625 C 13.3984 10.5625 10.7188 11.375 10.7188 11.375 L 10 11.5938 L 10 15 L 6 15 L 6 12.0313 C 6 11.1719 6.53516 10.4375 7.34375 10.1563 C 8.88672 9.62109 12.375 9 16 9 Z M 15 18 L 15 24.3125 L 12.7188 22.0313 L 11.2813 23.4688 L 15.2813 27.4688 L 16 28.1563 L 16.7188 27.4688 L 20.7188 23.4688 L 19.2813 22.0313 L 17 24.3125 L 17 18 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Blocco numeri nascosti" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questo servizio ti consente di rifiutare le chiamate entranti che hanno il numero anonimo. Le persone che ti chiamano da un numero privato vengono avvisate da un messaggio automatico che stai rifiutando la chiamata." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_1" IsChecked="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Trasferimento numeri nascosti alla segreteria telefonica-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 20.2813 3.28125 L 16.2813 7.28125 L 15.5938 8 L 16.2813 8.71875 L 20.2813 12.7188 L 21.7188 11.2813 L 19.4375 9 L 23 9 C 24.6563 9 26 10.3438 26 12 C 26 13.6563 24.6563 15 23 15 L 22 15 L 22 17 L 23 17 C 25.7461 17 28 14.7461 28 12 C 28 9.25391 25.7461 7 23 7 L 19.4375 7 L 21.7188 4.71875 Z M 7.8125 7.03125 C 7.29688 7.03125 6.78125 7.21875 6.40625 7.59375 L 3.78125 10.1875 C 3 10.9688 2.72656 12.125 3.03125 13.1875 L 3.0625 13.2188 L 3.0625 13.25 C 3.78906 15.2266 5.53125 19.2617 9.09375 22.7188 C 12.6055 26.125 16.4727 27.9648 18.5 28.7188 C 18.5156 28.7227 18.5469 28.7461 18.5625 28.75 L 18.5625 28.7188 C 19.6211 29.1406 20.8359 28.8516 21.5938 28 C 21.6133 27.9766 21.6367 27.9609 21.6563 27.9375 L 24.2188 25.4063 C 24.9727 24.6523 24.9727 23.3477 24.2188 22.5938 L 21.0313 19.3125 L 21 19.3125 L 21 19.2813 C 20.2461 18.5273 18.9414 18.5273 18.1875 19.2813 L 18.1563 19.3438 L 16.625 20.875 C 15.9844 20.5547 14.6758 19.8633 13.4063 18.5938 C 12.1367 17.3242 11.4453 16.0156 11.125 15.375 L 12.7188 13.8125 C 13.4727 13.0586 13.4727 11.7539 12.7188 11 L 12.6875 11 L 12.6875 10.9688 L 9.21875 7.59375 C 9.21094 7.58594 9.19531 7.60156 9.1875 7.59375 C 8.8125 7.23047 8.31641 7.03125 7.8125 7.03125 Z M 7.8125 9.03125 L 11.2813 12.4063 L 8.71875 14.9688 L 8.96875 15.5938 C 8.96875 15.5938 10.0313 18.0313 12 20 C 13.9688 21.9688 16.4063 23.0313 16.4063 23.0313 L 17.0313 23.2813 L 19.5938 20.7188 L 22.7813 24 L 20.125 26.6563 C 19.8906 26.9375 19.5781 27.0039 19.2813 26.875 L 19.25 26.875 C 17.4648 26.2188 13.7617 24.4492 10.5 21.2813 C 7.28906 18.1641 5.65234 14.4648 4.96875 12.625 C 4.87109 12.2891 5 11.8125 5.21875 11.5938 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Trasferimento numeri nascosti alla segreteria telefonica" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questo servizio ti consente di inoltrare le chiamate entranti che hanno il numero anonimo alla tua segreteria telefonica." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="Questo servizio può essere attivato solo se il servizio &quot;Blocco numeri nascosti&quot; è attivo" TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_7" IsChecked="{x:Bind AccountDetails.ActiveServices.RedirectToVoicemailUnknown, Mode=TwoWay}" IsEnabled="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Inoltro verso segreteria telefonica all'estero-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 8 9 C 4.14453 9 1 12.1445 1 16 C 1 19.8555 4.14453 23 8 23 L 24 23 C 27.8555 23 31 19.8555 31 16 C 31 12.1445 27.8555 9 24 9 C 20.1445 9 17 12.1445 17 16 C 17 17.957 17.8203 19.7266 19.125 21 L 12.875 21 C 14.1797 19.7266 15 17.957 15 16 C 15 12.1445 11.8555 9 8 9 Z M 8 11 C 10.7734 11 13 13.2266 13 16 C 13 18.7734 10.7734 21 8 21 C 5.22656 21 3 18.7734 3 16 C 3 13.2266 5.22656 11 8 11 Z M 24 11 C 26.7734 11 29 13.2266 29 16 C 29 18.7734 26.7734 21 24 21 C 21.2266 21 19 18.7734 19 16 C 19 13.2266 21.2266 11 24 11 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Inoltro verso segreteria telefonica all'estero" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Quando ti trovi all'estero, se non vuoi essere disturbato dalle chiamate in arrivo puoi trasferirle direttamente alla segreteria telefonica. Se hai attivato questo servizio, puoi effettuare normalmente chiamate se ti trovi in Italia." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_2" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferToVoicemail, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Protezione contro il trasferimento di chiamate-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 6 5 C 4.35547 5 2.79688 6.04297 2.25 7.6875 C 1.625 9.5625 1 12.1914 1 16 C 1 19.8086 1.625 22.4375 2.25 24.3125 C 2.79688 25.957 4.35547 27 6 27 L 9 27 C 9.52344 27 10.0586 26.8164 10.4375 26.4375 C 10.8164 26.0586 11 25.5234 11 25 L 11 21 C 11 20.4766 10.8164 19.9414 10.4375 19.5625 C 10.0586 19.1836 9.52344 19 9 19 L 7 19 C 6.79688 18.4688 6.5 17.5508 6.5 16 C 6.5 14.4492 6.79688 13.5313 7 13 L 9 13 C 9.52344 13 10.0586 12.8164 10.4375 12.4375 C 10.8164 12.0586 11 11.5234 11 11 L 11 7 C 11 6.47656 10.8164 5.94141 10.4375 5.5625 C 10.0586 5.18359 9.52344 5 9 5 Z M 26 5 C 24.3047 5 22.8242 6.08594 22.2813 7.65625 C 22.2773 7.67188 22.2539 7.67188 22.25 7.6875 C 21.6172 9.49219 21 12.207 21 16 C 21 19.8086 21.625 22.4375 22.25 24.3125 C 22.7969 25.957 24.3555 27 26 27 L 29 27 C 29.5234 27 30.0586 26.8164 30.4375 26.4375 C 30.8164 26.0586 31 25.5234 31 25 L 31 21 C 31 20.4766 30.8164 19.9414 30.4375 19.5625 C 30.0586 19.1836 29.5234 19 29 19 L 27 19 C 26.7969 18.4688 26.5 17.5508 26.5 16 C 26.5 14.4492 26.7969 13.5313 27 13 L 29 13 C 29.5234 13 30.0586 12.8164 30.4375 12.4375 C 30.8164 12.0586 31 11.5234 31 11 L 31 7 C 31 6.47656 30.8164 5.94141 30.4375 5.5625 C 30.0586 5.18359 29.5234 5 29 5 Z M 6 7 L 9 7 L 9 11 L 5.6875 11 L 5.40625 11.5625 C 5.40625 11.5625 4.5 13.3789 4.5 16 C 4.5 18.6211 5.40625 20.4375 5.40625 20.4375 L 5.6875 21 L 9 21 L 9 25 L 6 25 C 5.24609 25 4.41016 24.4453 4.15625 23.6875 C 3.58203 21.9609 3 19.5938 3 16 C 3 12.4063 3.58203 10.0391 4.15625 8.3125 C 4.41016 7.55469 5.24609 7 6 7 Z M 26 7 L 29 7 L 29 11 L 25.6875 11 L 25.4063 11.5625 C 25.4063 11.5625 24.5 13.3789 24.5 16 C 24.5 18.6211 25.4063 20.4375 25.4063 20.4375 L 25.6875 21 L 29 21 L 29 25 L 26 25 C 25.2461 25 24.4102 24.4453 24.1563 23.6875 C 23.582 21.9609 23 19.5938 23 16 C 23 12.4063 23.5938 9.9375 24.1563 8.34375 L 24.1563 8.3125 C 24.4258 7.50781 25.1094 7 26 7 Z M 15.5 11.2813 L 14.0938 12.7188 L 16.375 15 L 10 15 L 10 17 L 16.375 17 L 14.0938 19.2813 L 15.5 20.7188 L 20.2188 16 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Protezione contro il trasferimento di chiamate" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questo servizio non ti consente di ricevere una chiamata in entrata che è stata deviata in precedenza. Tutte le chiamate verranno bloccate a coloro che desiderano raggiungere un numero per il quale è stato attivato un rinvio alla tua linea." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_3" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferProtection, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Utente non disponibile-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 3 5 L 3 23 L 8 23 L 8 28.0938 L 9.625 26.7813 L 14.3438 23 L 29 23 L 29 5 Z M 5 7 L 27 7 L 27 21 L 13.6563 21 L 13.375 21.2188 L 10 23.9063 L 10 21 L 5 21 Z M 12.7188 9.28125 L 11.2813 10.7188 L 14.5625 14 L 11.2813 17.2813 L 12.7188 18.7188 L 16 15.4375 L 19.2813 18.7188 L 20.7188 17.2813 L 17.4375 14 L 20.7188 10.7188 L 19.2813 9.28125 L 16 12.5625 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Utente non disponibile" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questo servizio ti consente di rifiutare tutte le chiamate entranti sulla tua linea. Coloro che ti chiamano saranno trasferiti a un annuncio che indicherà loro che non sei raggiungibile e che possono inviarti un SMS." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_4" IsChecked="{x:Bind AccountDetails.ActiveServices.UserNotAvailable, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Chiamate rapide-->
+					<Grid Margin="0,18,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 19 6 L 16 15 L 21 16 L 13.1016 26 L 13 26 L 16 17.9688 L 11 16.9688 L 18.8984 6 L 19 6 M 21.7734 4 L 17.875 4 L 17.2773 4.83203 L 9.37891 15.8008 L 7.5625 18.3203 L 10.6055 18.9297 L 13.3047 19.4688 L 11.125 25.3008 L 10.1172 28 L 14.0703 28 L 14.6719 27.2383 L 22.5703 17.2383 L 24.5938 14.6797 L 21.3945 14.0391 L 18.6133 13.4844 L 20.8984 6.63281 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Chiamate rapide" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questo servizio consente di assegnare dei numeri abbreviati ai contatti preferiti." TextWrapping="Wrap" />
+							<HyperlinkButton Content="Personalizza chiamate rapide" Tapped="HyperlinkButton_Tapped" Visibility="{Binding ElementName=FastCallsCheckBox, Path=IsChecked, Mode=TwoWay, Converter={StaticResource Converter}}" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox x:Name="FastCallsCheckBox" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_5" IsChecked="{x:Bind AccountDetails.ActiveServices.FastCalls, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+
+					<!--#region Filtro Chiamate & SMS/MMS-->
+					<Grid Margin="0,18,0,58">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+
+						<Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+							<Path Data="M 3 6 L 3 26 L 29 26 L 29 6 Z M 5 8 L 11 8 L 11 12 L 5 12 Z M 13 8 L 19 8 L 19 12 L 13 12 Z M 21 8 L 27 8 L 27 12 L 21 12 Z M 5 14 L 7 14 L 7 18 L 5 18 Z M 9 14 L 15 14 L 15 18 L 9 18 Z M 17 14 L 23 14 L 23 18 L 17 18 Z M 25 14 L 27 14 L 27 18 L 25 18 Z M 5 20 L 11 20 L 11 24 L 5 24 Z M 13 20 L 19 20 L 19 24 L 13 24 Z M 21 20 L 27 20 L 27 24 L 21 24 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+						</Viewbox>
+						<TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Filtro Chiamate &amp; SMS/MMS" TextWrapping="Wrap" />
+
+						<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+							<TextBlock Text="Questo servizio ti consente di gestire, tramite dei filtri, le comunicazioni (chiamate e SMS/MMS) che ricevi o invii dalla tua linea." TextWrapping="Wrap" />
+							<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+						</StackPanel>
+						<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_6" IsChecked="{x:Bind AccountDetails.ActiveServices.Filter, Mode=TwoWay}" />
+					</Grid>
+					<!--#endregion-->
+					<!--#endregion-->
+				</StackPanel>
+			</Grid>
+		</ScrollViewer>
+		<!--#endregion-->
+
+		<!--#region VisualStateManager-->
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="WindowStates">
+				<VisualState x:Name="WideState">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="640" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="TitleGrid.Height" Value="104" />
+						<Setter Target="TitleText.FontWeight" Value="Light" />
+						<Setter Target="TitleText.FontSize" Value="46" />
+						<Setter Target="TitleText.Text" Value="Opzioni e servizi" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="NarrowState">
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="0" />
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="ContentStackPanel.(Grid.Column)" Value="0" />
+						<Setter Target="ContentStackPanel.(Grid.ColumnSpan)" Value="3" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+	</Grid>
+</Page>
