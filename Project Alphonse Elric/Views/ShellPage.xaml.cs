@@ -149,7 +149,7 @@ namespace Project_Alphonse_Elric.Views
             _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("I tuoi consumi", ''));
             _primaryItems.Add(ShellNavigationItem.FromType<ServicesPage>("Opzioni e servizi", ''));
             _primaryItems.Add(ShellNavigationItem.FromType<VoicemailPage>("Segreteria telefonica", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<RechargePage>("Ricarica", ''));
+            _primaryItems.Add(ShellNavigationItem.FromType<RechargePage>("Ricarica telefonica", ''));
 
             _secondaryItems.Clear();
 

@@ -224,7 +224,7 @@
             <AppBarButton x:Name="ConsumesAppBarButton" Grid.Column="0" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click" Icon="Home" Label="I tuoi consumi" />
             <AppBarButton x:Name="OptionsAppBarButton" Grid.Column="1" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_1" Icon="Repair" Label="Opzioni e servizi" />
             <AppBarButton x:Name="VoicemailAppBarButton" Grid.Column="2" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_2" Icon="Memo" Label="Segreteria telefonica" />
-            <AppBarButton x:Name="RechargeAppBarButton" Grid.Column="3" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_3" Icon="Refresh" Label="Ricarica" />
+            <AppBarButton x:Name="RechargeAppBarButton" Grid.Column="3" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_3" Icon="Refresh" Label="Ricarica telefonica" />
             <AppBarButton x:Name="SettingsAppBarButton" Grid.Column="4" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_4" Icon="Setting" Label="Impostazioni" />
         </Grid>
 
