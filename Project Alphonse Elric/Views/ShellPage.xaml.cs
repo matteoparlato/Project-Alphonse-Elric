@@ -115,10 +115,11 @@ namespace Project_Alphonse_Elric.Views
                 Loader.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
                 LoginGrid.Background = Application.Current.Resources["CardBackground"] as Brush;
                 WideNavigation.Background = this.Resources["SystemControlAccentAcrylicWindowAccentMediumHighBrush"] as Brush;
-                ConsumesAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                OptionsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                VoicemailAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                SettingsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
+                //ConsumesAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
+                //OptionsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
+                //VoicemailAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
+                //RechargeAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
+                //SettingsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
             }
             else
             {
