@@ -154,7 +154,7 @@
 
             <Grid x:Name="DropLinkGrid" Margin="0,48,0,0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
 
-            <ui:AdControl Width="320" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" AdUnitId="1100030385" ApplicationId="854121b0-1166-4931-a023-14fcbb75c9b1" Canvas.ZIndex="1" IsAutoRefreshEnabled="True" />
+            <ui:AdControl Width="320" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" AdUnitId="1100030462" ApplicationId="854121b0-1166-4931-a023-14fcbb75c9b1" Canvas.ZIndex="1" IsAutoRefreshEnabled="True" />
 
             <controls:DropShadowPanel x:Name="DropShadowHeader" Margin="0,48,0,0" HorizontalContentAlignment="Stretch" BlurRadius="10" OffsetX="0" OffsetY="-2" ShadowOpacity="0.5" Color="{ThemeResource TitleShadow}">
                 <Grid Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" />

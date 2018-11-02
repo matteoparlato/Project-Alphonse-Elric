@@ -115,8 +115,7 @@ namespace Helpers
             AccountDetails.Roaming.MMSCount = subnode[20].InnerText;
             AccountDetails.Roaming.MMSExtra = subnode[21].InnerText;
 
-            AccountDetails.TotalConsumes = subnode[24].InnerText;
-            AccountDetails.RemainingCredit = subnode[25].InnerText;
+            AccountDetails.RemainingCredit = subnode[24].InnerText;
 
             AccountDetails.NextRenewal = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Equals("end_offerta")).ToArray()[0].InnerText.Trim().Substring(49);
         }

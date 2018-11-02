@@ -10,7 +10,6 @@
         public string Name { get; set; } = string.Empty;
         public string ID { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public string TotalConsumes { get; set; } = string.Empty;
         public string RemainingCredit { get; set; } = string.Empty;
         public string NextRenewal { get; set; } = string.Empty;
         public Options ActiveOptions { get; set; } = new Options();
