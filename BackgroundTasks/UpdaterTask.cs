@@ -16,7 +16,7 @@ namespace BackgroundTasks
         /// Performs the work of a background task.
         /// The system calls this method when the associated background task has been triggered.
         /// </summary>
-        /// <param name="taskInstance">The interface to an instance of the background task.</param>
+        /// <param name="taskInstance">The interface to an instance of the background task</param>
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             taskInstance.GetDeferral();
@@ -25,9 +25,9 @@ namespace BackgroundTasks
         }
 
         /// <summary>
-        /// Method which performs an update of the live tile with the latest information.
+        /// Method which performs the work of the background task.
         /// </summary>
-        /// <param name="taskInstance">The interface to an instance of the background task.</param>
+        /// <param name="taskInstance">The interface to an instance of the background task</param>
         private async static void Update(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
