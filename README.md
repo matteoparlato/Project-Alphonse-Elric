@@ -1,8 +1,20 @@
+
 # Project Alphonse Elric
 
-Repository of Project Alphonse Elric (aka Area clienti iliad)
-
 Area clienti iliad is the app that allows you to quickly and easily access to your personal area on iliad.it to consult the meters related to your offer, the options and services activated as well as the voicemail.
+
+
+<p align="center">
+  <img src="https://github.com/matteoparlato/Project-Alphonse-Elric/blob/master/Project%20Alphonse%20Elric/Assets/Banner.png"/>
+</p>
+
+
+### Developing, testing and deploying Project Alphonse Elric
+
+For all those who want to extend the functionality or fix bugs (hope not) here are the prerequisites for developing Project Alphonse Elric:
+
+  - Visual Studio 2017 with UWP desktop development workload and Windows 1809 SDK.
+  - XAML Styler (optional but recommended for keeping XAML code in a good shape).
 
 ## Authors
 
