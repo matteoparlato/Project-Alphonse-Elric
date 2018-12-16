@@ -13,7 +13,7 @@ namespace Helpers
     public static class NotificationExtensions
     {
         /// <summary>
-        /// Method which sends an update to the live tile.
+        /// Method which sends a tile update.
         /// </summary>
         /// <param name="profile">The content of the tile</param>
         public static void SendTileNotification(Profile profile)
