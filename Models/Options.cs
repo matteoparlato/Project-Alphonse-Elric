@@ -10,11 +10,25 @@ namespace Models
     {
         public bool LTE { get; private set; } = true;
 
+        private bool _publishPhoneNumber;
+        public bool PublishPhoneNumber
+        {
+            get { return _publishPhoneNumber; }
+            set { Set(ref _publishPhoneNumber, value); }
+        }
+
         private bool _paidNumbers;
         public bool PaidNumbers
         {
             get { return _paidNumbers; }
             set { Set(ref _paidNumbers, value); }
+        }
+
+        private bool _paidBankNumbers;
+        public bool PaidBankNumbers
+        {
+            get { return _paidBankNumbers; }
+            set { Set(ref _paidBankNumbers, value); }
         }
 
         private bool _unlockLocal;

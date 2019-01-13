@@ -39,11 +39,32 @@ namespace Project_Alphonse_Elric.Views
         }
 
         /// <summary>
-        /// Method invoked when the user clicks on Blocco numeri a pagamento option checkbox.
+        /// Method invoked when the user clicks on Pubblicazione in elenco option checkbox.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (AccountDetails.ActiveOptions.PublishPhoneNumber)
+                {
+                    await ClientExtensions.EnablePublishPhoneNumber();
+                }
+                else
+                {
+                    await ClientExtensions.DisablePublishPhoneNumber();
+                }
+            }
+            catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
+        }
+
+        /// <summary>
+        /// Method invoked when the user clicks on Blocca le chiamate verso i numeri a pagamento e gli SMS+ option checkbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void CheckBox_Click_11(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -54,6 +75,27 @@ namespace Project_Alphonse_Elric.Views
                 else
                 {
                     await ClientExtensions.DisablePaidNumbers();
+                }
+            }
+            catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
+        }
+
+        /// <summary>
+        /// Method invoked when the user clicks on Blocca gli SMS bancari a pagamento option checkbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void CheckBox_Click_12(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (AccountDetails.ActiveOptions.PaidBankNumbers)
+                {
+                    await ClientExtensions.EnablePublishPhoneNumber();
+                }
+                else
+                {
+                    await ClientExtensions.DisablePublishPhoneNumber();
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }

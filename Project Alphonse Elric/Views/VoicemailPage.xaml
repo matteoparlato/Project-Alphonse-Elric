@@ -105,7 +105,7 @@
 
 							<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
 								<TextBlock Text="Consente di visualizzare il numero del chiamante" TextWrapping="Wrap" />
-								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+								<TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
 							</StackPanel>
 							<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.Voicemail.ShowCallerID, Mode=TwoWay}" />
 						</Grid>
@@ -130,7 +130,7 @@
 
 							<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
 								<TextBlock Text="Consente di visualizzare per ogni messagio la data e l'orario della chiamata." TextWrapping="Wrap" />
-								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+								<TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
 							</StackPanel>
 							<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_1" IsChecked="{x:Bind AccountDetails.Voicemail.ShowTimeDate, Mode=TwoWay}" />
 						</Grid>
@@ -156,7 +156,7 @@
 							<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
 								<TextBlock Text="Quando accedi a distanza alla tua segreteria telefonica (dall'estero o da qualsiasi telefono non tuo) dovrai identificarti tramite un codice." TextWrapping="Wrap" />
 								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="Il codice di protezione può essere impostato dalla tua &quot;Area personale&quot; sul sito iliad.it" TextWrapping="Wrap" />
-								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,5,0,0" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
 							</StackPanel>
 							<CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" IsChecked="{x:Bind AccountDetails.Voicemail.ProtectVoicemail, Mode=TwoWay}" IsEnabled="False" />
 						</Grid>
@@ -182,7 +182,7 @@
 							<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
 								<TextBlock Text="Consenti di utilizzare un annuncio personalizzato nella segreteria telefonica." TextWrapping="Wrap" />
 								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="L'annuncio personalizzato può essere impostato dalla tua &quot;Area personale&quot; sul sito iliad.it" TextWrapping="Wrap" />
-								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,5,0,0" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
 							</StackPanel>
 							<CheckBox x:Name="PersonalizedAdvertCheckBox" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_3" IsChecked="{x:Bind AccountDetails.Voicemail.PersonalizedAdvert, Mode=TwoWay}" />
 						</Grid>
@@ -208,7 +208,7 @@
 							<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
 								<TextBlock Text="Quando viene lasciato un messaggio sulla segreteria telefonica, puoi scegliere di ricevere una notifica via email con l'evidenza del numero chiamante, la data e la durata del messaggio. Puoi inoltre scegliere di includere come allegato il file audio del messaggio." TextWrapping="Wrap" />
 								<HyperlinkButton Content="Personalizza notifiche" Tapped="HyperlinkButton_Tapped" />
-								<TextBlock Margin="0,5,0,0" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Servizo incluso" TextWrapping="Wrap" />
+								<TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
 							</StackPanel>
 						</Grid>
 						<!--#endregion-->
