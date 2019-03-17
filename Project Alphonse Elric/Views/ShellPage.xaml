@@ -1,4 +1,4 @@
-<Page x:Class="Project_Alphonse_Elric.Views.ShellPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="using:Microsoft.Advertising.WinRT.UI" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
+<Page x:Class="Project_Alphonse_Elric.Views.ShellPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:contract5Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="using:Microsoft.Advertising.WinRT.UI" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
 
     <Page.Resources>
         <DataTemplate x:Key="NavigationMenuItemDataTemplate" x:DataType="local:ShellNavigationItem">
@@ -154,7 +154,7 @@
 
             <Grid x:Name="DropLinkGrid" Margin="0,48,0,0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
 
-            <ui:AdControl Width="320" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" AdUnitId="1100030462" ApplicationId="854121b0-1166-4931-a023-14fcbb75c9b1" Canvas.ZIndex="1" IsAutoRefreshEnabled="True" />
+            <!--<ui:AdControl Width="320" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" AdUnitId="1100030462" ApplicationId="854121b0-1166-4931-a023-14fcbb75c9b1" Canvas.ZIndex="1" IsAutoRefreshEnabled="True" />-->
 
             <controls:DropShadowPanel x:Name="DropShadowHeader" Margin="0,48,0,0" HorizontalContentAlignment="Stretch" BlurRadius="10" OffsetX="0" OffsetY="-2" ShadowOpacity="0.5" Color="{ThemeResource TitleShadow}">
                 <Grid Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
@@ -195,9 +195,9 @@
                             <TextBlock Opacity="0.6" Style="{ThemeResource TitleTextBlockStyle}" Text="Inserisci le credenziali del tuo account" TextAlignment="Center" TextWrapping="Wrap" />
 
                             <StackPanel Margin="0,18,0,0">
-                                <TextBox x:Name="UsernameTextBox" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
-                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
-                                <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" Click="Button_Click" Content="Accedi" IsEnabled="False" />
+                                <TextBox x:Name="UsernameTextBox" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
+                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
+                                <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" contract5Present:Style="{StaticResource ButtonRevealStyle}" Click="Button_Click" Content="Accedi" IsEnabled="False" />
                             </StackPanel>
 
                             <StackPanel x:Name="ErrorStackPanel" Visibility="Collapsed">

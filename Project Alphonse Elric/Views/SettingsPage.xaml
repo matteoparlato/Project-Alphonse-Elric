@@ -1,4 +1,4 @@
-﻿<Page x:Class="Project_Alphonse_Elric.Views.SettingsPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
+﻿<Page x:Class="Project_Alphonse_Elric.Views.SettingsPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:contract5Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
 
     <Page.Transitions>
         <TransitionCollection>
@@ -70,7 +70,7 @@
                         </Viewbox>
                         <StackPanel Margin="32,0,0,0">
                             <TextBlock Text="Per abilitare questa funzione è necessario specificare un metodo di autenticazione valido (PIN, impronta digitale o scansione dell'iride) nelle impostazioni di Windows." TextWrapping="Wrap" />
-                            <Button Margin="0,8,0,0" Click="Button_Click" Content="Apri le impostazioni di Windows" />
+                            <Button Margin="0,8,0,0" contract5Present:Style="{StaticResource ButtonRevealStyle}" Click="Button_Click" Content="Apri le impostazioni di Windows" />
                         </StackPanel>
                     </RelativePanel>
                 </StackPanel>
@@ -87,7 +87,7 @@
                         <StackPanel Margin="32,0,0,0">
                             <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Risparmio batteria" TextWrapping="Wrap" />
                             <TextBlock Text="Quando attivi la modalità risparmio batteria l'app non può più inviarti alcun tipo di aggiornamento. Aggiungendo un'eccezione potrai far si che l'app possa continuare ad essere eseguita in background e che continui a mantenerti aggiornato." TextWrapping="Wrap" />
-                            <Button Margin="0,8,0,0" Click="OpenSettingsButton_Click" Content="Aggiungi eccezione" />
+                            <Button Margin="0,8,0,0" contract5Present:Style="{StaticResource ButtonRevealStyle}" Click="OpenSettingsButton_Click" Content="Aggiungi eccezione" />
                         </StackPanel>
                     </RelativePanel>
                     <RelativePanel Margin="0,10,0,0">
@@ -97,7 +97,7 @@
                         <StackPanel Margin="32,0,0,0">
                             <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Disabilita notifiche e live tile" TextWrapping="Wrap" />
                             <TextBlock Text="Se non vuoi più ricevere aggiornamenti dall'app puoi disattivare la sua esecuzione in background." TextWrapping="Wrap" />
-                            <Button Margin="0,8,0,0" Click="OpenPrivacyBackgroundSettingsButton_Click" Content="Gestisci app in background" />
+                            <Button Margin="0,8,0,0" contract5Present:Style="{StaticResource ButtonRevealStyle}" Click="OpenPrivacyBackgroundSettingsButton_Click" Content="Gestisci app in background" />
                         </StackPanel>
                     </RelativePanel>
                 </StackPanel>
