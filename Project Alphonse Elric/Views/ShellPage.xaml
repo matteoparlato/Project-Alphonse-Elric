@@ -196,7 +196,7 @@
 
                             <StackPanel Margin="0,18,0,0">
                                 <TextBox x:Name="UsernameTextBox" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
-                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
+                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" KeyDown="PasswordPasswordBox_KeyDown" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
                                 <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" contract5Present:Style="{StaticResource ButtonRevealStyle}" Click="Button_Click" Content="Accedi" IsEnabled="False" />
                             </StackPanel>
 

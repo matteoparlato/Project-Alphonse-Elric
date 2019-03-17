@@ -18,6 +18,7 @@ using Windows.Foundation.Metadata;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
+using Windows.System;
 using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -494,6 +495,17 @@ namespace Project_Alphonse_Elric.Views
             NavigationService.Navigate(typeof(SettingsPage));
             NavigationService.Frame.BackStack.Clear();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Method invoked when the user presses a key on the keyboard.
+        /// If the Enter key is pressed begin the login process.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PasswordPasswordBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter) Button_Click(null, null);
         }
     }
 }
