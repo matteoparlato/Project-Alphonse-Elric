@@ -353,6 +353,17 @@
         <!--#region VisualStateManager-->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="PanoramicState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="960" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TitleGrid.Height" Value="104" />
+                        <Setter Target="TitleText.FontWeight" Value="Light" />
+                        <Setter Target="TitleText.FontSize" Value="46" />
+                        <Setter Target="TitleText.Text" Value="Opzioni e servizi" />
+                    </VisualState.Setters>
+                </VisualState>
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="640" />
@@ -362,6 +373,8 @@
                         <Setter Target="TitleText.FontWeight" Value="Light" />
                         <Setter Target="TitleText.FontSize" Value="46" />
                         <Setter Target="TitleText.Text" Value="Opzioni e servizi" />
+                        <Setter Target="ContentStackPanel.(Grid.Column)" Value="0" />
+                        <Setter Target="ContentStackPanel.(Grid.ColumnSpan)" Value="3" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
