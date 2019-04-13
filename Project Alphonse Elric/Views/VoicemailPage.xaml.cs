@@ -140,13 +140,13 @@ namespace Project_Alphonse_Elric.Views
                 ShellPage.Current.AppNotification.Content = "Sto scaricando il messaggio vocale che hai scelto di ascoltare. Non appena il download verrà terminato il messaggio vocale verrà aperto automaticamente.";
                 ShellPage.Current.AppNotification.ShowDismissButton = false;
                 ShellPage.Current.AppNotification.Show();
-            }            
+            }
 
             try
             {
                 if (!await Launcher.LaunchFileAsync(await ClientExtensions.DownloadMessage(message)))
                 {
-                    ShellPage.Current.AppNotification.Content = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area clienti iliad\" nella cartella \"Download\" del tuo account.";
+                    ShellPage.Current.AppNotification.Content = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area personale\" nella cartella \"Download\" del tuo account.";
                 }
                 else
                 {
@@ -157,7 +157,7 @@ namespace Project_Alphonse_Elric.Views
                     else
                     {
                         ShellPage.Current.AppNotification.Dismiss();
-                    }                    
+                    }
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
@@ -196,7 +196,7 @@ namespace Project_Alphonse_Elric.Views
             {
                 PhoneCallManager.ShowPhoneCallUI(message.Sender, message.Sender);
             }
-            catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }            
+            catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
         }
 
         /// <summary>

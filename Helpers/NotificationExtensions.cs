@@ -24,7 +24,7 @@ namespace Helpers
                 {
                     Visual = new TileVisual()
                     {
-                        DisplayName = "Area clienti iliad",
+                        DisplayName = "Area personale",
                         Branding = TileBranding.Name,
 
                         TileMedium = new TileBinding()

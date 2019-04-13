@@ -11,7 +11,7 @@ namespace Project_Alphonse_Elric.Helpers
     /// </summary>
     internal static class SecurityExtensions
     {
-        internal const string MESSAGE = "Per motivi di sicurezza, Area clienti deve verificare l'identità dell'utente.";
+        internal const string MESSAGE = "Per motivi di sicurezza, Area personale deve verificare l'identità dell'utente.";
 
         /// <summary>
         /// A method that de-registers the HelloAuthenticationEnabled key to disable Windows Hello.
