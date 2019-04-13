@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap uap5 mp uap3">
-  <Identity Name="3952FlowCode.Areaclientiiliad" Publisher="CN=0F54C46B-EBBC-4176-B95A-C336515C5BA8" Version="1.2.13.0" />
-  <mp:PhoneIdentity PhoneProductId="9d286c21-653e-4312-9ad5-e9db0190387b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="60396NeonDev.Areapersonale" Publisher="CN=9549A8D5-78E1-42CB-9E2D-0F8E426F38A1" Version="1.2.14.0" />
+  <mp:PhoneIdentity PhoneProductId="5ac187d7-5fa7-4585-8c5a-e07f321a1acc" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Area clienti iliad</DisplayName>
-    <PublisherDisplayName>FlowCode</PublisherDisplayName>
+    <DisplayName>Area personale</DisplayName>
+    <PublisherDisplayName>Neon Dev</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Project_Alphonse_Elric.App">
-      <uap:VisualElements DisplayName="Area clienti iliad" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Project Alphonse Elric" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Area personale" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Project Alphonse Elric" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Area clienti iliad" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
