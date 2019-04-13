@@ -2,11 +2,13 @@
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Push;
+using Microsoft.Toolkit.Uwp.Helpers;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
 using Project_Alphonse_Elric.Views;
 using System;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 
@@ -21,9 +23,18 @@ namespace Project_Alphonse_Elric
             get { return _activationService.Value; }
         }
 
+        private const string AppCenterAPIKey = "eadb65c5-c3e6-4a17-9031-b65d732a2523";
+
         public App()
         {
-            AppCenter.Start("93a2aa6e-431b-4c5b-826c-24d0073f5842", typeof(Analytics), typeof(Crashes), typeof(Push));
+            if (!(ApplicationData.Current.LocalSettings.Values.ContainsKey("AnalyticsDisabled") || SystemInformation.IsFirstRun))
+            {
+                AppCenter.Start(AppCenterAPIKey, typeof(Analytics), typeof(Crashes), typeof(Push));
+            }
+            else
+            {
+                AppCenter.Start(AppCenterAPIKey, typeof(Crashes), typeof(Push));
+            }
 
             InitializeComponent();
 

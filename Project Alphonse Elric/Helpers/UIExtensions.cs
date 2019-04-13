@@ -61,9 +61,9 @@ namespace Project_Alphonse_Elric.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Method which shows the ProgressIndicator in the status bar (mobile only).
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The message to show</param>
         internal static void ShowProgressStatusBar(string message)
         {
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -75,7 +75,7 @@ namespace Project_Alphonse_Elric.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Method which hides the ProgressIndicator in the status bar (mobile only).
         /// </summary>
         internal static void HideProgressStatusBar()
         {
