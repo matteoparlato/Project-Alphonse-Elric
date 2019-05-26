@@ -11,7 +11,7 @@ namespace Project_Alphonse_Elric.Helpers
     /// </summary>
     internal static class SecurityExtensions
     {
-        internal const string MESSAGE = "Per motivi di sicurezza, Area clienti iliad deve verificare l'identità dell'utente.";
+        internal const string MESSAGE = "Per motivi di sicurezza, Area personale deve verificare l'identità dell'utente.";
 
         /// <summary>
         /// A method that de-registers the HelloAuthenticationEnabled key to disable Windows Hello.
@@ -42,7 +42,7 @@ namespace Project_Alphonse_Elric.Helpers
         internal static PasswordCredential RetrieveCredentials()
         {
             IReadOnlyList<PasswordCredential> credentialList = new PasswordVault().RetrieveAll();
-            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("Iliad X")))
+            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("Area personale")))
             {
                 return credential;
             }
@@ -64,7 +64,7 @@ namespace Project_Alphonse_Elric.Helpers
             {
                 credential.RetrievePassword();
 
-                new PasswordVault().Remove(new PasswordCredential("Iliad X", credential.UserName, credential.Password));
+                new PasswordVault().Remove(new PasswordCredential("Area personale", credential.UserName, credential.Password));
             }
         }
 
@@ -75,9 +75,9 @@ namespace Project_Alphonse_Elric.Helpers
         /// <param name="password">The password</param>
         internal static void AddCredentials(string username, string password)
         {
-            new PasswordVault().Add(new PasswordCredential("Iliad X", username, password));
+            new PasswordVault().Add(new PasswordCredential("Area personale", username, password));
 
             BackgroundTaskExtensions.Register();
-        }        
+        }
     }
 }

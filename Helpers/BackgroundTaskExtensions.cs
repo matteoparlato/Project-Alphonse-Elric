@@ -32,7 +32,7 @@ namespace Helpers
         }
 
         /// <summary>
-        /// Method which unregister the TASK_NAME task of the app.
+        /// Method which unregisters the TASK_NAME task of the app.
         /// </summary>
         public static void Unregister()
         {

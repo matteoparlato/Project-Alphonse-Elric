@@ -2,7 +2,6 @@
 using Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using Windows.Web.Http;
@@ -97,25 +96,25 @@ namespace Helpers
             AccountDetails.PhoneNumber = subnode[6].InnerText.Trim();
 
             subnode = document.DocumentNode.Descendants().Where(tag => tag.GetAttributeValue("class", "").Contains("red")).ToArray();
-            AccountDetails.Local.VoiceTime = subnode[1].InnerText;
-            AccountDetails.Local.VoiceExtra = subnode[2].InnerText;
-            AccountDetails.Local.SMSCount = subnode[3].InnerText;
-            AccountDetails.Local.SMSExtra = subnode[4].InnerText;
-            AccountDetails.Local.DataUsed = subnode[5].InnerText;
-            AccountDetails.Local.DataExtra = subnode[6].InnerText;
-            AccountDetails.Local.MMSCount = subnode[9].InnerText;
-            AccountDetails.Local.MMSExtra = subnode[10].InnerText;
+            AccountDetails.Local.VoiceTime = subnode[2].InnerText;
+            AccountDetails.Local.VoiceExtra = subnode[3].InnerText;
+            AccountDetails.Local.SMSCount = subnode[4].InnerText;
+            AccountDetails.Local.SMSExtra = subnode[5].InnerText;
+            AccountDetails.Local.DataUsed = subnode[6].InnerText;
+            AccountDetails.Local.DataExtra = subnode[7].InnerText;
+            AccountDetails.Local.MMSCount = subnode[10].InnerText;
+            AccountDetails.Local.MMSExtra = subnode[11].InnerText;
 
-            AccountDetails.Roaming.VoiceTime = subnode[11].InnerText;
-            AccountDetails.Roaming.VoiceExtra = subnode[12].InnerText;
-            AccountDetails.Roaming.SMSCount = subnode[13].InnerText;
-            AccountDetails.Roaming.SMSExtra = subnode[14].InnerText;
-            AccountDetails.Roaming.DataUsed = subnode[15].InnerText;
-            AccountDetails.Roaming.DataExtra = subnode[16].InnerText;
-            AccountDetails.Roaming.MMSCount = subnode[20].InnerText;
-            AccountDetails.Roaming.MMSExtra = subnode[21].InnerText;
+            AccountDetails.Roaming.VoiceTime = subnode[12].InnerText;
+            AccountDetails.Roaming.VoiceExtra = subnode[13].InnerText;
+            AccountDetails.Roaming.SMSCount = subnode[14].InnerText;
+            AccountDetails.Roaming.SMSExtra = subnode[15].InnerText;
+            AccountDetails.Roaming.DataUsed = subnode[16].InnerText;
+            AccountDetails.Roaming.DataExtra = subnode[17].InnerText;
+            AccountDetails.Roaming.MMSCount = subnode[21].InnerText;
+            AccountDetails.Roaming.MMSExtra = subnode[22].InnerText;
 
-            AccountDetails.RemainingCredit = subnode[24].InnerText;
+            AccountDetails.RemainingCredit = subnode[0].InnerText;
 
             AccountDetails.NextRenewal = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Equals("end_offerta")).ToArray()[0].InnerText.Trim().Substring(49);
         }
@@ -140,31 +139,101 @@ namespace Helpers
 
             HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
+            AccountDetails.ActiveOptions.PublishPhoneNumber = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+
+            response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento"));
+            response.EnsureSuccessStatusCode();
+
+            document = new HtmlDocument() { OptionFixNestedTags = true };
+
+            document.LoadHtml((await response.Content.ReadAsStringAsync()));
+
+            node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
+
             AccountDetails.ActiveOptions.PaidNumbers = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.UnlockLocal = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.UnlockItaly = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.UnlockRoaming = node[6].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.PaidBankNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+
+            response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling"));
+            response.EnsureSuccessStatusCode();
+
+            document = new HtmlDocument() { OptionFixNestedTags = true };
+
+            document.LoadHtml((await response.Content.ReadAsStringAsync()));
+
+            node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
+
+            AccountDetails.ActiveOptions.UnlockLocal = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.UnlockItaly = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.UnlockRoaming = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
         }
 
-        #region Blocco numeri a pagamento
+        #region Pubblicazione in elenco
 
         /// <summary>
-        /// Method which enables Blocco numeri a pagamento option.
+        /// Method which enables Pubblicazione in elenco option.
         /// </summary>
         /// <returns></returns>
-        public static async Task EnablePaidNumbers()
+        public static async Task EnablePublishPhoneNumber()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_premium&activate=1"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=elenco&activate=1"));
             response.EnsureSuccessStatusCode();
         }
 
         /// <summary>
-        /// Method which disables Blocco numeri a pagamento option.
+        /// Method which disables Pubblicazione in elenco option.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task DisablePublishPhoneNumber()
+        {
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=elenco&activate=0"));
+            response.EnsureSuccessStatusCode();
+        }
+
+        #endregion
+
+        #region Blocca le chiamate verso i numeri a pagamento e gli SMS+
+
+        /// <summary>
+        /// Method which enables Blocca le chiamate verso i numeri a pagamento e gli SMS+ option.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task EnablePaidNumbers()
+        {
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?premium=1"));
+            response.EnsureSuccessStatusCode();
+        }
+
+        /// <summary>
+        /// Method which disables Blocca le chiamate verso i numeri a pagamento e gli SMS+ option.
         /// </summary>
         /// <returns></returns>
         public static async Task DisablePaidNumbers()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_premium&activate=0"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?premium=0"));
+            response.EnsureSuccessStatusCode();
+        }
+
+        #endregion
+
+        #region Blocca gli SMS bancari a pagamento
+
+        /// <summary>
+        /// Method which enables Blocca gli SMS bancari a pagamento option.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task EnablePaidBankNumbers()
+        {
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?bank=1"));
+            response.EnsureSuccessStatusCode();
+        }
+
+        /// <summary>
+        /// Method which disables Blocca gli SMS bancari a pagamento option.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task DisablePaidBankNumbers()
+        {
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?bank=0"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -178,7 +247,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task EnableUnlockLocal()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_data&activate=1"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?fairuse=1"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -188,7 +257,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task DisableUnlockLocal()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_data&activate=0"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?fairuse=0"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -202,7 +271,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task EnableUnlockItaly()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_data_italie&activate=1"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?billing=1"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -212,7 +281,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task DisableUnlockItaly()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_data_italie&activate=0"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?billing=0"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -226,7 +295,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task EnableUnlockRoaming()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_data_etranger&activate=1"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?roaming=1"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -236,7 +305,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task DisableUnlockRoaming()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=blocage_data_etranger&activate=0"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?roaming=0"));
             response.EnsureSuccessStatusCode();
         }
 

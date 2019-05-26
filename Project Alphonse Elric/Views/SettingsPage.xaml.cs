@@ -57,7 +57,7 @@ namespace Project_Alphonse_Elric.Views
         }
 
         /// <summary>
-        /// Method invoked when the user clicks on Invia un feedback.
+        /// Method invoked when the user clicks on Contatta il supporto / Invia un feedback.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

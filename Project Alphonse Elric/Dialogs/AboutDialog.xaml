@@ -1,26 +1,26 @@
-﻿<ContentDialog x:Class="Project_Alphonse_Elric.Dialogs.AboutDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="Informazioni su Area clienti iliad" PrimaryButtonText="Chiudi" mc:Ignorable="d">
+﻿<ContentDialog x:Class="Project_Alphonse_Elric.Dialogs.AboutDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="Informazioni su Area personale" PrimaryButtonText="Chiudi" mc:Ignorable="d">
 
-	<ScrollViewer>
-		<ScrollViewer.Background>
-			<ImageBrush AlignmentX="Center" AlignmentY="Center" ImageSource="ms-appx:///Assets/Project_logo_color.png" Opacity="0.2" Stretch="None" />
-		</ScrollViewer.Background>
-		<StackPanel>
-			<!--#region Project Evangelion-->
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Project Alphonse Elric" TextWrapping="Wrap" />
-				<TextBlock x:Name="VersionTextBlock" FontWeight="Light" Style="{StaticResource SubtitleTextBlockStyle}" Text=" Versione" TextWrapping="Wrap" />
-			</StackPanel>
-			<TextBlock Margin="0,8,0,0" Text="Area clienti iliad è l'app che ti consente di accedere in modo facile e veloce alla tua area personale iliad per consultare i contatori relativi alla tua offerta, le opzioni e i servizi attivati oltre che la segreteria telefonica." TextWrapping="Wrap" />
-			<TextBlock Margin="0,8,0,0" Text="Area clienti iliad non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.." TextWrapping="Wrap" />
-			<TextBlock Margin="0,8,0,0" Text="Il nome del progetto, il logo e tutti i riferimento Fullmetal Alchemist sono proprietà dello studio Bones." TextWrapping="Wrap" />
-			<!--#endregion-->
+    <ScrollViewer>
+        <!--<ScrollViewer.Background>
+            <ImageBrush AlignmentX="Center" AlignmentY="Center" ImageSource="ms-appx:///Assets/Project_logo_color.png" Opacity="0.2" Stretch="None" />
+        </ScrollViewer.Background>-->
+        <StackPanel>
+            <!--#region Project Alphone Elric-->
+            <!--<StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Project Alphonse Elric" TextWrapping="Wrap" />
+                <TextBlock x:Name="VersionTextBlock" FontWeight="Light" Style="{StaticResource SubtitleTextBlockStyle}" Text=" Versione" TextWrapping="Wrap" />
+            </StackPanel>-->
+            <TextBlock Text="Area personale è l'app che ti consente di accedere in modo facile e veloce alla tua area personale iliad per consultare i contatori relativi alla tua offerta, le opzioni e i servizi attivati oltre che la segreteria telefonica." TextWrapping="Wrap" />
+            <TextBlock Margin="0,8,0,0" Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.." TextWrapping="Wrap" />
+            <!--<TextBlock Margin="0,8,0,0" Text="Il nome del progetto, il logo e tutti i riferimento Fullmetal Alchemist sono proprietà dello studio Bones." TextWrapping="Wrap" />-->
+            <!--#endregion-->
 
-			<!--#region Autori-->
-			<TextBlock Margin="0,18,0,0" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Autori" TextWrapping="Wrap" />
-			<StackPanel>
-				<HyperlinkButton NavigateUri="mailto:matteo.parlato@outlook.it">Matteo Parlato</HyperlinkButton>
-			</StackPanel>
-			<!--#endregion-->
-		</StackPanel>
-	</ScrollViewer>
+            <!--#region Autori-->
+            <TextBlock Margin="0,18,0,0" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Autori" TextWrapping="Wrap" />
+            <StackPanel>
+                <HyperlinkButton NavigateUri="mailto:matteo.parlato@outlook.it">Matteo Parlato</HyperlinkButton>
+            </StackPanel>
+            <!--#endregion-->
+        </StackPanel>
+    </ScrollViewer>
 </ContentDialog>

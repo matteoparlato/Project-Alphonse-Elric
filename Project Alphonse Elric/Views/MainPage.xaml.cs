@@ -58,6 +58,7 @@ namespace Project_Alphonse_Elric.Views
         {
             switch (e.NewState.Name)
             {
+                case "PanoramicState":
                 case "WideState":
                     {
                         TitleText.Text = string.Format("Ciao {0}!", AccountDetails.Name);

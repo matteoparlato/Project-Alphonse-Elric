@@ -33,7 +33,7 @@ namespace BackgroundTasks
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
 
             IReadOnlyList<PasswordCredential> credentialList = new PasswordVault().RetrieveAll();
-            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("Iliad X")))
+            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("Area personale")))
             {
                 credential.RetrievePassword();
 
