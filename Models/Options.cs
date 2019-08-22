@@ -52,6 +52,13 @@ namespace Models
             set { Set(ref _unlockRoaming, value); }
         }
 
+        public bool _marketingAgreement;
+        public bool MarketingAgreement
+        {
+            get { return _marketingAgreement; }
+            set { Set(ref _marketingAgreement, value); }
+        }
+
         /// <summary>
         /// Parameterless constructor of Options class.
         /// </summary>

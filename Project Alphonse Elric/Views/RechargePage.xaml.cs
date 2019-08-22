@@ -34,7 +34,7 @@ namespace Project_Alphonse_Elric.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void pageWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        private void PageWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             StatusProgressRing.IsActive = false;
         }

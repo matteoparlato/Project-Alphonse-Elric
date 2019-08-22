@@ -378,7 +378,7 @@ namespace Project_Alphonse_Elric.Views
 
         /// <summary>
         /// Method invoked when the text in the UsernameTextBox changed.
-        /// Sets LoginButton enabled or disabled state..
+        /// Sets LoginButton enabled or disabled state.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -9,6 +9,7 @@ using Windows.Web.Http.Headers;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.ApplicationModel.Resources;
 
 namespace Helpers
 {
@@ -17,6 +18,8 @@ namespace Helpers
     /// </summary>
     public static class ClientExtensions
     {
+        private static ResourceLoader Resources = new ResourceLoader();
+
         public static Profile AccountDetails { get; set; } = new Profile();
 
         private static HttpFormUrlEncodedContent _POSTData;
@@ -35,7 +38,7 @@ namespace Helpers
         {
             _client.DefaultRequestHeaders.Accept.Add(new HttpMediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
-            await _client.GetAsync(new Uri("http://www.iliad.it/account/"));
+            await _client.GetAsync(new Uri(Resources.GetString("LoginURL")));
 
             _POSTData = new HttpFormUrlEncodedContent(new[]
             {
@@ -43,7 +46,7 @@ namespace Helpers
                 new KeyValuePair<string, string>("login-pwd", password)
             });
 
-            HttpResponseMessage response = await _client.PostAsync(new Uri("https://www.iliad.it/account/"), _POSTData);
+            HttpResponseMessage response = await _client.PostAsync(new Uri(Resources.GetString("LoginURL")), _POSTData);
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -59,7 +62,19 @@ namespace Helpers
         /// <returns></returns>
         public static async Task Logout()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/?logout=user"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("LogoutURL")));
+            response.EnsureSuccessStatusCode();
+        }
+
+        public static async Task SendEnableRequest(string url)
+        {
+            HttpResponseMessage response = await _client.GetAsync(new Uri(url + "1"));
+            response.EnsureSuccessStatusCode();
+        }
+
+        public static async Task SendDisableRequest(string url)
+        {
+            HttpResponseMessage response = await _client.GetAsync(new Uri(url + "0"));
             response.EnsureSuccessStatusCode();
         }
 
@@ -72,7 +87,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task GetConsumes()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/consumi-e-credito"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("ConsumesURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -89,7 +104,7 @@ namespace Helpers
         /// <param name="document">The HTML document where to get information</param>
         private static void ReadConsumes(HtmlDocument document)
         {
-            HtmlNode[] subnode = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Equals("current-user")).ToArray()[0].Descendants().ToArray();
+            HtmlNode[] subnode = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Equals("current-user__infos")).ToArray()[0].Descendants().ToArray();
 
             AccountDetails.Name = subnode[2].InnerText.Trim();
             AccountDetails.ID = subnode[5].InnerText.Trim();
@@ -130,7 +145,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task GetOptions()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("OptionsURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -140,8 +155,9 @@ namespace Helpers
             HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
             AccountDetails.ActiveOptions.PublishPhoneNumber = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.MarketingAgreement = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
 
-            response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento"));
+            response = await _client.GetAsync(new Uri(Resources.GetString("NumberOptionsURL")));
             response.EnsureSuccessStatusCode();
 
             document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -153,7 +169,7 @@ namespace Helpers
             AccountDetails.ActiveOptions.PaidNumbers = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
             AccountDetails.ActiveOptions.PaidBankNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
 
-            response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling"));
+            response = await _client.GetAsync(new Uri(Resources.GetString("DataCeilingOptionsURL")));
             response.EnsureSuccessStatusCode();
 
             document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -167,150 +183,6 @@ namespace Helpers
             AccountDetails.ActiveOptions.UnlockRoaming = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
         }
 
-        #region Pubblicazione in elenco
-
-        /// <summary>
-        /// Method which enables Pubblicazione in elenco option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnablePublishPhoneNumber()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=elenco&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Pubblicazione in elenco option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisablePublishPhoneNumber()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni?update=elenco&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Blocca le chiamate verso i numeri a pagamento e gli SMS+
-
-        /// <summary>
-        /// Method which enables Blocca le chiamate verso i numeri a pagamento e gli SMS+ option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnablePaidNumbers()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?premium=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Blocca le chiamate verso i numeri a pagamento e gli SMS+ option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisablePaidNumbers()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?premium=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Blocca gli SMS bancari a pagamento
-
-        /// <summary>
-        /// Method which enables Blocca gli SMS bancari a pagamento option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnablePaidBankNumbers()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?bank=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Blocca gli SMS bancari a pagamento option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisablePaidBankNumbers()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?bank=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Sblocco connessione dati oltre il limite incluso nel forfait
-
-        /// <summary>
-        /// Method which enables Sblocco connessione dati oltre il limite incluso nel forfait option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableUnlockLocal()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?fairuse=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Sblocco connessione dati oltre il limite incluso nel forfait option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableUnlockLocal()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?fairuse=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Sblocco connessione dati in Italia oltre 50€ fatturati
-
-        /// <summary>
-        /// Method which enables Sblocco connessione dati in Italia oltre 50€ fatturati option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableUnlockItaly()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?billing=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Sblocco connessione dati in Italia oltre 50€ fatturati option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableUnlockItaly()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?billing=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€
-
-        /// <summary>
-        /// Method which enables Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€ option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableUnlockRoaming()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?roaming=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€ option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableUnlockRoaming()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/le-mie-opzioni/data-ceiling?roaming=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
         #endregion
 
         #region Services
@@ -322,7 +194,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task GetServices()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("ServicesURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -344,53 +216,7 @@ namespace Helpers
             }
         }
 
-        #region Blocco numeri nascosti
-
-        /// <summary>
-        /// Method which enables Blocco numeri nascosti option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableBlockUnknown()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=1"));
-            response.EnsureSuccessStatusCode();
-
-            await CheckRedirectToVoicemailUnknown();
-        }
-
-        /// <summary>
-        /// Method which disables Blocco numeri nascosti option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableBlockUnknown()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
         #region Trasferire le chiamate anonime alla segreteria telefonica anziché rifiutare le chiamate
-
-        /// <summary>
-        /// Method which enables Trasferire le chiamate anonime alla segreteria telefonica anziché rifiutare le chiamate option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableRedirectToVoicemailUnknown()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=1&forward=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Trasferire le chiamate anonime alla segreteria telefonica anziché rifiutare le chiamate option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableRedirectToVoicemailUnknown()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=1&forward=0"));
-            response.EnsureSuccessStatusCode();
-        }
 
         /// <summary>
         /// Method which connects to user's services page and then reads the HTML
@@ -401,7 +227,7 @@ namespace Helpers
         /// <returns></returns>
         private static async Task CheckRedirectToVoicemailUnknown()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/block_anonymous"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("AnonymousServiceURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -415,99 +241,7 @@ namespace Helpers
 
         #endregion
 
-        #region Inoltro verso segreteria telefonica all'estero
-
-        /// <summary>
-        /// Method which enables Inoltro verso segreteria telefonica all'estero option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableTransferToVoicemail()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/voicemail_roaming?activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Inoltro verso segreteria telefonica all'estero option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableTransferToVoicemail()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/voicemail_roaming?activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Protezione contro il trasferimento di chiamate
-
-        /// <summary>
-        /// Method which enables Protezione contro il trasferimento di chiamate option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableTransferProtection()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=block_redirect&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Protezione contro il trasferimento di chiamate option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableTransferProtection()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=block_redirect&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Utente non disponibile
-
-        /// <summary>
-        /// Method which enables Utente non disponibile option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableUserNotAvailable()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=absent_subscriber&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Utente non disponibile option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableUserNotAvailable()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=absent_subscriber&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
         #region Chiamate rapide
-
-        /// <summary>
-        /// Method which enables Chiamate rapide option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableFastCalls()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=speed_dial&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Chiamate rapide option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableFastCalls()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=speed_dial&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
 
         /// <summary>
         /// Method which adds a phone number to fast calls.
@@ -518,7 +252,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task AddFastCall(string name, string target, string @short)
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format("https://www.iliad.it/account/i-miei-servizi/numeros_abreges?action=add&name={0}&target={1}&short={2}", WebUtility.UrlEncode(name), WebUtility.UrlEncode(target), @short)));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("AddFastCallURL"), WebUtility.UrlEncode(name), WebUtility.UrlEncode(target), @short)));
             response.EnsureSuccessStatusCode();
         }
 
@@ -529,7 +263,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task DeleteFastCall(string uri)
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format("https://www.iliad.it{0}&action=delete", uri)));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("DeleteFastCallURL"), uri)));
             response.EnsureSuccessStatusCode();
         }
 
@@ -542,7 +276,7 @@ namespace Helpers
         {
             AccountDetails.ActiveServices.FastCallList.Clear();
 
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi/numeros_abreges"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("FastCallsURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -561,30 +295,6 @@ namespace Helpers
 
         #endregion
 
-        #region Filtro Chiamate & SMS/MMS
-
-        /// <summary>
-        /// Method which enables Filtro Chiamate & SMS/MMS option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableFilter()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=filter_rules&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Filtro Chiamate & SMS/MMS option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableFilter()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/i-miei-servizi?update=filter_rules&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
         #endregion
 
         #region Voicemail
@@ -597,7 +307,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task GetMessages()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("VoicemailURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -629,7 +339,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task DeleteMessage(string ID)
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format("https://www.iliad.it/account/segreteria-telefonica/messaggio_vocale?id={0}&action=delete", ID)));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("DeleteVoicemailURL"), ID)));
             response.EnsureSuccessStatusCode();
         }
 
@@ -648,78 +358,6 @@ namespace Helpers
             return file;
         }
 
-        #region Visualizza il numero del chiamante
-
-        /// <summary>
-        /// Method which enables Visualizza il numero del chiamante  option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableShowCallerID()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica?update=0&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Visualizza il numero del chiamante  option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableShowCallerID()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica?update=0&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Visualizza per ogni messaggio la data e l'orario della chiamata
-
-        /// <summary>
-        /// Method which enables Visualizza per ogni messaggio la data e l'orario della chiamata option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnableShowTimeDate()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica?update=1&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Visualizza per ogni messaggio la data e l'orario della chiamata option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisableShowTimeDate()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica?update=1&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
-        #region Personalizza l'annuncio della tua segreteria telefonica
-
-        /// <summary>
-        /// Method which enables Personalizza l'annuncio della tua segreteria telefonica option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task EnablePersonalizedAdvert()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica/Annuncio?update=3&activate=1"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        /// <summary>
-        /// Method which disables Personalizza l'annuncio della tua segreteria telefonica option.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task DisablePersonalizedAdvert()
-        {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica/Annuncio?update=3&activate=0"));
-            response.EnsureSuccessStatusCode();
-        }
-
-        #endregion
-
         #region Notifiche
 
         /// <summary>
@@ -729,7 +367,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task GetNotifications()
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri("https://www.iliad.it/account/segreteria-telefonica"));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("VoicemailURL")));
             response.EnsureSuccessStatusCode();
 
             HtmlDocument document = new HtmlDocument() { OptionFixNestedTags = true };
@@ -756,7 +394,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task AddNotification(string mode, string mail)
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format("https://www.iliad.it/account/segreteria-telefonica/notifiche?email={0}&action=add&type={1}", mail, mode)));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("AddNotificationURL"), mail, mode)));
             response.EnsureSuccessStatusCode();
         }
 
@@ -767,7 +405,7 @@ namespace Helpers
         /// <returns></returns>
         public static async Task DeleteNotification(string mail)
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format("https://www.iliad.it/account/segreteria-telefonica/notifiche?email={0}&action=delete", mail)));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("DeleteNotificationURL"), mail)));
             response.EnsureSuccessStatusCode();
         }
 

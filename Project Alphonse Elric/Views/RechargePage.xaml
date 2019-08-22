@@ -22,7 +22,7 @@
 
         <!--#region Content-->
         <ProgressRing x:Name="StatusProgressRing" Grid.Row="1" Style="{StaticResource ProgressRingBrowser}" />
-        <WebView x:Name="PageWebView" Grid.Row="1" NavigationCompleted="pageWebView_NavigationCompleted" />
+        <WebView x:Name="PageWebView" Grid.Row="1" NavigationCompleted="PageWebView_NavigationCompleted" />
         <!--#endregion-->
 
         <!--#region VisualStateManager-->

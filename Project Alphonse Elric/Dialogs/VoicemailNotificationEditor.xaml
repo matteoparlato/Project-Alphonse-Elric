@@ -17,7 +17,7 @@
                 <x:String>File audio inviato in allegato</x:String>
             </ComboBox>
 
-            <TextBox x:Name="MailTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" PlaceholderText="Email" TextChanged="TextBox_TextChanged" />
+            <TextBox x:Name="MailTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" PlaceholderText="Email" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" TextChanged="TextBox_TextChanged" />
             <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" VerticalAlignment="Stretch" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" contract5Present:Style="{StaticResource ButtonRevealStyle}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" IsEnabled="False" Tapped="Button_Tapped" />
 
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,18,0,0">
