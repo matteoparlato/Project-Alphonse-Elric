@@ -49,63 +49,22 @@ namespace Project_Alphonse_Elric.Views
         }
 
         /// <summary>
-        /// Method invoked when the user clicks on Visualizza il numero del chiamante option checkbox.
+        /// Method invoked when the user clicks on a checkbox.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void CheckBox_Click(object sender, RoutedEventArgs e)
         {
+            CheckBox checkBox = (CheckBox)sender;
             try
             {
-                if (AccountDetails.Voicemail.ShowCallerID)
+                if ((bool)checkBox.IsChecked)
                 {
-                    await ClientExtensions.EnableShowCallerID();
+                    await ClientExtensions.SendEnableRequest((string)checkBox.CommandParameter);
                 }
                 else
                 {
-                    await ClientExtensions.DisableShowCallerID();
-                }
-            }
-            catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on Visualizza per ogni messagio la data e l'orario della chiamata option checkbox.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void CheckBox_Click_1(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (AccountDetails.Voicemail.ShowTimeDate)
-                {
-                    await ClientExtensions.EnableShowTimeDate();
-                }
-                else
-                {
-                    await ClientExtensions.DisableShowTimeDate();
-                }
-            }
-            catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on Annuncio personalizzato option checkbox.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void CheckBox_Click_3(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (AccountDetails.Voicemail.PersonalizedAdvert)
-                {
-                    await ClientExtensions.EnablePersonalizedAdvert();
-                }
-                else
-                {
-                    await ClientExtensions.DisablePersonalizedAdvert();
+                    await ClientExtensions.SendDisableRequest((string)checkBox.CommandParameter);
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }

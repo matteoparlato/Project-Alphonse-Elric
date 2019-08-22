@@ -84,7 +84,7 @@
                             <TextBlock Text="Consenti la pubblicazione del tuo numero di telefono negli elenchi pubblici." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PublishPhoneNumber, Mode=TwoWay}" />
+                        <CheckBox x:Uid="PublishPhoneNumber" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PublishPhoneNumber, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -110,13 +110,13 @@
                             <TextBlock Text="Blocca le chiamate verso i numeri a pagamento e gli SMS+." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="1" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_11" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidNumbers, Mode=TwoWay}" />
+                        <CheckBox x:Uid="PaidNumbers" Grid.Row="1" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidNumbers, Mode=TwoWay}" />
 
                         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0">
                             <TextBlock Text="Blocca gli SMS bancari a pagamento." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_12" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidBankNumbers, Mode=TwoWay}" />
+                        <CheckBox x:Uid="PaidBankNumbers" Grid.Row="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidBankNumbers, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -144,21 +144,46 @@
                             <TextBlock Text="Questa opzione consente di sbloccare la navigazione in Internet dopo che hai raggiunto al soglia prevista dalla tua promozione. Si consiglia di non abilitare questa opzione in quanto potrebbe comportare spese extra." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="1" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_8" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockLocal, Mode=TwoWay}" />
+                        <CheckBox x:Uid="UnlockLocal" Grid.Row="1" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockLocal, Mode=TwoWay}" />
 
                         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0">
                             <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€" TextWrapping="Wrap" />
                             <TextBlock Text="Questa opzione ti consente di sbloccare la navigazione in Internet dopo che hai superato la soglia di 50€. Si consiglia di non abilitare questa opzione in quanto potrebbe comportare spese extra." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_10" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockItaly, Mode=TwoWay}" />
+                        <CheckBox x:Uid="UnlockItaly" Grid.Row="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockItaly, Mode=TwoWay}" />
 
                         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0">
                             <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="Sblocco consumo dei dati in roaming (Europa e resto del mondo) oltre i 50€" TextWrapping="Wrap" />
                             <TextBlock Text="Questa opzione ti consente di sbloccare la navigazione in Internet dopo che hai superato la soglia di 50€. Si consiglia di non abilitare questa opzione in quanto potrebbe comportare spese extra." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="3" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_9" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockRoaming, Mode=TwoWay}" />
+                        <CheckBox x:Uid="UnlockRoaming" Grid.Row="3" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.UnlockRoaming, Mode=TwoWay}" />
+                    </Grid>
+                    <!--#endregion-->
+
+                    <!--#region Consenso di marketing-->
+                    <Grid Margin="0,18,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
+                            <Path Data="M 28 3.03125 L 26.4063 4.1875 C 26.4063 4.1875 24.4193 5.66236 21.5625 7.125 C 18.7057 8.58764 14.9892 10 11.7188 10 L 3 10 L 2 10 L 2 11 L 2 19 L 2 19.125 L 2.03125 19.2813 L 4.03125 26.2813 L 4.25 27 L 5 27 L 9 27 L 10.3125 27 L 9.96875 25.7188 L 8.34375 20 L 11.7188 20 C 14.9444 20 18.6629 21.4429 21.5313 22.9063 C 24.3996 24.3696 26.4063 25.8125 26.4063 25.8125 L 28 26.9688 L 28 25 L 28 17.8125 C 29.1557 17.3943 30 16.292 30 15 C 30 13.708 29.1557 12.6057 28 12.1875 L 28 5 L 28 3.03125 Z M 26 6.75 L 26 12 L 26 13 L 26 17 L 26 18 L 26 23.2188 C 25.173 22.6606 24.5152 22.1538 22.4375 21.0938 C 19.4991 19.5946 15.7077 18.0732 12 18 L 12 12 C 15.7432 11.9253 19.5393 10.3748 22.4688 8.875 C 24.5415 7.81376 25.1799 7.30835 26 6.75 Z M 4 12 L 10 12 L 10 18 L 4 18 L 4 12 Z M 4.34375 20 L 6.25 20 L 7.65625 25 L 5.75 25 L 4.34375 20 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
+                        </Viewbox>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Consenso di marketing" TextWrapping="Wrap" />
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                            <TextBlock Text="Consenso al trattamento dei dati personali per finalità di marketing." TextWrapping="Wrap" />
+                            <!--<TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />-->
+                        </StackPanel>
+                        <CheckBox x:Uid="MarketingAgreement" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.MarketingAgreement, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -188,7 +213,7 @@
                             <TextBlock Text="Questo servizio ti consente di rifiutare le chiamate entranti che hanno il numero anonimo. Le persone che ti chiamano da un numero privato vengono avvisate da un messaggio automatico che stai rifiutando la chiamata." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_1" IsChecked="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
+                        <CheckBox x:Uid="BlockUnknown" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -214,7 +239,7 @@
                             <TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="Questo servizio può essere attivato solo se il servizio &quot;Blocco numeri nascosti&quot; è attivo" TextWrapping="Wrap" />
                             <TextBlock Margin="0,5,0,0" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_7" IsChecked="{x:Bind AccountDetails.ActiveServices.RedirectToVoicemailUnknown, Mode=TwoWay}" IsEnabled="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
+                        <CheckBox x:Uid="RedirectToVoicemailUnknown" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.RedirectToVoicemailUnknown, Mode=TwoWay}" IsEnabled="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -239,7 +264,7 @@
                             <TextBlock Text="Quando ti trovi all'estero, se non vuoi essere disturbato dalle chiamate in arrivo puoi trasferirle direttamente alla segreteria telefonica. Se hai attivato questo servizio, puoi effettuare normalmente chiamate se ti trovi in Italia." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_2" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferToVoicemail, Mode=TwoWay}" />
+                        <CheckBox x:Uid="TransferToVoicemail" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferToVoicemail, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -264,7 +289,7 @@
                             <TextBlock Text="Questo servizio non ti consente di ricevere una chiamata in entrata che è stata deviata in precedenza. Tutte le chiamate verranno bloccate a coloro che desiderano raggiungere un numero per il quale è stato attivato un rinvio alla tua linea." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_3" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferProtection, Mode=TwoWay}" />
+                        <CheckBox x:Uid="TransferProtection" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferProtection, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -289,7 +314,7 @@
                             <TextBlock Text="Questo servizio ti consente di rifiutare tutte le chiamate entranti sulla tua linea. Coloro che ti chiamano saranno trasferiti a un annuncio che indicherà loro che non sei raggiungibile e che possono inviarti un SMS." TextWrapping="Wrap" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_4" IsChecked="{x:Bind AccountDetails.ActiveServices.UserNotAvailable, Mode=TwoWay}" />
+                        <CheckBox x:Uid="UserNotAvailable" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.UserNotAvailable, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -315,7 +340,7 @@
                             <HyperlinkButton Content="Personalizza chiamate rapide" Tapped="HyperlinkButton_Tapped" Visibility="{Binding ElementName=FastCallsCheckBox, Path=IsChecked, Mode=TwoWay, Converter={StaticResource Converter}}" />
                             <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox x:Name="FastCallsCheckBox" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_5" IsChecked="{x:Bind AccountDetails.ActiveServices.FastCalls, Mode=TwoWay}" />
+                        <CheckBox x:Uid="FastCalls" x:Name="FastCallsCheckBox" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.FastCalls, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
 
@@ -341,7 +366,7 @@
                             <TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="I filtri possono essere impostati dalla tua &quot;Area personale&quot; sul sito iliad.it" TextWrapping="Wrap" />
                             <TextBlock Margin="0,5,0,0" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                         </StackPanel>
-                        <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click_6" IsChecked="{x:Bind AccountDetails.ActiveServices.Filter, Mode=TwoWay}" />
+                        <CheckBox x:Uid="Filter" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.Filter, Mode=TwoWay}" />
                     </Grid>
                     <!--#endregion-->
                     <!--#endregion-->
