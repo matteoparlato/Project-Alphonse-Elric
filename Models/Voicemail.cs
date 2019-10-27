@@ -37,9 +37,9 @@ namespace Models
             set { Set(ref _personalizedAdvert, value); }
         }
 
-        public ObservableCollection<Message> MessagesList { get; set; } = new ObservableCollection<Message>();
+        public readonly ObservableCollection<Message> MessagesList = new ObservableCollection<Message>();
 
-        public ObservableCollection<VoicemailNotification> VoicemeilNotificationList { get; set; } = new ObservableCollection<VoicemailNotification>();
+        public readonly ObservableCollection<VoicemailNotification> VoicemailNotificationList = new ObservableCollection<VoicemailNotification>();
 
         /// <summary>
         /// Parameterless constructor of Voicemail class.
