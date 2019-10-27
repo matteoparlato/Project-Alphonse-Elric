@@ -52,7 +52,7 @@ namespace Models
             set { Set(ref _unlockRoaming, value); }
         }
 
-        public bool _marketingAgreement;
+        private bool _marketingAgreement;
         public bool MarketingAgreement
         {
             get { return _marketingAgreement; }

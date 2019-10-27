@@ -58,7 +58,7 @@ namespace Models
             set { Set(ref _fastCalls, value); }
         }
 
-        public ObservableCollection<FastCall> FastCallList { get; set; } = new ObservableCollection<FastCall>();
+        public readonly ObservableCollection<FastCall> FastCallList = new ObservableCollection<FastCall>();
 
         private bool _filter;
         public bool Filter

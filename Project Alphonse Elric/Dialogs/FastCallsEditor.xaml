@@ -50,7 +50,7 @@
                                     <TextBlock Margin="0,5,0,0" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap">
                                         <Run Text="{Binding Target}" />
                                         <Run Text="-" />
-                                        <Run Text="{Binding Short}" />
+                                        <Run Text="{Binding ShortTarget}" />
                                     </TextBlock>
                                 </StackPanel>
 

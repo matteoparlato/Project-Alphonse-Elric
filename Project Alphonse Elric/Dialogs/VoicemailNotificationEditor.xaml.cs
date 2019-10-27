@@ -35,8 +35,8 @@ namespace Project_Alphonse_Elric.Dialogs
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = ClientExtensions.AccountDetails.Voicemail.VoicemeilNotificationList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            DataListView.ItemsSource = ClientExtensions.AccountDetails.Voicemail.VoicemeilNotificationList;
+            NoDataStackPanel.Visibility = ClientExtensions.AccountDetails.Voicemail.VoicemailNotificationList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            DataListView.ItemsSource = ClientExtensions.AccountDetails.Voicemail.VoicemailNotificationList;
         }
 
         /// <summary>

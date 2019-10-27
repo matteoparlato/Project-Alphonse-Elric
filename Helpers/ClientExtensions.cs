@@ -248,11 +248,11 @@ namespace Helpers
         /// </summary>
         /// <param name="name">The name of the fast call</param>
         /// <param name="target">The target number of the fast call</param>
-        /// <param name="short">The abbreviation of the target number</param>
+        /// <param name="shortTarget">The abbreviation of the target number</param>
         /// <returns></returns>
-        public static async Task AddFastCall(string name, string target, string @short)
+        public static async Task AddFastCall(string name, string target, string shortTarget)
         {
-            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("AddFastCallURL"), WebUtility.UrlEncode(name), WebUtility.UrlEncode(target), @short)));
+            HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("AddFastCallURL"), WebUtility.UrlEncode(name), WebUtility.UrlEncode(target), shortTarget)));
             response.EnsureSuccessStatusCode();
         }
 
@@ -374,7 +374,7 @@ namespace Helpers
 
             document.LoadHtml(await response.Content.ReadAsStringAsync());
 
-            AccountDetails.Voicemail.VoicemeilNotificationList.Clear();
+            AccountDetails.Voicemail.VoicemailNotificationList.Clear();
 
             HtmlNode[] modeNodes = document.DocumentNode.Descendants("option").Where(tag => tag.GetAttributeValue("selected", "").Equals("selected")).ToArray();
 
@@ -382,7 +382,7 @@ namespace Helpers
 
             for(int i = 0; i < modeNodes.Length; i++)
             {
-                AccountDetails.Voicemail.VoicemeilNotificationList.Add(new VoicemailNotification(modeNodes[i].InnerText.Trim(), mailNodes[i].GetAttributeValue("value", "").Trim()));
+                AccountDetails.Voicemail.VoicemailNotificationList.Add(new VoicemailNotification(modeNodes[i].InnerText.Trim(), mailNodes[i].GetAttributeValue("value", "").Trim()));
             }
         }
 
