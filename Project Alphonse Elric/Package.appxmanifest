@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap uap5 mp uap3">
-  <Identity Name="60396NeonDev.Areapersonale" Publisher="CN=9549A8D5-78E1-42CB-9E2D-0F8E426F38A1" Version="1.2.15.0" />
+  <Identity Name="60396NeonDev.Areapersonale" Publisher="CN=9549A8D5-78E1-42CB-9E2D-0F8E426F38A1" Version="1.2.16.0" />
   <mp:PhoneIdentity PhoneProductId="5ac187d7-5fa7-4585-8c5a-e07f321a1acc" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Area personale</DisplayName>
