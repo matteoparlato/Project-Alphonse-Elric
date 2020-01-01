@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using Models;
+using Project_Alphonse_Elric.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

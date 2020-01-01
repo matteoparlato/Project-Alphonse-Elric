@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// FastCall class

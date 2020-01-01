@@ -1,30 +1,30 @@
 <!--
-    Questo file contiene le direttive di runtime usate da .NET Native. Le impostazioni predefinite sono adatte per la 
-    maggior parte degli sviluppatori, ma è possibile modificare questi parametri per cambiare il 
-    comportamento dell'ottimizzatore di .NET Native.
+    This file contains Runtime Directives used by .NET Native. The defaults here are suitable for most
+    developers. However, you can modify these parameters to modify the behavior of the .NET Native
+    optimizer.
 
-    Le direttive di runtime sono documentate in https://go.microsoft.com/fwlink/?LinkID=391919
+    Runtime Directives are documented at https://go.microsoft.com/fwlink/?LinkID=391919
 
-    Per abilitare completamente la reflection per App1.MyClass e tutti i relativi membri pubblici/privati
+    To fully enable reflection for App1.MyClass and all of its public/private members
     <Type Name="App1.MyClass" Dynamic="Required All"/>
 
-    Per abilitare la creazione dinamica della creazione di istanze specifica di AppClass<T> tramite System.Int32
+    To enable dynamic creation of the specific instantiation of AppClass<T> over System.Int32
     <TypeInstantiation Name="App1.AppClass" Arguments="System.Int32" Activate="Required Public" />
 
-    Uso della direttiva Namespace per applicare i criteri di reflection a tutti i tipi in uno spazio dei nomi specifico
+    Using the Namespace directive to apply reflection policy to all the types in a particular namespace
     <Namespace Name="DataClasses.ViewModels" Serialize="All" />
 -->
 
 <Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
   <Application>
     <!--
-      Un elemento Assembly il cui nome è "*Application*" si applica a tutti gli assembly
-      nel pacchetto dell'applicazione. Gli asterischi non sono caratteri jolly.
+      An Assembly element with Name="*Application*" applies to all assemblies in
+      the application package. The asterisks are not wildcards.
     -->
     <Assembly Name="*Application*" Dynamic="Required All" />
-    
-    
-    <!-- Aggiungere qui le direttive di runtime specifiche dell'applicazione. -->
+
+
+    <!-- Add your application specific runtime directives here. -->
 
 
   </Application>

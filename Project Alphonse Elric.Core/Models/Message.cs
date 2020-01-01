@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Models
+namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// Message class

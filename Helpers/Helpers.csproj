@@ -136,9 +136,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{b958e9ff-3ba5-4b80-b516-65d757960736}</Project>
-      <Name>Models</Name>
+    <ProjectReference Include="..\Project Alphonse Elric.Core\Project Alphonse Elric.Core.csproj">
+      <Project>{92c5a770-c583-4114-b652-ee81e95b7202}</Project>
+      <Name>Project Alphonse Elric.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -1,5 +1,5 @@
 ﻿using Helpers;
-using Models;
+using Project_Alphonse_Elric.Core.Models;
 using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Models
+namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// Services class

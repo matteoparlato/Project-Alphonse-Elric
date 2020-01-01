@@ -8,7 +8,7 @@
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Project_Alphonse_Elric</RootNamespace>
-    <AssemblyName>Project Alphonse Elric</AssemblyName>
+    <AssemblyName>Project_Alphonse_Elric</AssemblyName>
     <DefaultLanguage>it-IT</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
@@ -106,7 +106,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.cs" />
-    <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
+    <Compile Include="Activation\DefaultActivationHandler.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -343,9 +343,9 @@
       <Project>{397449db-eb2d-4c6d-8286-eb65853d3157}</Project>
       <Name>Helpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{b958e9ff-3ba5-4b80-b516-65d757960736}</Project>
-      <Name>Models</Name>
+    <ProjectReference Include="..\Project Alphonse Elric.Core\Project Alphonse Elric.Core.csproj">
+      <Project>{92c5a770-c583-4114-b652-ee81e95b7202}</Project>
+      <Name>Project Alphonse Elric.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

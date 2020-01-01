@@ -1,7 +1,7 @@
 ﻿using System;
 using Helpers;
 using Microsoft.Services.Store.Engagement;
-using Models;
+using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
