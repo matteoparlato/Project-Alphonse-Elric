@@ -64,7 +64,7 @@ namespace Project_Alphonse_Elric.Dialogs
         private async void Button_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
             FrameworkElement element = (FrameworkElement)sender;
-            Models.FastCall fastcall = (Models.FastCall)element.DataContext;
+            Core.Models.FastCall fastcall = (Core.Models.FastCall)element.DataContext;
 
             try
             {
@@ -83,14 +83,12 @@ namespace Project_Alphonse_Elric.Dialogs
         /// <param name="e"></param>
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(NameTextBox.Text) && !string.IsNullOrWhiteSpace(TargetTextBox.Text) && !string.IsNullOrWhiteSpace(ShortTextBox.Text) && ShortTextBox.Text.Length > 3 && ShortTextBox.Text.Length < 11 && !ShortTextBox.Text.ToCharArray()[0].Equals('0'))
-            {
-               AddButton.IsEnabled = true;
-            }
-            else
-            {
-                AddButton.IsEnabled = false;
-            }
+            AddButton.IsEnabled = !string.IsNullOrWhiteSpace(NameTextBox.Text) &&
+                                  !string.IsNullOrWhiteSpace(TargetTextBox.Text) &&
+                                  !string.IsNullOrWhiteSpace(ShortTextBox.Text) &&
+                                  ShortTextBox.Text.Length > 3 &&
+                                  ShortTextBox.Text.Length < 11 &&
+                                  !ShortTextBox.Text.ToCharArray()[0].Equals('0');
         }
     }
 }

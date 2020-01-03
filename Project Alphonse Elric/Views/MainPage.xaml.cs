@@ -1,6 +1,8 @@
 ﻿using Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -10,7 +12,7 @@ namespace Project_Alphonse_Elric.Views
     /// <summary>
     /// MainPage class
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
         internal Profile AccountDetails { get; private set; } = ClientExtensions.AccountDetails;
 
@@ -30,8 +32,6 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            TitleText.Text = Window.Current.Bounds.Width < 640 ? string.Format("CIAO {0}!", AccountDetails.Name.ToUpper()) : string.Format("Ciao {0}!", AccountDetails.Name);
-
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
             Frame.BackStack.Clear();
@@ -54,22 +54,19 @@ namespace Project_Alphonse_Elric.Views
             catch (Exception) { }
         }
 
-        private void WindowStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
         {
-            switch (e.NewState.Name)
+            if (Equals(storage, value))
             {
-                case "PanoramicState":
-                case "WideState":
-                    {
-                        TitleText.Text = string.Format("Ciao {0}!", AccountDetails.Name);
-                        break;
-                    }
-                default:
-                    {
-                        TitleText.Text = string.Format("CIAO {0}!", AccountDetails.Name.ToUpper());
-                        break;
-                    }
+                return;
             }
+
+            storage = value;
+            OnPropertyChanged(propertyName);
         }
+
+        private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -1,167 +1,28 @@
-<Page x:Class="Project_Alphonse_Elric.Views.ShellPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:contract5Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Views" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ui="using:Microsoft.Advertising.WinRT.UI" IsTextScaleFactorEnabled="False" Loaded="Page_Loaded" mc:Ignorable="d">
+<Page x:Class="Project_Alphonse_Elric.Views.ShellPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:behaviors="using:Project_Alphonse_Elric.Behaviors" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:helpers="using:Project_Alphonse_Elric.Helpers" xmlns:i="using:Microsoft.Xaml.Interactivity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:views="using:Project_Alphonse_Elric.Views" xmlns:winui="using:Microsoft.UI.Xaml.Controls" Loaded="OnLoaded" mc:Ignorable="d">
 
-    <Page.Resources>
-        <DataTemplate x:Key="NavigationMenuItemDataTemplate" x:DataType="local:ShellNavigationItem">
-            <Grid Width="320" MinHeight="48">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Rectangle Width="6" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="{ThemeResource SystemControlForegroundAccentBrush}" Visibility="{x:Bind SelectedVis, Mode=OneWay}" />
-                <FontIcon Margin="16,12" VerticalAlignment="Center" FontSize="16" Foreground="{x:Bind SelectedForeground, Mode=OneWay}" Glyph="{x:Bind SymbolAsChar}" />
-                <TextBlock Grid.Column="1" Margin="0,9,0,11" VerticalAlignment="Center" Foreground="{x:Bind SelectedForeground, Mode=OneWay}" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind Label}" TextTrimming="None" />
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <Storyboard>
-                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="PointerOver">
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
-                                </ObjectAnimationUsingKeyFrames>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
-                                </ObjectAnimationUsingKeyFrames>
-                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Pressed">
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListMediumBrush}" />
-                                </ObjectAnimationUsingKeyFrames>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
-                                </ObjectAnimationUsingKeyFrames>
-                                <PointerDownThemeAnimation TargetName="ContentPresenter" />
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                    <VisualStateGroup x:Name="DisabledStates">
-                        <VisualState x:Name="Enabled" />
-                        <VisualState x:Name="Disabled">
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Opacity" To="{ThemeResource ListViewItemDisabledThemeOpacity}" Duration="0" />
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Grid>
-        </DataTemplate>
-        <Style x:Key="LegacyHamburgerMenuStyle" TargetType="controls:HamburgerMenu">
-            <Setter Property="HamburgerMenuTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" FontSize="16" Glyph="&#xE700;" />
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="IsTabStop" Value="False" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="controls:HamburgerMenu">
-                        <Grid>
-                            <SplitView x:Name="MainSplitView" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="{TemplateBinding DisplayMode}" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsTabStop="False" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{TemplateBinding PaneBackground}" PanePlacement="{TemplateBinding PanePlacement}">
-                                <SplitView.Pane>
-                                    <Grid x:Name="PaneGrid" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" FlowDirection="LeftToRight">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Height="{TemplateBinding HamburgerHeight}" Margin="0,0,0,0" />
-                                        <ListView x:Name="ButtonsListView" Grid.Row="1" Width="{TemplateBinding OpenPaneLength}" IsItemClickEnabled="True" ItemTemplate="{TemplateBinding ItemTemplate}" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" ItemsSource="{TemplateBinding ItemsSource}" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectionMode="None" TabIndex="1">
-                                            <ListView.ItemContainerStyle>
-                                                <Style TargetType="ListViewItem">
-                                                    <Setter Property="Padding" Value="0" />
-                                                </Style>
-                                            </ListView.ItemContainerStyle>
-                                        </ListView>
-                                        <ListView x:Name="OptionsListView" Grid.Row="2" Width="{TemplateBinding OpenPaneLength}" Margin="0,20,0,0" VerticalAlignment="Bottom" IsItemClickEnabled="True" ItemTemplate="{TemplateBinding OptionsItemTemplate}" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" ItemsSource="{TemplateBinding OptionsItemsSource}" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedIndex="{Binding SelectedOptionsIndex, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectedItem="{Binding SelectedOptionsItem, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectionMode="None" TabIndex="2">
-                                            <ListView.ItemContainerStyle>
-                                                <Style TargetType="ListViewItem">
-                                                    <Setter Property="Padding" Value="0" />
-                                                </Style>
-                                            </ListView.ItemContainerStyle>
-                                        </ListView>
-                                    </Grid>
-                                </SplitView.Pane>
-                                <ContentPresenter x:Name="ContentPart" Content="{TemplateBinding Content}" />
-                            </SplitView>
-                            <Button x:Name="HamburgerButton" Width="{TemplateBinding HamburgerWidth}" Height="{TemplateBinding HamburgerHeight}" Margin="0" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" TabIndex="0" Visibility="{TemplateBinding HamburgerVisibility}">
-                                <ContentControl ContentTemplate="{TemplateBinding HamburgerMenuTemplate}" Foreground="{TemplateBinding Foreground}" IsTabStop="False" />
-                            </Button>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="AcrylicWideHamburgerMenuStyle" BasedOn="{StaticResource LegacyHamburgerMenuStyle}" TargetType="controls:HamburgerMenu">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="controls:HamburgerMenu">
-                        <Grid>
-                            <SplitView x:Name="MainSplitView" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="{TemplateBinding DisplayMode}" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsTabStop="False" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{TemplateBinding PaneBackground}" PanePlacement="{TemplateBinding PanePlacement}">
-                                <SplitView.Pane>
-                                    <Grid x:Name="PaneGrid" Background="{ThemeResource SystemControlChromeMediumLowAcrylicElementMediumBrush}" FlowDirection="LeftToRight">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Height="{TemplateBinding HamburgerHeight}" Margin="0,0,0,0" />
-                                        <ListView x:Name="ButtonsListView" Grid.Row="1" Width="{TemplateBinding OpenPaneLength}" Margin="0,32,0,0" IsItemClickEnabled="True" ItemTemplate="{TemplateBinding ItemTemplate}" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" ItemsSource="{TemplateBinding ItemsSource}" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectionMode="None" TabIndex="1">
-                                            <ListView.ItemContainerStyle>
-                                                <Style TargetType="ListViewItem">
-                                                    <Setter Property="Padding" Value="0" />
-                                                </Style>
-                                            </ListView.ItemContainerStyle>
-                                        </ListView>
-                                        <ListView x:Name="OptionsListView" Grid.Row="2" Width="{TemplateBinding OpenPaneLength}" Margin="0,20,0,0" VerticalAlignment="Bottom" IsItemClickEnabled="True" ItemTemplate="{TemplateBinding OptionsItemTemplate}" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" ItemsSource="{TemplateBinding OptionsItemsSource}" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectedIndex="{Binding SelectedOptionsIndex, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectedItem="{Binding SelectedOptionsItem, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" SelectionMode="None" TabIndex="2">
-                                            <ListView.ItemContainerStyle>
-                                                <Style TargetType="ListViewItem">
-                                                    <Setter Property="Padding" Value="0" />
-                                                </Style>
-                                            </ListView.ItemContainerStyle>
-                                        </ListView>
-                                    </Grid>
-                                </SplitView.Pane>
-                                <ContentPresenter x:Name="ContentPart" Content="{TemplateBinding Content}" />
-                            </SplitView>
-                            <Button x:Name="HamburgerButton" Width="{TemplateBinding HamburgerWidth}" Height="{TemplateBinding HamburgerHeight}" Margin="0,32,0,0" VerticalAlignment="Top" Background="Transparent" BorderThickness="1" Style="{StaticResource ButtonRevealStyle}" TabIndex="0" Visibility="{TemplateBinding HamburgerVisibility}">
-                                <ContentControl ContentTemplate="{TemplateBinding HamburgerMenuTemplate}" Foreground="{TemplateBinding Foreground}" IsTabStop="False" />
-                            </Button>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
+    <Grid>
+        <winui:NavigationView x:Name="navigationView" BackRequested="navigationView_BackRequested" ItemInvoked="navigationView_ItemInvoked" Loaded="navigationView_Loaded">
+            <winui:NavigationView.MenuItems>
+                <winui:NavigationViewItem Content="Home" Icon="Home" Tag="home" />
+                <winui:NavigationViewItemSeparator />
+                <winui:NavigationViewItemHeader x:Name="MainPagesHeader"/>
+                <winui:NavigationViewItem Content="Opzioni e servizi" Tag="services">
+                    <winui:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;" />
+                    </winui:NavigationViewItem.Icon>
+                </winui:NavigationViewItem>
+                <winui:NavigationViewItem Content="Segreteria telefonica" Icon="Memo" Tag="voicemail" />
+                <winui:NavigationViewItem Content="Ricarica telefonica" Tag="recharge">
+                    <winui:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C7;" />
+                    </winui:NavigationViewItem.Icon>
+                </winui:NavigationViewItem>
+            </winui:NavigationView.MenuItems>
 
-    <Grid x:Name="CollectorGrid" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-
-        <Grid x:Name="ShellGrid" Grid.Row="0" Canvas.ZIndex="0">
-            <Frame x:Name="ShellFrame" Margin="0" Canvas.ZIndex="1" />
-
-            <Grid x:Name="DropLinkGrid" Margin="0,48,0,0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-
-            <!--<ui:AdControl Width="320" Height="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" AdUnitId="1100030462" ApplicationId="854121b0-1166-4931-a023-14fcbb75c9b1" Canvas.ZIndex="1" IsAutoRefreshEnabled="True" />-->
-
-            <controls:DropShadowPanel x:Name="DropShadowHeader" Margin="0,48,0,0" HorizontalContentAlignment="Stretch" BlurRadius="10" OffsetX="0" OffsetY="-2" ShadowOpacity="0.5" Color="{ThemeResource TitleShadow}">
-                <Grid Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-            </controls:DropShadowPanel>
-        </Grid>
-
-        <controls:HamburgerMenu x:Name="NavigationMenu" Grid.Row="0" Canvas.ZIndex="1" DisplayMode="{x:Bind DisplayMode, Mode=OneWay}" IsPaneOpen="{x:Bind IsPaneOpen, Mode=TwoWay}" ItemClick="ItemClicked" ItemTemplate="{StaticResource NavigationMenuItemDataTemplate}" ItemsSource="{x:Bind PrimaryItems}" OptionsItemClick="ItemClicked" OptionsItemTemplate="{StaticResource NavigationMenuItemDataTemplate}" OptionsItemsSource="{x:Bind SecondaryItems}" SelectedItem="{x:Bind Selected, Mode=OneWay}" Style="{StaticResource LegacyHamburgerMenuStyle}" />
+            <ScrollViewer>
+                <Frame x:Name="shellFrame" Padding="12,0,12,24" IsTabStop="True" NavigationFailed="shellFrame_NavigationFailed" />
+            </ScrollViewer>
+        </winui:NavigationView>
 
         <!--#region Login-->
         <controls:Loading x:Name="LoadingControl" Grid.Row="0" Grid.RowSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Canvas.ZIndex="2" IsLoading="True">
@@ -189,14 +50,14 @@
                         <StackPanel x:Name="LoginStackPanel" Grid.Row="1" Padding="35" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock Margin="0,0,0,18" Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
                                 <Run Text="Benvenuto in" />
-                                <Run Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="iliad"/>
+                                <Run Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="iliad" />
                             </TextBlock>
                             <TextBlock Opacity="0.6" Style="{ThemeResource TitleTextBlockStyle}" Text="Inserisci le credenziali del tuo account" TextAlignment="Center" TextWrapping="Wrap" />
 
                             <StackPanel Margin="0,18,0,0">
-                                <TextBox x:Name="UsernameTextBox" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
-                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" KeyDown="PasswordPasswordBox_KeyDown" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
-                                <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" contract5Present:Style="{StaticResource ButtonRevealStyle}" Click="Button_Click" Content="Accedi" IsEnabled="False" />
+                                <TextBox x:Name="UsernameTextBox" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
+                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" KeyDown="PasswordPasswordBox_KeyDown" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
+                                <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" Click="Button_Click" Content="Accedi" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" />
                             </StackPanel>
 
                             <StackPanel x:Name="ErrorStackPanel" Visibility="Collapsed">
@@ -212,59 +73,30 @@
 
         <controls:InAppNotification x:Name="InAppNotification" Grid.Row="0" HorizontalAlignment="Stretch" Canvas.ZIndex="3" VerticalOffset="0" />
 
-        <Grid x:Name="WideNavigation" Grid.Row="1" Background="{ThemeResource SystemControlForegroundAccentBrush}" Canvas.ZIndex="1" RequestedTheme="Dark">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <AppBarButton x:Name="ConsumesAppBarButton" Grid.Column="0" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click" Icon="Home" Label="I tuoi consumi" />
-            <AppBarButton x:Name="OptionsAppBarButton" Grid.Column="1" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_1" Icon="Repair" Label="Opzioni e servizi" />
-            <AppBarButton x:Name="VoicemailAppBarButton" Grid.Column="2" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_2" Icon="Memo" Label="Segreteria telefonica" />
-            <AppBarButton x:Name="RechargeAppBarButton" Grid.Column="3" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_3" Icon="Refresh" Label="Ricarica telefonica" />
-            <AppBarButton x:Name="SettingsAppBarButton" Grid.Column="4" Width="128" HorizontalAlignment="Stretch" Click="AppBarButton_Click_4" Icon="Setting" Label="Impostazioni" />
-        </Grid>
-
-        <!--#region VisualStateManager-->
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates" CurrentStateChanged="WindowStates_CurrentStateChanged">
-                <VisualState x:Name="PanoramicState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1024" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DropShadowHeader.Margin" Value="0,104,0,0" />
-                        <Setter Target="DropLinkGrid.Margin" Value="0,104,0,0" />
-                        <Setter Target="WideNavigation.Visibility" Value="Visible" />
-                        <Setter Target="NavigationMenu.Visibility" Value="Collapsed" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="DropShadowHeader.Margin" Value="0,104,0,0" />
-                        <Setter Target="DropLinkGrid.Margin" Value="0,104,0,0" />
-                        <Setter Target="WideNavigation.Visibility" Value="Visible" />
-                        <Setter Target="NavigationMenu.Visibility" Value="Collapsed" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
+            <VisualStateGroup>
+                <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="LoginGrid.Margin" Value="0" />
-                        <Setter Target="LoginGrid.(Grid.Row)" Value="0" />
-                        <Setter Target="LoginGrid.(Grid.Column)" Value="0" />
-                        <Setter Target="LoginGrid.(Grid.RowSpan)" Value="3" />
-                        <Setter Target="LoginGrid.(Grid.ColumnSpan)" Value="3" />
-                        <Setter Target="LoginStackPanel.Padding" Value="16" />
-                        <Setter Target="WideNavigation.Visibility" Value="Collapsed" />
-                        <Setter Target="NavigationMenu.Visibility" Value="Visible" />
+                        <!--  Remove the next 3 lines for left-only navigation.  -->
+                        <Setter Target="navigationView.PaneDisplayMode" Value="Top" />
+                        <Setter Target="MainPagesHeader.Visibility" Value="Collapsed" />
+                        <!--  Leave the next line for left-only navigation.  -->
+                        <Setter Target="shellFrame.Padding" Value="24,0,24,24" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{x:Bind navigationView.ExpandedModeThresholdWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  Remove the next 3 lines for left-only navigation.  -->
+                        <Setter Target="navigationView.PaneDisplayMode" Value="Left" />
+                        <Setter Target="MainPagesHeader.Visibility" Value="Visible" />
+                        <!--  Leave the next line for left-only navigation.  -->
+                        <Setter Target="shellFrame.Padding" Value="24,0,24,24" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

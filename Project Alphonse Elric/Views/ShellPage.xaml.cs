@@ -1,4 +1,12 @@
-﻿using Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using Helpers;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.Services.Store.Engagement;
 using Microsoft.Toolkit.Uwp.Helpers;
@@ -6,26 +14,20 @@ using Microsoft.Toolkit.Uwp.UI.Controls;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Windows.Foundation.Metadata;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
 using Windows.System;
-using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+
+using WinUI = Microsoft.UI.Xaml.Controls;
 
 namespace Project_Alphonse_Elric.Views
 {
@@ -33,52 +35,22 @@ namespace Project_Alphonse_Elric.Views
     {
         #region ShellPage
 
-        private const string PanoramicStateName = "PanoramicState";
-        private const string WideStateName = "WideState";
-        private const string NarrowStateName = "NarrowState";
-        private const double WideStateMinWindowWidth = 640;
-        private const double PanoramicStateMinWindowWidth = 1024;
+        private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
+        private readonly KeyboardAccelerator _backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
 
-        private bool _isPaneOpen;
+        private bool _isBackEnabled;
+        private WinUI.NavigationViewItem _selected;
 
-        public bool IsPaneOpen
+        public bool IsBackEnabled
         {
-            get { return _isPaneOpen; }
-            set { Set(ref _isPaneOpen, value); }
+            get { return _isBackEnabled; }
+            set { Set(ref _isBackEnabled, value); }
         }
 
-        private object _selected;
-
-        public object Selected
+        public WinUI.NavigationViewItem Selected
         {
             get { return _selected; }
             set { Set(ref _selected, value); }
-        }
-
-        private SplitViewDisplayMode _displayMode = SplitViewDisplayMode.CompactInline;
-
-        public SplitViewDisplayMode DisplayMode
-        {
-            get { return _displayMode; }
-            set { Set(ref _displayMode, value); }
-        }
-
-        private object _lastSelectedItem;
-
-        private ObservableCollection<ShellNavigationItem> _primaryItems = new ObservableCollection<ShellNavigationItem>();
-
-        public ObservableCollection<ShellNavigationItem> PrimaryItems
-        {
-            get { return _primaryItems; }
-            set { Set(ref _primaryItems, value); }
-        }
-
-        private ObservableCollection<ShellNavigationItem> _secondaryItems = new ObservableCollection<ShellNavigationItem>();
-
-        public ObservableCollection<ShellNavigationItem> SecondaryItems
-        {
-            get { return _secondaryItems; }
-            set { Set(ref _secondaryItems, value); }
         }
 
         public ShellPage()
@@ -87,12 +59,13 @@ namespace Project_Alphonse_Elric.Views
             DataContext = this;
             Initialize();
         }
-        
+
         private void Initialize()
         {
-            NavigationService.Frame = ShellFrame;
+            NavigationService.Frame = shellFrame;
+            NavigationService.NavigationFailed += Frame_NavigationFailed;
             NavigationService.Navigated += Frame_Navigated;
-            PopulateNavItems();
+            navigationView.BackRequested += OnBackRequested;
 
             UIExtensions.SetTitleBarColor();
 
@@ -102,140 +75,73 @@ namespace Project_Alphonse_Elric.Views
 
             Loader.IsLoading = true;
 
-            InitializeState(Window.Current.Bounds.Width);
-
-            if (((ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion) & 0x00000000FFFF0000L) >> 16) == 14393)
-            {
-                DropShadowHeader.Visibility = Visibility.Collapsed;
-            }
-
-            if (UIExtensions.IsFluentAvailable)
-            {
-                NavigationMenu.Style = this.Resources["AcrylicWideHamburgerMenuStyle"] as Style;
-                CollectorGrid.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
-                Loader.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
-                LoginGrid.Background = Application.Current.Resources["CardBackground"] as Brush;
-                WideNavigation.Background = this.Resources["SystemControlAccentAcrylicWindowAccentMediumHighBrush"] as Brush;
-                //ConsumesAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //OptionsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //VoicemailAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //RechargeAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //SettingsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-            }
-            else
-            {
-                DropShadowContent.ShadowOpacity = 0;
-            }
+            //CollectorGrid.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
+            Loader.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
+            LoginGrid.Background = Application.Current.Resources["CardBackground"] as Brush;
+            //WideNavigation.Background = this.Resources["SystemControlAccentAcrylicWindowAccentMediumHighBrush"] as Brush;
         }
 
-        private void InitializeState(double windowWith)
+        private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (windowWith < WideStateMinWindowWidth)
-            {
-                GoToState(NarrowStateName);
-            }
-            else if (windowWith < PanoramicStateMinWindowWidth)
-            {
-                GoToState(WideStateName);
-            }
-            else
-            {
-                GoToState(PanoramicStateName);
-            }
+            // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
+            // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
+            KeyboardAccelerators.Add(_altLeftKeyboardAccelerator);
+            KeyboardAccelerators.Add(_backKeyboardAccelerator);
+            await Task.CompletedTask;
+
+            Page_Loaded();
         }
-
-        private void PopulateNavItems()
+        private void Frame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            _primaryItems.Clear();
-
-            _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("I tuoi consumi", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<ServicesPage>("Opzioni e servizi", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<VoicemailPage>("Segreteria telefonica", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<RechargePage>("Ricarica telefonica", ''));
-
-            _secondaryItems.Clear();
-
-            _secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Impostazioni", ''));
+            throw e.Exception;
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            var navigationItem = PrimaryItems?.FirstOrDefault(i => i.PageType == e?.SourcePageType);
-            if (navigationItem == null)
-            {
-                navigationItem = SecondaryItems?.FirstOrDefault(i => i.PageType == e?.SourcePageType);
-            }
-
-            if (navigationItem != null)
-            {
-                ChangeSelected(_lastSelectedItem, navigationItem);
-                _lastSelectedItem = navigationItem;
-            }
+            IsBackEnabled = NavigationService.CanGoBack;
+            Selected = navigationView.MenuItems
+                            .OfType<WinUI.NavigationViewItem>()
+                            .FirstOrDefault(menuItem => IsMenuItemForPageType(menuItem, e.SourcePageType));
         }
 
-        private void ChangeSelected(object oldValue, object newValue)
+        private bool IsMenuItemForPageType(WinUI.NavigationViewItem menuItem, Type sourcePageType)
         {
-            if (oldValue != null)
-            {
-                (oldValue as ShellNavigationItem).IsSelected = false;
-            }
-
-            if (newValue != null)
-            {
-                (newValue as ShellNavigationItem).IsSelected = true;
-                Selected = newValue;
-            }
+            var pageType = menuItem.GetValue(NavHelper.NavigateToProperty) as Type;
+            return pageType == sourcePageType;
         }
 
-        private void Navigate(object item)
+        private void OnItemInvoked(WinUI.NavigationView sender, WinUI.NavigationViewItemInvokedEventArgs args)
         {
-            var navigationItem = item as ShellNavigationItem;
-            if (navigationItem != null)
-            {
-                NavigationService.Navigate(navigationItem.PageType);
-            }
+            var item = navigationView.MenuItems
+                            .OfType<WinUI.NavigationViewItem>()
+                            .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
+            var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
+            NavigationService.Navigate(pageType);
         }
 
-        private void ItemClicked(object sender, ItemClickEventArgs e)
+        private void OnBackRequested(WinUI.NavigationView sender, WinUI.NavigationViewBackRequestedEventArgs args)
         {
-            if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
+            NavigationService.GoBack();
+        }
+
+        private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
+        {
+            var keyboardAccelerator = new KeyboardAccelerator() { Key = key };
+            if (modifiers.HasValue)
             {
-                IsPaneOpen = false;
+                keyboardAccelerator.Modifiers = modifiers.Value;
             }
 
-            Navigate(e.ClickedItem);
+            keyboardAccelerator.Invoked += OnKeyboardAcceleratorInvoked;
+            return keyboardAccelerator;
         }
 
-        private void OpenPane_Click(object sender, RoutedEventArgs e)
+        private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
-            IsPaneOpen = !_isPaneOpen;
+            var result = NavigationService.GoBack();
+            args.Handled = result;
         }
-
-        private void WindowStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e) => GoToState(e.NewState.Name);
-
-        private void GoToState(string stateName)
-        {
-            switch (stateName)
-            {
-                case PanoramicStateName:
-                    DisplayMode = SplitViewDisplayMode.Overlay;
-                    if (UIExtensions.IsFluentAvailable) ShellGrid.Margin = new Thickness { Left = 0, Top = 0, Right = 0, Bottom = 0 };
-                    break;
-                case WideStateName:
-                    DisplayMode = SplitViewDisplayMode.Overlay;
-                    IsPaneOpen = false;
-                    if (UIExtensions.IsFluentAvailable) ShellGrid.Margin = new Thickness { Left = 0, Top = 0, Right = 0, Bottom = 0 };
-                    break;
-                case NarrowStateName:
-                    DisplayMode = SplitViewDisplayMode.Overlay;
-                    IsPaneOpen = false;
-                    if (UIExtensions.IsFluentAvailable) ShellGrid.Margin = new Thickness { Left = 0, Top = 32, Right = 0, Bottom = 0 };
-                    break;
-                default:
-                    break;
-            }
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
@@ -269,7 +175,7 @@ namespace Project_Alphonse_Elric.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded()
         {
             if (SystemInformation.IsFirstRun) await new PrivacyPolicyDialog().ShowAsync();
 
@@ -294,14 +200,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                UIExtensions.ShowProgressStatusBar("Sto eseguendo l'accesso...");
-            }
-            else
-            {
-                StatusProgressBar.Visibility = Visibility.Visible;
-            }
+            StatusProgressBar.Visibility = Visibility.Visible;
             ErrorStackPanel.Visibility = Visibility.Collapsed;
             UsernameTextBox.IsEnabled = false;
             PasswordPasswordBox.IsEnabled = false;
@@ -373,7 +272,6 @@ namespace Project_Alphonse_Elric.Views
             PasswordPasswordBox.IsEnabled = true;
             LoginButton.IsEnabled = true;
             StatusProgressBar.Visibility = Visibility.Collapsed;
-            UIExtensions.HideProgressStatusBar();
         }
 
         /// <summary>
@@ -507,5 +405,163 @@ namespace Project_Alphonse_Elric.Views
         {
             if (e.Key == VirtualKey.Enter) Button_Click(null, null);
         }
+
+
+
+
+        //////////////////
+        ///
+
+
+
+
+        private void shellFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
+        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+        {
+            ("home", typeof(MainPage)),
+            ("services", typeof(ServicesPage)),
+            ("voicemail", typeof(VoicemailPage)),
+            ("recharge", typeof(RechargePage)),
+            ("settings", typeof(SettingsPage)),
+        };
+
+        private void navigationView_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Add handler for shellFrame navigation.
+            shellFrame.Navigated += On_Navigated;
+
+            // navigationView doesn't load any page by default, so load home page.
+            navigationView.SelectedItem = navigationView.MenuItems[0];
+            // If navigation occurs on SelectionChanged, this isn't needed.
+            // Because we use ItemInvoked to navigate, we need to call Navigate
+            // here to load the home page.
+            navigationView_Navigate("home", new EntranceNavigationTransitionInfo());
+
+            // Add keyboard accelerators for backwards navigation.
+            var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };
+            goBack.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(goBack);
+
+            // ALT routes here
+            var altLeft = new KeyboardAccelerator
+            {
+                Key = VirtualKey.Left,
+                Modifiers = VirtualKeyModifiers.Menu
+            };
+            altLeft.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(altLeft);
+        }
+
+        private void navigationView_ItemInvoked(WinUI.NavigationView sender,
+                                         WinUI.NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked == true)
+            {
+                navigationView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
+            }
+            else if (args.InvokedItemContainer != null)
+            {
+                var navItemTag = args.InvokedItemContainer.Tag.ToString();
+                navigationView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
+            }
+        }
+
+        // navigationView_SelectionChanged is not used in this example, but is shown for completeness.
+        // You will typically handle either ItemInvoked or SelectionChanged to perform navigation,
+        // but not both.
+        private void navigationView_SelectionChanged(WinUI.NavigationView sender,
+                                              WinUI.NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected == true)
+            {
+                navigationView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
+            }
+            else if (args.SelectedItemContainer != null)
+            {
+                var navItemTag = args.SelectedItemContainer.Tag.ToString();
+                navigationView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
+            }
+        }
+
+        private void navigationView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
+        {
+            Type _page = null;
+            if (navItemTag == "settings")
+            {
+                _page = typeof(SettingsPage);
+            }
+            else
+            {
+                var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
+                _page = item.Page;
+            }
+            // Get the page type before navigation so you can prevent duplicate
+            // entries in the backstack.
+            var preNavPageType = shellFrame.CurrentSourcePageType;
+
+            // Only navigate if the selected page isn't currently loaded.
+            if (!(_page is null) && !Type.Equals(preNavPageType, _page))
+            {
+                shellFrame.Navigate(_page, null, transitionInfo);
+            }
+        }
+
+        private void navigationView_BackRequested(WinUI.NavigationView sender,
+                                           WinUI.NavigationViewBackRequestedEventArgs args)
+        {
+            On_BackRequested();
+        }
+
+        private void BackInvoked(KeyboardAccelerator sender,
+                                 KeyboardAcceleratorInvokedEventArgs args)
+        {
+            On_BackRequested();
+            args.Handled = true;
+        }
+
+        private bool On_BackRequested()
+        {
+            if (!shellFrame.CanGoBack)
+                return false;
+
+            // Don't go back if the nav pane is overlayed.
+            if (navigationView.IsPaneOpen &&
+                (navigationView.DisplayMode == WinUI.NavigationViewDisplayMode.Compact ||
+                 navigationView.DisplayMode == WinUI.NavigationViewDisplayMode.Minimal))
+                return false;
+
+            shellFrame.GoBack();
+            return true;
+        }
+
+        private void On_Navigated(object sender, NavigationEventArgs e)
+        {
+            navigationView.IsBackEnabled = shellFrame.CanGoBack;
+
+            if (shellFrame.SourcePageType == typeof(SettingsPage))
+            {
+                // SettingsItem is not part of navigationView.MenuItems, and doesn't have a Tag.
+                navigationView.SelectedItem = (WinUI.NavigationViewItem)navigationView.SettingsItem;
+                navigationView.Header = "Settings";
+            }
+            else if (shellFrame.SourcePageType != null)
+            {
+                var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
+
+                navigationView.SelectedItem = navigationView.MenuItems
+                    .OfType<WinUI.NavigationViewItem>()
+                    .First(n => n.Tag.Equals(item.Tag));
+
+                navigationView.Header =
+                    ((WinUI.NavigationViewItem)navigationView.SelectedItem)?.Content?.ToString();
+            }
+        }
+        /////
+        //////////////////////////////
     }
 }

@@ -1,4 +1,4 @@
-﻿<ContentDialog x:Class="Project_Alphonse_Elric.Dialogs.VoicemailNotificationEditor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:contract5Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Dialogs" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="Gestisci notifiche" Loaded="ContentDialog_Loaded" PrimaryButtonText="Chiudi" mc:Ignorable="d">
+﻿<ContentDialog x:Class="Project_Alphonse_Elric.Dialogs.VoicemailNotificationEditor" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Alphonse_Elric.Dialogs" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="Gestisci notifiche" CloseButtonText="Chiudi" DefaultButton="Close" Loaded="ContentDialog_Loaded" mc:Ignorable="d">
 
     <ScrollViewer>
         <Grid>
@@ -12,13 +12,13 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ComboBox x:Name="TypeComboBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Stretch" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" SelectedIndex="0">
+            <ComboBox x:Name="TypeComboBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" SelectedIndex="0">
                 <x:String>Notifica inviata via email</x:String>
                 <x:String>File audio inviato in allegato</x:String>
             </ComboBox>
 
-            <TextBox x:Name="MailTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" PlaceholderText="Email" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" TextChanged="TextBox_TextChanged" />
-            <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" VerticalAlignment="Stretch" contract5Present:BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" contract5Present:Style="{StaticResource ButtonRevealStyle}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" IsEnabled="False" Tapped="Button_Tapped" />
+            <TextBox x:Name="MailTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PlaceholderText="Email" TextChanged="TextBox_TextChanged" />
+            <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" VerticalAlignment="Stretch" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" Tapped="Button_Tapped" />
 
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,18,0,0">
                 <ListView x:Name="DataListView" SelectionMode="None">

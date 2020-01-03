@@ -1,7 +1,6 @@
 ﻿using Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
-using Project_Alphonse_Elric.Helpers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

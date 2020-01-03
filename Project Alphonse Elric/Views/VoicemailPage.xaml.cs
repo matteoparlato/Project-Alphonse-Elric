@@ -1,11 +1,9 @@
 ﻿using Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
-using Project_Alphonse_Elric.Helpers;
 using System;
 using Windows.ApplicationModel.Calls;
 using Windows.ApplicationModel.Chat;
-using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -90,16 +88,9 @@ namespace Project_Alphonse_Elric.Views
             FrameworkElement element = (FrameworkElement)sender;
             Message message = (Message)element.DataContext;
 
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                UIExtensions.ShowProgressStatusBar("Sto scaricando il messaggio vocale...");
-            }
-            else
-            {
-                ShellPage.Current.AppNotification.Content = "Sto scaricando il messaggio vocale che hai scelto di ascoltare. Non appena il download verrà terminato il messaggio vocale verrà aperto automaticamente.";
-                ShellPage.Current.AppNotification.ShowDismissButton = false;
-                ShellPage.Current.AppNotification.Show();
-            }
+            ShellPage.Current.AppNotification.Content = "Sto scaricando il messaggio vocale che hai scelto di ascoltare. Non appena il download verrà terminato il messaggio vocale verrà aperto automaticamente.";
+            ShellPage.Current.AppNotification.ShowDismissButton = false;
+            ShellPage.Current.AppNotification.Show();
 
             try
             {
@@ -109,14 +100,7 @@ namespace Project_Alphonse_Elric.Views
                 }
                 else
                 {
-                    if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-                    {
-                        UIExtensions.HideProgressStatusBar();
-                    }
-                    else
-                    {
-                        ShellPage.Current.AppNotification.Dismiss();
-                    }
+                    ShellPage.Current.AppNotification.Dismiss();
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }

@@ -79,7 +79,7 @@ namespace Project_Alphonse_Elric.Dialogs
         private async void Button_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
             FrameworkElement element = (FrameworkElement)sender;
-            Models.VoicemailNotification notification = (Models.VoicemailNotification)element.DataContext;
+            Core.Models.VoicemailNotification notification = (Core.Models.VoicemailNotification)element.DataContext;
 
             try
             {
