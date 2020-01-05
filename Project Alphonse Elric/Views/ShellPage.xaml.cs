@@ -11,6 +11,7 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.Services.Store.Engagement;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Microsoft.UI.Xaml.Controls;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
@@ -69,7 +70,7 @@ namespace Project_Alphonse_Elric.Views
             navigationView.ItemInvoked += OnItemInvoked;
             UIExtensions.SetTitleBarColor();
 
-            AppNotification = InAppNotification;
+            AppNotification = AppNotificationTeachingTip;
 
             Loader = LoadingControl;
 
@@ -174,7 +175,7 @@ namespace Project_Alphonse_Elric.Views
 
         internal static ShellPage Current { get; set; }
 
-        internal InAppNotification AppNotification { get; private set; }
+        internal TeachingTip AppNotification { get; private set; }
 
         internal Loading Loader { get; private set; }
 
@@ -255,10 +256,11 @@ namespace Project_Alphonse_Elric.Views
 
                 SecurityExtensions.AddCredentials(UsernameTextBox.Text, PasswordPasswordBox.Password);
 
-                AppNotification.Dismiss();
+                AppNotification.IsOpen = false;
 
                 NavigationService.Navigate(typeof(MainPage), new EntranceNavigationTransitionInfo());
                 navigationView.SelectedItem = navigationView.MenuItems[0];
+                IsBackEnabled = false;
 
                 Loader.IsLoading = false;
 
@@ -269,12 +271,7 @@ namespace Project_Alphonse_Elric.Views
                 ErrorTextBlock.Text = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
                 ErrorStackPanel.Visibility = Visibility.Visible;
             }
-            catch (HttpRequestException)
-            {
-                ErrorTextBlock.Text = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                ErrorStackPanel.Visibility = Visibility.Visible;
-            }
-            catch (COMException)
+            catch (Exception)
             {
                 ErrorTextBlock.Text = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
                 ErrorStackPanel.Visibility = Visibility.Visible;
@@ -318,23 +315,18 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="ex">The generated exception</param>
         public void HandleExceptionNotification(Exception ex)
         {
+            Analytics.TrackEvent(ex.Message, new Dictionary<string, string> { { "exception", ex.ToString() } });
+
             if (ex is IndexOutOfRangeException)
             {
-                AppNotification.Content = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.Show();
+                AppNotification.Subtitle = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
+                AppNotification.IsOpen = true;
             }
-            if (ex is HttpRequestException)
+            else
             {
-                AppNotification.Content = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.Show();
+                AppNotification.Subtitle = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
+                AppNotification.IsOpen = true;
             }
-            if (ex is COMException)
-            {
-                AppNotification.Content = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.Show();
-            }
-
-            Analytics.TrackEvent(ex.Message, new Dictionary<string, string> { { "exception", ex.ToString() } });
         }
 
         /// <summary>

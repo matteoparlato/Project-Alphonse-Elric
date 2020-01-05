@@ -18,7 +18,7 @@
                     </winui:NavigationViewItem.Icon>
                 </winui:NavigationViewItem>
             </winui:NavigationView.MenuItems>
-            <i:Interaction.Behaviors>
+            <!--<i:Interaction.Behaviors>
                 <behaviors:NavigationViewHeaderBehavior DefaultHeader="{x:Bind Selected.Content, Mode=OneWay}">
                     <behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
                         <DataTemplate>
@@ -28,7 +28,7 @@
                         </DataTemplate>
                     </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
                 </behaviors:NavigationViewHeaderBehavior>
-            </i:Interaction.Behaviors>
+            </i:Interaction.Behaviors>-->
             <ScrollViewer>
                 <Frame x:Name="shellFrame" Padding="12,0,12,24" IsTabStop="True" />
             </ScrollViewer>
@@ -81,7 +81,11 @@
         </controls:Loading>
         <!--#endregion-->
 
-        <controls:InAppNotification x:Name="InAppNotification" Grid.Row="0" HorizontalAlignment="Stretch" Canvas.ZIndex="3" VerticalOffset="0" />
+        <winui:TeachingTip x:Name="AppNotificationTeachingTip" Background="{ThemeResource SystemControlAcrylicWindowBrush}" PreferredPlacement="Bottom">
+            <winui:TeachingTip.IconSource>
+                <winui:FontIconSource FontFamily="Segoe MDL2 Assets" Glyph="&#xEA6A;" />
+            </winui:TeachingTip.IconSource>
+        </winui:TeachingTip>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
