@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Helpers;
 using Microsoft.AppCenter.Analytics;
@@ -15,11 +13,14 @@ using Microsoft.UI.Xaml.Controls;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
+using Windows.ApplicationModel.Core;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -67,8 +68,13 @@ namespace Project_Alphonse_Elric.Views
             navigationView.BackRequested += OnBackRequested;
 
             //
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
             navigationView.ItemInvoked += OnItemInvoked;
-            UIExtensions.SetTitleBarColor();
 
             AppNotification = AppNotificationTeachingTip;
 

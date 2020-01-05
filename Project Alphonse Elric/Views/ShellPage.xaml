@@ -81,7 +81,7 @@
         </controls:Loading>
         <!--#endregion-->
 
-        <winui:TeachingTip x:Name="AppNotificationTeachingTip" Background="{ThemeResource SystemControlAcrylicWindowBrush}" PreferredPlacement="Bottom">
+        <winui:TeachingTip x:Name="AppNotificationTeachingTip" PreferredPlacement="Bottom">
             <winui:TeachingTip.IconSource>
                 <winui:FontIconSource FontFamily="Segoe MDL2 Assets" Glyph="&#xEA6A;" />
             </winui:TeachingTip.IconSource>
@@ -96,6 +96,7 @@
                     <VisualState.Setters>
                         <!--  Remove the next 3 lines for left-only navigation.  -->
                         <Setter Target="navigationView.PaneDisplayMode" Value="Top" />
+                        <Setter Target="navigationView.IsTitleBarAutoPaddingEnabled" Value="True" />
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed" />
                         <!--  Leave the next line for left-only navigation.  -->
                         <Setter Target="shellFrame.Padding" Value="24,0,24,24" />
@@ -108,6 +109,7 @@
                     <VisualState.Setters>
                         <!--  Remove the next 3 lines for left-only navigation.  -->
                         <Setter Target="navigationView.PaneDisplayMode" Value="Left" />
+                        <Setter Target="navigationView.IsTitleBarAutoPaddingEnabled" Value="False" />
                         <Setter Target="MainPagesHeader.Visibility" Value="Visible" />
                         <!--  Leave the next line for left-only navigation.  -->
                         <Setter Target="shellFrame.Padding" Value="24,0,24,24" />

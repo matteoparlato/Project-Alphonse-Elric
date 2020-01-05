@@ -3,7 +3,6 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Push;
 using Microsoft.Toolkit.Uwp.Helpers;
-using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
 using Project_Alphonse_Elric.Views;
 using System;
@@ -40,8 +39,6 @@ namespace Project_Alphonse_Elric
 
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
 
-            UIExtensions.SetTheme();
-
             _activationService = new Lazy<ActivationService>(CreateActivationService);
         }
 
@@ -61,8 +58,6 @@ namespace Project_Alphonse_Elric
 
         private ActivationService CreateActivationService()
         {
-            UIExtensions.SetTitleBarColor();
-
             return new ActivationService(this, typeof(LockedPage), new Lazy<UIElement>(CreateShell));
         }
 
