@@ -10,7 +10,7 @@
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="ContentGrid" Grid.Column="1" Padding="0,0,0,10">
+            <Grid x:Name="ContentGrid" Grid.Column="1" Padding="0,18,0,10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />

@@ -18,12 +18,10 @@ using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
 using Windows.System;
-using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -67,6 +65,8 @@ namespace Project_Alphonse_Elric.Views
             NavigationService.Navigated += Frame_Navigated;
             navigationView.BackRequested += OnBackRequested;
 
+            //
+            navigationView.ItemInvoked += OnItemInvoked;
             UIExtensions.SetTitleBarColor();
 
             AppNotification = InAppNotification;
@@ -74,9 +74,7 @@ namespace Project_Alphonse_Elric.Views
             Loader = LoadingControl;
 
             Loader.IsLoading = true;
-
-            Loader.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
-            LoginGrid.Background = Application.Current.Resources["CardBackground"] as Brush;
+            //
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
@@ -87,7 +85,9 @@ namespace Project_Alphonse_Elric.Views
             KeyboardAccelerators.Add(_backKeyboardAccelerator);
             await Task.CompletedTask;
 
+            //
             Page_Loaded();
+            //
         }
         private void Frame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
@@ -106,11 +106,6 @@ namespace Project_Alphonse_Elric.Views
             Selected = navigationView.MenuItems
                             .OfType<WinUI.NavigationViewItem>()
                             .FirstOrDefault(menuItem => IsMenuItemForPageType(menuItem, e.SourcePageType));
-
-            //
-            navigationView.Header =
-                ((WinUI.NavigationViewItem)navigationView.SelectedItem)?.Content?.ToString();
-            //
         }
 
         private bool IsMenuItemForPageType(WinUI.NavigationViewItem menuItem, Type sourcePageType)
@@ -126,12 +121,15 @@ namespace Project_Alphonse_Elric.Views
                 NavigationService.Navigate(typeof(SettingsPage));
                 return;
             }
+            else if (args.InvokedItemContainer != null)
+            {
 
-            var item = navigationView.MenuItems
+                var item = navigationView.MenuItems
                             .OfType<WinUI.NavigationViewItem>()
                             .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
-            var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
-            NavigationService.Navigate(pageType, args.RecommendedNavigationTransitionInfo);
+                var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
+                NavigationService.Navigate(pageType, args.RecommendedNavigationTransitionInfo);
+            }
         }
 
         private void OnBackRequested(WinUI.NavigationView sender, WinUI.NavigationViewBackRequestedEventArgs args)
