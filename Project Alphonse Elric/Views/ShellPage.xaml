@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Project_Alphonse_Elric.Views"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     Loaded="OnLoaded"
     mc:Ignorable="d">
 
@@ -57,52 +58,38 @@
         <controls:Loading x:Name="LoadingControl" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}" Canvas.ZIndex="2" IsLoading="True">
             <Border CornerRadius="4">
                 <controls:DropShadowPanel x:Name="DropShadowContent" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.5" Color="#545454">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="4*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid x:Name="LoginGrid" Grid.Row="1" Grid.Column="1" Background="{ThemeResource CardBackground}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="4*" />
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Grid x:Name="LoginGrid" Grid.Row="1" Grid.Column="1" Background="{ThemeResource CardBackground}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <ProgressBar x:Name="StatusProgressBar" Grid.Row="0" VerticalAlignment="Top" IsIndeterminate="True" Opacity="0">
+                            <Windows10version1809:ProgressBar.OpacityTransition>
+                                <Windows10version1809:ScalarTransition />
+                            </Windows10version1809:ProgressBar.OpacityTransition>
+                        </ProgressBar>
 
-                            <ProgressBar x:Name="StatusProgressBar" Grid.Row="0" VerticalAlignment="Top" IsIndeterminate="True" Visibility="Collapsed" />
-
-                            <StackPanel x:Name="LoginStackPanel" Grid.Row="1" Padding="35" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Margin="0,0,0,18" Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
+                        <StackPanel x:Name="LoginStackPanel" Grid.Row="1" Padding="35" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Margin="0,0,0,18" Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
                                 <Run Text="Benvenuto in" />
                                 <Run Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="iliad" />
-                                </TextBlock>
-                                <TextBlock Opacity="0.6" Style="{ThemeResource TitleTextBlockStyle}" Text="Inserisci le credenziali del tuo account" TextAlignment="Center" TextWrapping="Wrap" />
+                            </TextBlock>
+                            <TextBlock Opacity="0.6" Style="{ThemeResource TitleTextBlockStyle}" Text="Inserisci le credenziali del tuo account" TextAlignment="Center" TextWrapping="Wrap" />
 
-                                <StackPanel Margin="0,18,0,0">
-                                    <TextBox x:Name="UsernameTextBox" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
-                                    <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" KeyDown="PasswordPasswordBox_KeyDown" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
-                                    <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" Click="Button_Click" Content="Accedi" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" />
-                                </StackPanel>
-
-                                <StackPanel x:Name="ErrorStackPanel" Visibility="Collapsed">
-                                    <TextBlock x:Name="ErrorTextBlock" Margin="0,18,0,0" Foreground="{StaticResource MessageHighlight}" Style="{ThemeResource BodyTextBlockStyle}" Text="Eventuali messaggi d'errore verranno visualizzati qui." TextAlignment="Center" TextWrapping="Wrap" />
-                                    <HyperlinkButton Margin="0,18,0,0" HorizontalAlignment="Center" Click="HyperlinkButton_Click" Content="Problemi ad accedere al tuo account iliad?" />
-                                </StackPanel>
+                            <StackPanel Margin="0,18,0,0">
+                                <TextBox x:Name="UsernameTextBox" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
+                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" KeyDown="PasswordPasswordBox_KeyDown" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
+                                <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" Click="Button_Click" Content="Accedi" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" />
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </Grid>
                 </controls:DropShadowPanel>
             </Border>
         </controls:Loading>
         <!--#endregion-->
 
-        <winui:TeachingTip x:Name="AppNotificationTeachingTip" PreferredPlacement="Bottom">
+        <winui:TeachingTip x:Name="AppNotificationTeachingTip" PreferredPlacement="Center">
             <winui:TeachingTip.IconSource>
                 <winui:FontIconSource FontFamily="Segoe MDL2 Assets" Glyph="&#xEA6A;" />
             </winui:TeachingTip.IconSource>

@@ -227,8 +227,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            StatusProgressBar.Visibility = Visibility.Visible;
-            ErrorStackPanel.Visibility = Visibility.Collapsed;
+            StatusProgressBar.Opacity = 1;
             UsernameTextBox.IsEnabled = false;
             PasswordPasswordBox.IsEnabled = false;
             LoginButton.IsEnabled = false;
@@ -279,15 +278,9 @@ namespace Project_Alphonse_Elric.Views
 
                 SessionTimeout.Start();
             }
-            catch (IndexOutOfRangeException)
+            catch (Exception ex)
             {
-                ErrorTextBlock.Text = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                ErrorStackPanel.Visibility = Visibility.Visible;
-            }
-            catch (Exception)
-            {
-                ErrorTextBlock.Text = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                ErrorStackPanel.Visibility = Visibility.Visible;
+                HandleExceptionNotification(ex);
             }
 
             _avoidCheck = false;
@@ -295,7 +288,7 @@ namespace Project_Alphonse_Elric.Views
             UsernameTextBox.IsEnabled = true;
             PasswordPasswordBox.IsEnabled = true;
             LoginButton.IsEnabled = true;
-            StatusProgressBar.Visibility = Visibility.Collapsed;
+            StatusProgressBar.Opacity = 0;
         }
 
         /// <summary>
