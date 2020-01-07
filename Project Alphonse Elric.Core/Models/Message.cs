@@ -5,7 +5,7 @@ namespace Project_Alphonse_Elric.Core.Models
     /// <summary>
     /// Message class
     /// </summary>
-    public sealed class Message
+    public sealed class Message : BindableBase
     {
         public string ID { get; set; } = string.Empty;
         public string Sender { get; set; } = string.Empty;

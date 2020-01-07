@@ -3,13 +3,13 @@
     /// <summary>
     /// VoicemailNotification class
     /// </summary>
-    public sealed class VoicemailNotification
+    public sealed class VoicemailNotification : BindableBase
     {
         private string _mode = string.Empty;
         public string Mode
         {
-            get { return _mode.ToUpper(); }
-            set { _mode = value; }
+            get => _mode.ToUpper();
+            set => _mode = value;
         }
 
         public string Mail { get; set; } = string.Empty;

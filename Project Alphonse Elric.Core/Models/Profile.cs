@@ -3,11 +3,18 @@
     /// <summary>
     /// Profile class
     /// </summary>
-    public sealed class Profile
+    public sealed class Profile : BindableBase
     {
         public Consumes Local { get; set; } = new Consumes();
         public Consumes Roaming { get; set; } = new Consumes();
-        public string Name { get; set; } = string.Empty;
+
+        private string _name = string.Empty;
+        public string Name
+        {
+            get => _name.ToUpper();
+            set => SetProperty(ref _name, value);
+        }
+
         public string ID { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string RemainingCredit { get; set; } = string.Empty;

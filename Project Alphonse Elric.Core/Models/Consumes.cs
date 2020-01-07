@@ -1,67 +1,64 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Project_Alphonse_Elric.Core.Models
+﻿namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// Consumes class
     /// </summary>
-    public sealed class Consumes : INotifyPropertyChanged
+    public sealed class Consumes : BindableBase
     {
         private string _voiceTime;
         public string VoiceTime
         {
-            get { return _voiceTime; }
-            set { Set(ref _voiceTime, value); }
+            get => _voiceTime;
+            set => SetProperty(ref _voiceTime, value);
         }
 
         private string _voiceExtra;
         public string VoiceExtra
         {
-            get { return _voiceExtra; }
-            set { Set(ref _voiceExtra, value); }
+            get => _voiceExtra;
+            set => SetProperty(ref _voiceExtra, value);
         }
 
         private string _SMSCount;
         public string SMSCount
         {
-            get { return _SMSCount; }
-            set { Set(ref _SMSCount, value); }
+            get => _SMSCount;
+            set => SetProperty(ref _SMSCount, value);
         }
 
         private string _SMSExtra;
         public string SMSExtra
         {
-            get { return _SMSExtra; }
-            set { Set(ref _SMSExtra, value); }
+            get => _SMSExtra;
+            set => SetProperty(ref _SMSExtra, value);
         }
 
         private string _dataUsed;
         public string DataUsed
         {
-            get { return _dataUsed; }
-            set { Set(ref _dataUsed, value); }
+            get => _dataUsed;
+            set => SetProperty(ref _dataUsed, value);
         }
 
         private string _dataExtra;
         public string DataExtra
         {
-            get { return _dataExtra; }
-            set { Set(ref _dataExtra, value); }
+            get => _dataExtra;
+            set => SetProperty(ref _dataExtra, value);
         }
 
         private string _MMSCount;
         public string MMSCount
         {
-            get { return _MMSCount; }
-            set { Set(ref _MMSCount, value); }
+            get => _MMSCount;
+            set => SetProperty(ref _MMSCount, value);
         }
 
         private string _MMSExtra;
         public string MMSExtra
         {
-            get { return _MMSExtra; }
-            set { Set(ref _MMSExtra, value); }
+            get => _MMSExtra;
+            set => SetProperty(ref _MMSExtra, value);
         }
 
         /// <summary>
@@ -71,20 +68,5 @@ namespace Project_Alphonse_Elric.Core.Models
         {
             //
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
-        {
-            if (Equals(storage, value))
-            {
-                return;
-            }
-
-            storage = value;
-            OnPropertyChanged(propertyName);
-        }
-
-        private void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
