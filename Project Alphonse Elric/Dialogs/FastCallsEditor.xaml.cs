@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Views;
 using System;
 using Windows.UI.Xaml;
@@ -30,14 +31,14 @@ namespace Project_Alphonse_Elric.Dialogs
         {
             try
             {
-                await ClientExtensions.GetFastCalls();
+                await Singleton<ClientExtensions>.Instance.GetFastCalls();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = ClientExtensions.AccountDetails.ActiveServices.FastCallList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            DataListView.ItemsSource = ClientExtensions.AccountDetails.ActiveServices.FastCallList;
+            NoDataStackPanel.Visibility = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            DataListView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList;
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace Project_Alphonse_Elric.Dialogs
         {
             try
             {
-                await ClientExtensions.AddFastCall(NameTextBox.Text, TargetTextBox.Text, ShortTextBox.Text);
+                await Singleton<ClientExtensions>.Instance.AddFastCall(NameTextBox.Text, TargetTextBox.Text, ShortTextBox.Text);
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
@@ -68,7 +69,7 @@ namespace Project_Alphonse_Elric.Dialogs
 
             try
             {
-                await ClientExtensions.DeleteFastCall(fastcall.DeleteLink);
+                await Singleton<ClientExtensions>.Instance.DeleteFastCall(fastcall.DeleteLink);
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 

@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Project_Alphonse_Elric.Core.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,9 +40,9 @@ namespace BackgroundTasks
 
                 try
                 {
-                    await ClientExtensions.Authenticate(credential.UserName, credential.Password);
+                    await Singleton<ClientExtensions>.Instance.Authenticate(credential.UserName, credential.Password);
 
-                    NotificationExtensions.SendTileNotification(ClientExtensions.AccountDetails);
+                    NotificationExtensions.SendTileNotification(Singleton<ClientExtensions>.Instance.AccountDetails);
                 }
                 catch (Exception)
                 {

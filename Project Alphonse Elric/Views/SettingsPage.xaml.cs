@@ -1,6 +1,7 @@
 ﻿using System;
 using Helpers;
 using Microsoft.Services.Store.Engagement;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
@@ -87,13 +88,13 @@ namespace Project_Alphonse_Elric.Views
         {
             try
             {
-                await ClientExtensions.Logout();
+                await Singleton<ClientExtensions>.Instance.Logout();
 
                 ShellPage.Current.SessionTimeout.Stop();
 
                 SecurityExtensions.RemoveCredentials();
 
-                ClientExtensions.AccountDetails = new Profile();
+                Singleton<ClientExtensions>.Instance.AccountDetails = new Profile();
 
                 NavigationService.Navigate(typeof(LockedPage));
 

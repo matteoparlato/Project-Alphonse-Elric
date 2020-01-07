@@ -10,6 +10,7 @@ using Microsoft.Services.Store.Engagement;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Microsoft.UI.Xaml.Controls;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
@@ -240,7 +241,7 @@ namespace Project_Alphonse_Elric.Views
                     {
                         case UserConsentVerificationResult.Verified:
                             {
-                                await ClientExtensions.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
+                                await Singleton<ClientExtensions>.Instance.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
                                 break;
                             }
                         case UserConsentVerificationResult.DeviceNotPresent:
@@ -258,12 +259,12 @@ namespace Project_Alphonse_Elric.Views
                 }
                 else
                 {
-                    await ClientExtensions.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
+                    await Singleton<ClientExtensions>.Instance.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
                 }
 
                 SessionTimeout.Tick += (s, o) =>
                 {
-                    ClientExtensions.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password); // Never await this method!
+                    Singleton<ClientExtensions>.Instance.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password); // Never await this method!
                 };
 
                 SecurityExtensions.AddCredentials(UsernameTextBox.Text, PasswordPasswordBox.Password);

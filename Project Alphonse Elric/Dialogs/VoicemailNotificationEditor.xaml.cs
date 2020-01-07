@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Views;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -29,14 +30,14 @@ namespace Project_Alphonse_Elric.Dialogs
         {
             try
             {
-                await ClientExtensions.GetNotifications();
+                await Singleton<ClientExtensions>.Instance.GetNotifications();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = ClientExtensions.AccountDetails.Voicemail.VoicemailNotificationList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            DataListView.ItemsSource = ClientExtensions.AccountDetails.Voicemail.VoicemailNotificationList;
+            NoDataStackPanel.Visibility = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.VoicemailNotificationList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            DataListView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.VoicemailNotificationList;
         }
 
         /// <summary>
@@ -52,12 +53,12 @@ namespace Project_Alphonse_Elric.Dialogs
                 {
                     case 0:
                         {
-                            await ClientExtensions.AddNotification("report", WebUtility.HtmlEncode(MailTextBox.Text));
+                            await Singleton<ClientExtensions>.Instance.AddNotification("report", WebUtility.HtmlEncode(MailTextBox.Text));
                             break;
                         }
                     case 1:
                         {
-                            await ClientExtensions.AddNotification("attachment", WebUtility.HtmlEncode(MailTextBox.Text));
+                            await Singleton<ClientExtensions>.Instance.AddNotification("attachment", WebUtility.HtmlEncode(MailTextBox.Text));
                             break;
                         }
                     default:
@@ -83,7 +84,7 @@ namespace Project_Alphonse_Elric.Dialogs
 
             try
             {
-                await ClientExtensions.DeleteNotification(WebUtility.HtmlEncode(notification.Mail));
+                await Singleton<ClientExtensions>.Instance.DeleteNotification(WebUtility.HtmlEncode(notification.Mail));
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 

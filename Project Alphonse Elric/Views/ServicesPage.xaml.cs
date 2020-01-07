@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using System;
@@ -12,7 +13,7 @@ namespace Project_Alphonse_Elric.Views
     /// </summary>
     public sealed partial class ServicesPage : Page
     {
-        internal Profile AccountDetails { get; private set; } = ClientExtensions.AccountDetails;
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
         /// Parameterless constructor of ServicesPage class.
@@ -32,8 +33,8 @@ namespace Project_Alphonse_Elric.Views
         {
             try
             {
-                await ClientExtensions.GetOptions();
-                await ClientExtensions.GetServices();
+                await Singleton<ClientExtensions>.Instance.GetOptions();
+                await Singleton<ClientExtensions>.Instance.GetServices();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
         }
@@ -50,11 +51,11 @@ namespace Project_Alphonse_Elric.Views
             {
                 if ((bool)checkBox.IsChecked) 
                 {
-                    await ClientExtensions.SendEnableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendEnableRequest((string)checkBox.CommandParameter);
                 }
                 else
                 {
-                    await ClientExtensions.SendDisableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendDisableRequest((string)checkBox.CommandParameter);
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }

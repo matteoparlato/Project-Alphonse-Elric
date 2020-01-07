@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using System;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace Project_Alphonse_Elric.Views
     /// </summary>
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
-        internal Profile AccountDetails { get; private set; } = ClientExtensions.AccountDetails;
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
         /// Parameterless constructor of MainPage class.
@@ -38,7 +39,7 @@ namespace Project_Alphonse_Elric.Views
 
             try
             {
-                await ClientExtensions.GetConsumes();
+                await Singleton<ClientExtensions>.Instance.GetConsumes();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
@@ -47,7 +48,7 @@ namespace Project_Alphonse_Elric.Views
                 DispatcherTimer updateTimeout = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(1) };
                 updateTimeout.Tick += (s, o) =>
                 {
-                    ClientExtensions.GetConsumes(); // Never await this method!
+                    Singleton<ClientExtensions>.Instance.GetConsumes(); // Never await this method!
                 };
                 updateTimeout.Start();
             }

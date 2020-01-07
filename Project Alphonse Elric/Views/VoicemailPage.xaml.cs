@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using System;
@@ -16,7 +17,7 @@ namespace Project_Alphonse_Elric.Views
     /// </summary>
     public sealed partial class VoicemailPage : Page
     {
-        internal Profile AccountDetails { get; private set; } = ClientExtensions.AccountDetails;
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
         /// Parameterless constructor of VoicemailPage class.
@@ -36,14 +37,14 @@ namespace Project_Alphonse_Elric.Views
         {
             try
             {
-                await ClientExtensions.GetMessages();
+                await Singleton<ClientExtensions>.Instance.GetMessages();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = ClientExtensions.AccountDetails.Voicemail.MessagesList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            DataGridView.ItemsSource = ClientExtensions.AccountDetails.Voicemail.MessagesList;
+            NoDataStackPanel.Visibility = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            DataGridView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList;
         }
 
         /// <summary>
@@ -58,11 +59,11 @@ namespace Project_Alphonse_Elric.Views
             {
                 if ((bool)checkBox.IsChecked)
                 {
-                    await ClientExtensions.SendEnableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendEnableRequest((string)checkBox.CommandParameter);
                 }
                 else
                 {
-                    await ClientExtensions.SendDisableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendDisableRequest((string)checkBox.CommandParameter);
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
@@ -93,7 +94,7 @@ namespace Project_Alphonse_Elric.Views
 
             try
             {
-                if (!await Launcher.LaunchFileAsync(await ClientExtensions.DownloadMessage(message)))
+                if (!await Launcher.LaunchFileAsync(await Singleton<ClientExtensions>.Instance.DownloadMessage(message)))
                 {
                     ShellPage.Current.AppNotification.Subtitle = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area personale\" nella cartella \"Download\" del tuo account.";
                 }
@@ -117,7 +118,7 @@ namespace Project_Alphonse_Elric.Views
 
             try
             {
-                await ClientExtensions.DeleteMessage(message.ID);
+                await Singleton<ClientExtensions>.Instance.DeleteMessage(message.ID);
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
