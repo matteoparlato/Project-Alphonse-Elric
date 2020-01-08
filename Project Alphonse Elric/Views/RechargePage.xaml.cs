@@ -26,14 +26,17 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            PageWebView.NavigateWithHttpRequestMessage(new HttpRequestMessage(HttpMethod.Get, new Uri("https://www.iliad.it/account/ricarica")));
+            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri("https://www.iliad.it/account/ricarica")))
+            {
+                PageWebView.NavigateWithHttpRequestMessage(request);
+            }
         }
 
         /// <summary>
         /// Method invoked when the WebView completes the navigation.
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="args"></param>
         private void PageWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             StatusProgressRing.IsActive = false;

@@ -19,7 +19,7 @@
             <winui:NavigationView.MenuItems>
                 <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:MainPage" Content="Home" Icon="Home" />
                 <winui:NavigationViewItemSeparator />
-                <winui:NavigationViewItemHeader x:Name="MainPagesHeader" Content="Account di Matteo Parlato" />
+                <winui:NavigationViewItemHeader x:Name="MainPagesHeader" Content="{x:Bind AccountDetails.AccountName, Mode=OneWay}" />
                 <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:ServicesPage" Content="Opzioni e servizi">
                     <winui:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;" />

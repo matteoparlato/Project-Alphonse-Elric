@@ -1,4 +1,6 @@
-﻿namespace Project_Alphonse_Elric.Core.Models
+﻿using System.Globalization;
+
+namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// Profile class
@@ -11,8 +13,17 @@
         private string _name = string.Empty;
         public string Name
         {
-            get => _name.ToUpper();
-            set => SetProperty(ref _name, value);
+            get => _name;
+            set
+            {
+                SetProperty(ref _name, value);
+                OnPropertyChanged(nameof(AccountName));
+            }
+        }
+
+        public string AccountName
+        {
+            get => "Account di " + _name;
         }
 
         public string ID { get; set; } = string.Empty;

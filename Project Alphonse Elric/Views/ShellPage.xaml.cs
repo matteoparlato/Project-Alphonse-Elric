@@ -11,6 +11,7 @@ using Microsoft.Toolkit.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using Microsoft.UI.Xaml.Controls;
 using Project_Alphonse_Elric.Core.Helpers;
+using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
@@ -196,6 +197,8 @@ namespace Project_Alphonse_Elric.Views
         internal DispatcherTimer SessionTimeout = new DispatcherTimer() { Interval = TimeSpan.FromMinutes(5) };
 
         private bool _avoidCheck = false;
+
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
         /// Method invoked once navigated to the page.
