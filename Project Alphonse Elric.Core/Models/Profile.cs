@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Project_Alphonse_Elric.Core.Models
+﻿namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// Profile class

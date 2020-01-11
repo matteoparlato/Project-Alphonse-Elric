@@ -11,6 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Project_Alphonse_Elric.Views"
     xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    IsTextScaleFactorEnabled="False"
     Loaded="OnLoaded"
     mc:Ignorable="d">
 
@@ -43,15 +44,8 @@
                     </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
                 </behaviors:NavigationViewHeaderBehavior>
             </i:Interaction.Behaviors>-->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
 
-                <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent" />
-                <Frame x:Name="shellFrame" Grid.Row="1" IsTabStop="True" />
-            </Grid>
+            <Frame x:Name="shellFrame" Grid.Row="1" IsTabStop="True" />
         </winui:NavigationView>
 
         <!--#region Login-->
@@ -104,9 +98,7 @@
                     <VisualState.Setters>
                         <!--  Remove the next 3 lines for left-only navigation.  -->
                         <Setter Target="navigationView.PaneDisplayMode" Value="Top" />
-                        <Setter Target="navigationView.IsTitleBarAutoPaddingEnabled" Value="True" />
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed" />
-                        <Setter Target="AppTitleBar.Visibility" Value="Collapsed" />
                         <!--  Leave the next line for left-only navigation.  -->
                         <!--<Setter Target="shellFrame.Padding" Value="24,0,24,24" />-->
                     </VisualState.Setters>
@@ -118,9 +110,7 @@
                     <VisualState.Setters>
                         <!--  Remove the next 3 lines for left-only navigation.  -->
                         <Setter Target="navigationView.PaneDisplayMode" Value="Left" />
-                        <Setter Target="navigationView.IsTitleBarAutoPaddingEnabled" Value="False" />
                         <Setter Target="MainPagesHeader.Visibility" Value="Visible" />
-                        <Setter Target="AppTitleBar.Visibility" Value="Visible" />
                         <!--  Leave the next line for left-only navigation.  -->
                         <!--<Setter Target="shellFrame.Padding" Value="24,0,24,24" />-->
                     </VisualState.Setters>

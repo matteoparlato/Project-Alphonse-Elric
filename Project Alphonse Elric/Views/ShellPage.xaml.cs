@@ -72,8 +72,6 @@ namespace Project_Alphonse_Elric.Views
             //
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
-            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
-            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
 
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
@@ -88,10 +86,6 @@ namespace Project_Alphonse_Elric.Views
             Loader.IsLoading = true;
             //
         }
-
-        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args) => AppTitleBar.Height = sender.Height;
-
-        private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args) => AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -277,6 +271,7 @@ namespace Project_Alphonse_Elric.Views
                 NavigationService.Navigate(typeof(MainPage), new EntranceNavigationTransitionInfo());
                 navigationView.SelectedItem = navigationView.MenuItems[0];
                 IsBackEnabled = false;
+                NavigationService.Frame.BackStack.Clear();
 
                 Loader.IsLoading = false;
 

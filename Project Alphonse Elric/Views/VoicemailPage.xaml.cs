@@ -43,7 +43,7 @@ namespace Project_Alphonse_Elric.Views
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            NoDataTextBlock.Opacity = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList.Count > 0 ? 0 : 0.6;
             DataGridView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList;
         }
 
