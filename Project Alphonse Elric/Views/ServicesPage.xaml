@@ -18,7 +18,6 @@
     <!--#region Content-->
     <ScrollViewer>
         <Grid>
-            <!--  Margin="16,0,16,0"  -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="10*" />
@@ -39,6 +38,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
@@ -46,10 +46,8 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Servizio 4G LTE" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Il servizio 4G+ viene attivato automaticamente sulla rete mobile iliad. Questo servizio richiede un telefono 4G compatibile con la rete mobile iliad." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Il servizio 4G+ viene attivato automaticamente sulla rete mobile iliad. Questo servizio richiede un telefono 4G compatibile con la rete mobile iliad." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                     <CheckBox Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" IsChecked="True" IsEnabled="False" />
                 </Grid>
                 <!--#endregion-->
@@ -64,6 +62,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
@@ -71,10 +70,8 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Pubblicazione in elenco" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Consenti la pubblicazione del tuo numero di telefono negli elenchi pubblici." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Consenti la pubblicazione del tuo numero di telefono negli elenchi pubblici." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                     <CheckBox x:Uid="PublishPhoneNumber" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PublishPhoneNumber, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
@@ -90,6 +87,8 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
@@ -97,17 +96,13 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Blocco numeri a pagamento" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                        <TextBlock Text="Blocca le chiamate verso i numeri a pagamento e gli SMS+." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
-                    <CheckBox x:Uid="PaidNumbers" Grid.Row="1" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidNumbers, Mode=TwoWay}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Blocca le chiamate verso i numeri a pagamento e gli SMS+." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
+                    <CheckBox x:Uid="PaidNumbers" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidNumbers, Mode=TwoWay}" />
 
-                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0">
-                        <TextBlock Text="Blocca gli SMS bancari a pagamento." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
-                    <CheckBox x:Uid="PaidBankNumbers" Grid.Row="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidBankNumbers, Mode=TwoWay}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" Text="Blocca gli SMS bancari a pagamento." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
+                    <CheckBox x:Uid="PaidBankNumbers" Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.PaidBankNumbers, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
 
@@ -170,10 +165,7 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" VerticalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}" Text="Consenso di marketing" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Consenso al trattamento dei dati personali per finalità di marketing." TextWrapping="Wrap" />
-                        <!--<TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />-->
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Consenso al trattamento dei dati personali per finalità di marketing." TextWrapping="Wrap" />
                     <CheckBox x:Uid="MarketingAgreement" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveOptions.MarketingAgreement, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
@@ -193,6 +185,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
@@ -200,10 +193,8 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Blocco numeri nascosti" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Questo servizio ti consente di rifiutare le chiamate entranti che hanno il numero anonimo. Le persone che ti chiamano da un numero privato vengono avvisate da un messaggio automatico che stai rifiutando la chiamata." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Questo servizio ti consente di rifiutare le chiamate entranti che hanno il numero anonimo. Le persone che ti chiamano da un numero privato vengono avvisate da un messaggio automatico che stai rifiutando la chiamata." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                     <CheckBox x:Uid="BlockUnknown" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.BlockUnknown, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
@@ -225,7 +216,7 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Trasferimento numeri nascosti alla segreteria telefonica" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                         <TextBlock Text="Questo servizio ti consente di inoltrare le chiamate entranti che hanno il numero anonimo alla tua segreteria telefonica." TextWrapping="Wrap" />
                         <TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="Questo servizio può essere attivato solo se il servizio &quot;Blocco numeri nascosti&quot; è attivo" TextWrapping="Wrap" />
                         <TextBlock Margin="0,5,0,0" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
@@ -244,6 +235,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
@@ -251,10 +243,8 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Inoltro verso segreteria telefonica all'estero" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Quando ti trovi all'estero, se non vuoi essere disturbato dalle chiamate in arrivo puoi trasferirle direttamente alla segreteria telefonica. Se hai attivato questo servizio, puoi effettuare normalmente chiamate se ti trovi in Italia." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Quando ti trovi all'estero, se non vuoi essere disturbato dalle chiamate in arrivo puoi trasferirle direttamente alla segreteria telefonica. Se hai attivato questo servizio, puoi effettuare normalmente chiamate se ti trovi in Italia." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                     <CheckBox x:Uid="TransferToVoicemail" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferToVoicemail, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
@@ -269,6 +259,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
@@ -276,10 +267,8 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Protezione contro il trasferimento di chiamate" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Questo servizio non ti consente di ricevere una chiamata in entrata che è stata deviata in precedenza. Tutte le chiamate verranno bloccate a coloro che desiderano raggiungere un numero per il quale è stato attivato un rinvio alla tua linea." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Questo servizio non ti consente di ricevere una chiamata in entrata che è stata deviata in precedenza. Tutte le chiamate verranno bloccate a coloro che desiderano raggiungere un numero per il quale è stato attivato un rinvio alla tua linea." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                     <CheckBox x:Uid="TransferProtection" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.TransferProtection, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
@@ -294,6 +283,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Column="0" Margin="0" VerticalAlignment="Center">
@@ -301,10 +291,8 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Utente non disponibile" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                        <TextBlock Text="Questo servizio ti consente di rifiutare tutte le chiamate entranti sulla tua linea. Coloro che ti chiamano saranno trasferiti a un annuncio che indicherà loro che non sei raggiungibile e che possono inviarti un SMS." TextWrapping="Wrap" />
-                        <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Questo servizio ti consente di rifiutare tutte le chiamate entranti sulla tua linea. Coloro che ti chiamano saranno trasferiti a un annuncio che indicherà loro che non sei raggiungibile e che possono inviarti un SMS." TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
                     <CheckBox x:Uid="UserNotAvailable" Grid.Row="0" Grid.Column="2" Margin="16,0,0,0" Click="CheckBox_Click" IsChecked="{x:Bind AccountDetails.ActiveServices.UserNotAvailable, Mode=TwoWay}" />
                 </Grid>
                 <!--#endregion-->
@@ -326,7 +314,7 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Chiamate rapide" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                         <TextBlock Text="Questo servizio consente di assegnare dei numeri abbreviati ai contatti preferiti." TextWrapping="Wrap" />
                         <HyperlinkButton Content="Personalizza chiamate rapide" Tapped="HyperlinkButton_Tapped" Visibility="{Binding ElementName=FastCallsCheckBox, Path=IsChecked, Mode=TwoWay, Converter={StaticResource Converter}}" />
                         <TextBlock Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
@@ -352,7 +340,7 @@
                     </Viewbox>
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,12,0,8" Style="{StaticResource SubtitleTextBlockStyle}" Text="Filtro Chiamate &amp; SMS/MMS" TextWrapping="Wrap" />
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                         <TextBlock Text="Questo servizio ti consente di gestire, tramite dei filtri, le comunicazioni (chiamate e SMS/MMS) che ricevi o invii dalla tua linea." TextWrapping="Wrap" />
                         <TextBlock Margin="0,5,0,0" Foreground="{ThemeResource MessageHighlight}" Text="I filtri possono essere impostati dalla tua &quot;Area personale&quot; sul sito iliad.it" TextWrapping="Wrap" />
                         <TextBlock Margin="0,5,0,0" Opacity="0.6" Text="Servizo incluso" TextWrapping="Wrap" />
