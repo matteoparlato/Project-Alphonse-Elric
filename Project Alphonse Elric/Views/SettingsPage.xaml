@@ -23,7 +23,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <!--#region Spaggiari account-->
+                <!--#region Account-->
                 <StackPanel x:Name="AccountStackPanel" Grid.Row="0" Grid.Column="0" Padding="0,18,0,0">
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Account iliad" TextWrapping="Wrap" />
                     <TextBlock Margin="0,8,0,0" Style="{ThemeResource BodyTextBlockStyle}" Text="Vuoi accedere all'account iliad associato ad un'altra SIM?" TextWrapping="Wrap" />

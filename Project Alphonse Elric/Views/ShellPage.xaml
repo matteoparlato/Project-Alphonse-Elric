@@ -84,9 +84,9 @@
         <!--#endregion-->
 
         <winui:TeachingTip x:Name="AppNotificationTeachingTip" PreferredPlacement="Center">
-            <winui:TeachingTip.IconSource>
+            <!--<winui:TeachingTip.IconSource>
                 <winui:FontIconSource FontFamily="Segoe MDL2 Assets" Glyph="&#xEA6A;" />
-            </winui:TeachingTip.IconSource>
+            </winui:TeachingTip.IconSource>-->
         </winui:TeachingTip>
 
         <VisualStateManager.VisualStateGroups>

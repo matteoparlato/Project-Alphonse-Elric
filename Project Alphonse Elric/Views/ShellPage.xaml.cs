@@ -324,14 +324,14 @@ namespace Project_Alphonse_Elric.Views
 
             if (ex is IndexOutOfRangeException)
             {
-                AppNotification.Subtitle = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.IsOpen = true;
+                AppNotification.Subtitle = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";                
             }
             else
             {
                 AppNotification.Subtitle = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.IsOpen = true;
             }
+            AppNotification.Title = "Attenzione";
+            AppNotification.IsOpen = true;
         }
 
         /// <summary>

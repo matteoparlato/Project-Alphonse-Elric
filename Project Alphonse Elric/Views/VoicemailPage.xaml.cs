@@ -89,6 +89,7 @@ namespace Project_Alphonse_Elric.Views
             FrameworkElement element = (FrameworkElement)sender;
             Message message = (Message)element.DataContext;
 
+            ShellPage.Current.AppNotification.Title = "Download messaggio vocale";
             ShellPage.Current.AppNotification.Subtitle = "Sto scaricando il messaggio vocale che hai scelto di ascoltare. Non appena il download verrà terminato il messaggio vocale verrà aperto automaticamente.";
             ShellPage.Current.AppNotification.IsOpen = true;
 
@@ -96,7 +97,8 @@ namespace Project_Alphonse_Elric.Views
             {
                 if (!await Launcher.LaunchFileAsync(await Singleton<ClientExtensions>.Instance.DownloadMessage(message)))
                 {
-                    ShellPage.Current.AppNotification.Subtitle = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area personale\" nella cartella \"Download\" del tuo account.";
+                    ShellPage.Current.AppNotification.Title = "Attenzione";
+                    ShellPage.Current.AppNotification.Subtitle = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area personale\" nella cartella \"Download\".";
                 }
                 else
                 {
