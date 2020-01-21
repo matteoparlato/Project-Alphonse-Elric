@@ -37,7 +37,7 @@ namespace Project_Alphonse_Elric.Dialogs
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            NoDataStackPanel.Opacity = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList.Count > 0 ? 0 : 1;
             DataListView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList;
         }
 
@@ -89,7 +89,7 @@ namespace Project_Alphonse_Elric.Dialogs
                                   !string.IsNullOrWhiteSpace(ShortTextBox.Text) &&
                                   ShortTextBox.Text.Length > 3 &&
                                   ShortTextBox.Text.Length < 11 &&
-                                  !ShortTextBox.Text.ToCharArray()[0].Equals('0');
+                                  !ShortTextBox.Text.StartsWith('0');
         }
     }
 }
