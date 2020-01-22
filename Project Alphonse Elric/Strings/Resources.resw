@@ -160,7 +160,7 @@
     <value>https://www.iliad.it/account/?logout=user</value>
   </data>
   <data name="MarketingAgreement.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni?update=consenso-di-marketing&amp;activate=1</value>
+    <value>https://www.iliad.it/account/le-mie-opzioni?update=consenso-di-marketing&amp;activate=</value>
   </data>
   <data name="NumberOptionsURL" xml:space="preserve">
     <value>https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento</value>
