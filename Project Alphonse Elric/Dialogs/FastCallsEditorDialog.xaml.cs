@@ -11,12 +11,12 @@ namespace Project_Alphonse_Elric.Dialogs
     /// <summary>
     /// FastCallsEditor class
     /// </summary>
-    public sealed partial class FastCallsEditor : ContentDialog
+    public sealed partial class FastCallsEditorDialog : ContentDialog
     {
         /// <summary>
-        /// Parameterless constructor of FastCallsEditor class.
+        /// Parameterless constructor of FastCallsEditorDialog class.
         /// </summary>
-        public FastCallsEditor()
+        public FastCallsEditorDialog()
         {
             this.InitializeComponent();
         }

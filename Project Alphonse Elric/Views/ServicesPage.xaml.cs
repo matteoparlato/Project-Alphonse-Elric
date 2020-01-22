@@ -68,7 +68,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void HyperlinkButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            await new FastCallsEditor().ShowAsync();
+            await new FastCallsEditorDialog().ShowAsync();
         }
     }
 }

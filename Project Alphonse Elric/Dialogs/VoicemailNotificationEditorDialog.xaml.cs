@@ -10,12 +10,12 @@ using Windows.UI.Xaml.Input;
 
 namespace Project_Alphonse_Elric.Dialogs
 {
-    public sealed partial class VoicemailNotificationEditor : ContentDialog
+    public sealed partial class VoicemailNotificationEditorDialog : ContentDialog
     {
         /// <summary>
-        /// Parameterless constructor of FastCallsEditor class.
+        /// Parameterless constructor of VoicemailNotificationEditorDialog class.
         /// </summary>
-        public VoicemailNotificationEditor()
+        public VoicemailNotificationEditorDialog()
         {
             this.InitializeComponent();
         }
@@ -36,8 +36,8 @@ namespace Project_Alphonse_Elric.Dialogs
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.VoicemailNotificationList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            DataListView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.VoicemailNotificationList;
+            NoDataStackPanel.Opacity = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList.Count > 0 ? 0 : 1;
+            DataListView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.ActiveServices.FastCallList;
         }
 
         /// <summary>

@@ -115,14 +115,14 @@
     <Compile Include="Dialogs\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\FastCallsEditor.xaml.cs">
-      <DependentUpon>FastCallsEditor.xaml</DependentUpon>
+    <Compile Include="Dialogs\FastCallsEditorDialog.xaml.cs">
+      <DependentUpon>FastCallsEditorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\PrivacyPolicyDialog.xaml.cs">
       <DependentUpon>PrivacyPolicyDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\VoicemailNotificationEditor.xaml.cs">
-      <DependentUpon>VoicemailNotificationEditor.xaml</DependentUpon>
+    <Compile Include="Dialogs\VoicemailNotificationEditorDialog.xaml.cs">
+      <DependentUpon>VoicemailNotificationEditorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\SecurityExtensions.cs" />
@@ -218,7 +218,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\FastCallsEditor.xaml">
+    <Page Include="Dialogs\FastCallsEditorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,7 +226,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Dialogs\VoicemailNotificationEditor.xaml">
+    <Page Include="Dialogs\VoicemailNotificationEditorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

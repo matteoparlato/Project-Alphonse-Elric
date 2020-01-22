@@ -76,7 +76,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void HyperlinkButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await new VoicemailNotificationEditor().ShowAsync();
+            await new VoicemailNotificationEditorDialog().ShowAsync();
         }
 
         /// <summary>
