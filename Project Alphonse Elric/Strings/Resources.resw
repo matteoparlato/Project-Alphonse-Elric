@@ -177,6 +177,9 @@
   <data name="PersonalizedAdvert.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/segreteria-telefonica/Annuncio?update=3&amp;activate=</value>
   </data>
+  <data name="PrivacyPolicy.NavigateUri" xml:space="preserve">
+    <value>http://neondev.altervista.org/Area_Personale/Privacy_Policy.html</value>
+  </data>
   <data name="ProtectVoicemail.CommandParameter" xml:space="preserve">
     <value />
   </data>

@@ -36,7 +36,7 @@
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Supporto" TextWrapping="Wrap" />
                     <HyperlinkButton Click="HyperlinkButton_Click" Content="Contatta il supporto" />
                     <HyperlinkButton Click="HyperlinkButton_Click" Content="Invia un feedback" />
-                    <HyperlinkButton Content="La tua privacy" NavigateUri="http://flowcode.altervista.org/apps/registro_elettronico_x/PrivacyPolicy.pdf" />
+                    <HyperlinkButton x:Uid="PrivacyPolicy" Content="La tua privacy" />
                     <HyperlinkButton Click="HyperlinkButton_Click_1" Content="Informazioni sull'app" />
                 </StackPanel>
                 <!--#endregion-->

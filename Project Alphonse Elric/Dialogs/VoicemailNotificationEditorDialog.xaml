@@ -12,71 +12,71 @@
     Loaded="ContentDialog_Loaded"
     mc:Ignorable="d">
 
-    <ScrollViewer>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+    <!--<ScrollViewer>-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <ComboBox x:Name="TypeComboBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" SelectedIndex="0">
-                <x:String>Notifica inviata via email</x:String>
-                <x:String>Notifica inviata via email + audio in allegato</x:String>
-            </ComboBox>
+        <ComboBox x:Name="TypeComboBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" SelectedIndex="0">
+            <x:String>Notifica inviata via email</x:String>
+            <x:String>Notifica inviata via email + audio in allegato</x:String>
+        </ComboBox>
 
-            <TextBox x:Name="MailTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PlaceholderText="Email" TextChanged="TextBox_TextChanged" />
-            <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" VerticalAlignment="Stretch" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" Tapped="Button_Tapped" />
+        <TextBox x:Name="MailTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PlaceholderText="Email" TextChanged="TextBox_TextChanged" />
+        <Button x:Name="AddButton" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" VerticalAlignment="Stretch" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" Tapped="Button_Tapped" />
 
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,18,0,0">
-                <ListView x:Name="DataListView" SelectionMode="None">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <!--<Setter Property="MinWidth" Value="400" />-->
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="10,0,0,18">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,18,0,0">
+            <ListView x:Name="DataListView" SelectionMode="None">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <!--<Setter Property="MinWidth" Value="400" />-->
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
-                                    <TextBlock Margin="0,5,0,0" Style="{StaticResource BodyTextBlockStyle}" Text="{Binding Mail}" TextWrapping="Wrap" />
-                                    <TextBlock Margin="0,5,0,0" FontWeight="ExtraBold" Opacity="0.6" Style="{StaticResource CaptionTextBlockStyle}" Text="{Binding Mode}" TextWrapping="Wrap" />
-                                </StackPanel>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Margin="0,5,0,0" Style="{StaticResource BodyTextBlockStyle}" Text="{Binding Mail}" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,5,0,0" FontWeight="ExtraBold" Opacity="0.6" Style="{StaticResource CaptionTextBlockStyle}" Text="{Binding Mode}" TextWrapping="Wrap" />
+                            </StackPanel>
 
-                                <HyperlinkButton Grid.Column="1" Margin="5,0,0,0" Content="Elimina" Tapped="Button_Tapped_1" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            <HyperlinkButton Grid.Column="1" Margin="5,0,0,0" Content="Elimina" Tapped="Button_Tapped_1" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-                <!--#region Loading progress-->
-                <ProgressRing x:Name="LoadingProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True" />
-                <!--#endregion-->
+            <!--#region Loading progress-->
+            <ProgressRing x:Name="LoadingProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True" />
+            <!--#endregion-->
 
-                <!--#region NoData message-->
-                <StackPanel x:Name="NoDataStackPanel" Margin="0,48,0,48" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0">
-                    <Windows10version1809:StackPanel.OpacityTransition>
-                        <Windows10version1809:ScalarTransition />
-                    </Windows10version1809:StackPanel.OpacityTransition>
-                    <TextBlock x:Name="NoDataTextBlock" Style="{ThemeResource TitleTextBlockStyle}" Text="Nessuna notifica definita" TextAlignment="Center" TextWrapping="Wrap" />
-                    <TextBlock Opacity="0.6" Style="{ThemeResource SubtitleTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
-                        <Run Text="Tocca o fai click su" />
-                        <Span FontFamily="Segoe MDL2 Assets" FontSize="18.667">&#xE710;</Span>
-                        <Run Text="per aggiungerne una" />
-                    </TextBlock>
-                </StackPanel>
-                <!--#endregion-->
-            </Grid>
+            <!--#region NoData message-->
+            <StackPanel x:Name="NoDataStackPanel" Margin="0,48,0,48" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0">
+                <Windows10version1809:StackPanel.OpacityTransition>
+                    <Windows10version1809:ScalarTransition />
+                </Windows10version1809:StackPanel.OpacityTransition>
+                <TextBlock x:Name="NoDataTextBlock" Style="{ThemeResource TitleTextBlockStyle}" Text="Nessuna notifica definita" TextAlignment="Center" TextWrapping="Wrap" />
+                <TextBlock Opacity="0.6" Style="{ThemeResource SubtitleTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
+                    <Run Text="Tocca o fai click su" />
+                    <Span FontFamily="Segoe MDL2 Assets" FontSize="18.667">&#xE710;</Span>
+                    <Run Text="per aggiungerne una" />
+                </TextBlock>
+            </StackPanel>
+            <!--#endregion-->
         </Grid>
-    </ScrollViewer>
+    </Grid>
+    <!--</ScrollViewer>-->
 </ContentDialog>
