@@ -15,6 +15,7 @@ using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
+using Windows.ApplicationModel.Core;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
@@ -71,6 +72,9 @@ namespace Project_Alphonse_Elric.Views
             ApplicationView view = ApplicationView.GetForCurrentView();
             view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
 
             navigationView.ItemInvoked += OnItemInvoked;
 
