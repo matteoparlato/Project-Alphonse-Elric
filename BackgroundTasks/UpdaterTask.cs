@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Resources;
 using Windows.Security.Credentials;
 
 namespace BackgroundTasks
@@ -34,7 +35,7 @@ namespace BackgroundTasks
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
 
             IReadOnlyList<PasswordCredential> credentialList = new PasswordVault().RetrieveAll();
-            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("Area personale")))
+            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals(ResourceLoader.GetForCurrentView().GetString("AppName"))))
             {
                 credential.RetrievePassword();
 

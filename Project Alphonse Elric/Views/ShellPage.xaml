@@ -16,7 +16,7 @@
     mc:Ignorable="d">
 
     <Grid>
-        <winui:NavigationView x:Name="navigationView" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" IsBackButtonVisible="Visible" IsBackEnabled="{x:Bind IsBackEnabled, Mode=OneWay}" IsSettingsVisible="True" SelectedItem="{x:Bind Selected, Mode=OneWay}">
+        <winui:NavigationView x:Name="navigationView" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" IsBackButtonVisible="Visible" IsBackEnabled="{x:Bind IsBackEnabled, Mode=OneWay}" IsSettingsVisible="True" PaneTitle="{x:Bind PaneTitle}" SelectedItem="{x:Bind Selected, Mode=OneWay}">
             <winui:NavigationView.MenuItems>
                 <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:MainPage" Content="Home" Icon="Home" />
                 <winui:NavigationViewItemSeparator />

@@ -129,18 +129,18 @@ namespace Project_Alphonse_Elric.Views
                 {
                     WindowsHelloCheckBox.IsChecked = true;
 
-                    SecurityExtensions.RegisterKey();
+                    SecurityExtensions.EnableWindowsHello();
                 }
                 else
                 {
                     WindowsHelloCheckBox.IsChecked = false;
 
-                    SecurityExtensions.RemoveKey();
+                    SecurityExtensions.DisableWindowsHello();
                 }
             }
             else
             {
-                SecurityExtensions.RemoveKey();
+                SecurityExtensions.DisableWindowsHello();
             }
         }
 

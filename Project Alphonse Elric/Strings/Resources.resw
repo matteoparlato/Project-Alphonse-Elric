@@ -126,6 +126,9 @@
   <data name="AnonymousServiceURL" xml:space="preserve">
     <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous</value>
   </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Area personale</value>
+  </data>
   <data name="BlockUnknown.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=</value>
   </data>

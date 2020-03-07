@@ -1,6 +1,7 @@
 ﻿using Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel.Resources;
 using Windows.Security.Credentials;
 using Windows.Storage;
 
@@ -11,12 +12,12 @@ namespace Project_Alphonse_Elric.Helpers
     /// </summary>
     internal static class SecurityExtensions
     {
-        internal const string MESSAGE = "Per motivi di sicurezza, Area personale deve verificare l'identità dell'utente.";
+        internal static readonly string MESSAGE = string.Format("Per motivi di sicurezza, {0} deve verificare l'identità dell'utente.", ResourceLoader.GetForCurrentView().GetString("AppName"));
 
         /// <summary>
         /// A method that de-registers the HelloAuthenticationEnabled key to disable Windows Hello.
         /// </summary>
-        internal static void RemoveKey()
+        internal static void DisableWindowsHello()
         {
             if (ApplicationData.Current.LocalSettings.Values.ContainsKey("HelloAuthenticationEnabled"))
             {
@@ -27,7 +28,7 @@ namespace Project_Alphonse_Elric.Helpers
         /// <summary>
         /// Method that registers the HelloAuthenticationEnabled key to enable Windows Hello.
         /// </summary>
-        internal static void RegisterKey()
+        internal static void EnableWindowsHello()
         {
             if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("HelloAuthenticationEnabled"))
             {
@@ -42,7 +43,7 @@ namespace Project_Alphonse_Elric.Helpers
         internal static PasswordCredential RetrieveCredentials()
         {
             IReadOnlyList<PasswordCredential> credentialList = new PasswordVault().RetrieveAll();
-            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("Area personale")))
+            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals(ResourceLoader.GetForCurrentView().GetString("AppName"))))
             {
                 return credential;
             }
@@ -57,14 +58,14 @@ namespace Project_Alphonse_Elric.Helpers
         {
             BackgroundTaskExtensions.Unregister();
 
-            RemoveKey();
+            DisableWindowsHello();
 
             PasswordCredential credential = RetrieveCredentials();
             if (credential != null)
             {
                 credential.RetrievePassword();
 
-                new PasswordVault().Remove(new PasswordCredential("Area personale", credential.UserName, credential.Password));
+                new PasswordVault().Remove(new PasswordCredential(ResourceLoader.GetForCurrentView().GetString("AppName"), credential.UserName, credential.Password));
             }
         }
 
@@ -75,7 +76,7 @@ namespace Project_Alphonse_Elric.Helpers
         /// <param name="password">The password</param>
         internal static void AddCredentials(string username, string password)
         {
-            new PasswordVault().Add(new PasswordCredential("Area personale", username, password));
+            new PasswordVault().Add(new PasswordCredential(ResourceLoader.GetForCurrentView().GetString("AppName"), username, password));
 
             BackgroundTaskExtensions.Register();
         }

@@ -16,6 +16,7 @@ using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
 using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
@@ -62,13 +63,19 @@ namespace Project_Alphonse_Elric.Views
             Initialize();
         }
 
+        public string PaneTitle
+        {
+            get { return ResourceLoader.GetForCurrentView().GetString("AppName"); }
+        }
+
         private void Initialize()
         {
             NavigationService.Frame = shellFrame;
             NavigationService.NavigationFailed += Frame_NavigationFailed;
             NavigationService.Navigated += Frame_Navigated;
             navigationView.BackRequested += OnBackRequested;
-            
+
+            //
             ApplicationView view = ApplicationView.GetForCurrentView();
             view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
