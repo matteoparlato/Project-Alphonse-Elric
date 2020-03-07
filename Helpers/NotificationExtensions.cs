@@ -1,6 +1,6 @@
 ﻿using Microsoft.AppCenter.Analytics;
 using Microsoft.Toolkit.Uwp.Notifications;
-using Models;
+using Project_Alphonse_Elric.Core.Models;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Notifications;

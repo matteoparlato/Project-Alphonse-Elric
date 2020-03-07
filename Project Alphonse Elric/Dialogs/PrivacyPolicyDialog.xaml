@@ -1,8 +1,24 @@
-﻿<ContentDialog x:Class="Project_Alphonse_Elric.Dialogs.PrivacyPolicyDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="using:Project_Nirvash.Dialogs" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="La tua privacy prima di tutto" PrimaryButtonClick="ContentDialog_PrimaryButtonClick" PrimaryButtonText="Accetta" SecondaryButtonClick="ContentDialog_SecondaryButtonClick" SecondaryButtonText="Rifiuta" mc:Ignorable="d">
-    <StackPanel>
-        <TextBlock Text="Prima di iniziare dovrai leggere attentamente alcune informazioni relative alla tua privacy." TextWrapping="Wrap" />
-        <TextBlock Margin="0,5,0,0" Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.." TextWrapping="Wrap" />
-        <TextBlock Margin="0,5,0,0" Text="Area personale utilizza servizi di terze parti per raccogliere dati di diagnostica che possono essere impiegati per migliorare l'esperienza d'uso e la stabilità dell'app." TextWrapping="Wrap" />
-        <HyperlinkButton Margin="5,0,0,0" HorizontalAlignment="Center" Content="Consulta l'informativa completa" NavigateUri="http://neondev.altervista.org/Registro_Elettronico_S/Privacy_Policy.html" />
-    </StackPanel>
+﻿<ContentDialog
+    x:Class="Project_Alphonse_Elric.Dialogs.PrivacyPolicyDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Project_Alphonse_Elric.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="La tua privacy prima di tutto"
+    DefaultButton="Primary"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    PrimaryButtonText="Accetta"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    SecondaryButtonText="Rifiuta"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel>
+            <TextBlock Text="Prima di iniziare dovrai leggere attentamente alcune informazioni relative alla tua privacy." TextWrapping="Wrap" />
+            <TextBlock Margin="0,5,0,0" Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.." TextWrapping="Wrap" />
+            <TextBlock Margin="0,5,0,0" Text="Area personale utilizza servizi di terze parti per raccogliere dati di diagnostica che possono essere impiegati per migliorare l'esperienza d'uso e la stabilità dell'app." TextWrapping="Wrap" />
+            <HyperlinkButton x:Uid="PrivacyPolicy" Margin="5,0,0,0" HorizontalAlignment="Center" Content="Consulta l'informativa completa" />
+        </StackPanel>
+    </ScrollViewer>
 </ContentDialog>

@@ -13,7 +13,6 @@ Area clienti iliad is the app that allows you to quickly and easily access to yo
 
 For all those who want to extend the functionality or fix bugs (hope not) here are the prerequisites for developing Project Alphonse Elric:
 
-  - Visual Studio 2017 with UWP development workload and Windows 1903 SDK for Windows Mobile builds.
   - Visual Studio 2019 with UWP development workload and Windows 1903 SDK.
   - XAML Styler (optional but recommended for keeping XAML code in a good shape).
 

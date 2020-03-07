@@ -1,15 +1,15 @@
-﻿namespace Models
+﻿namespace Project_Alphonse_Elric.Core.Models
 {
     /// <summary>
     /// FastCall class
     /// </summary>
-    public sealed class FastCall
+    public sealed class FastCall : BindableBase
     {
         private string _name = string.Empty;
         public string Name
         {
-            get { return _name.ToUpper(); }
-            set { _name = value; }
+            get =>_name.ToUpper();
+            set => SetProperty(ref _name, value);
         }
         public string Target { get; set; } = string.Empty;
         public string ShortTarget { get; set; } = string.Empty;

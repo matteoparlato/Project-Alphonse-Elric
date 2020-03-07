@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using Models;
+using Project_Alphonse_Elric.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +16,15 @@ namespace Helpers
     /// <summary>
     /// ClientExtensions class
     /// </summary>
-    public static class ClientExtensions
+    public class ClientExtensions
     {
-        private static ResourceLoader Resources = new ResourceLoader();
+        private ResourceLoader Resources = new ResourceLoader();
 
-        public static Profile AccountDetails { get; set; } = new Profile();
+        public Profile AccountDetails { get; set; } = new Profile();
 
-        private static HttpFormUrlEncodedContent _POSTData;
+        private HttpFormUrlEncodedContent _POSTData;
 
-        private static HttpClient _client = new HttpClient();
+        private HttpClient _client = new HttpClient();
 
         /// <summary>
         /// Method which connects to the Iliad personal area of the user and then
@@ -34,7 +34,7 @@ namespace Helpers
         /// <param name="username">The username of the account</param>
         /// <param name="password">The password of the account</param>
         /// <returns></returns>
-        public static async Task Authenticate(string username, string password)
+        public async Task Authenticate(string username, string password)
         {
             _client.DefaultRequestHeaders.Accept.Add(new HttpMediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
@@ -60,19 +60,19 @@ namespace Helpers
         /// Method which logout the current user.
         /// </summary>
         /// <returns></returns>
-        public static async Task Logout()
+        public async Task Logout()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("LogoutURL")));
             response.EnsureSuccessStatusCode();
         }
 
-        public static async Task SendEnableRequest(string url)
+        public async Task SendEnableRequest(string url)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(url + "1"));
             response.EnsureSuccessStatusCode();
         }
 
-        public static async Task SendDisableRequest(string url)
+        public async Task SendDisableRequest(string url)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(url + "0"));
             response.EnsureSuccessStatusCode();
@@ -85,7 +85,7 @@ namespace Helpers
         /// code of the web page to get the details about costs and consumes.
         /// </summary>
         /// <returns></returns>
-        public static async Task GetConsumes()
+        public async Task GetConsumes()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("ConsumesURL")));
             response.EnsureSuccessStatusCode();
@@ -102,7 +102,7 @@ namespace Helpers
         /// costs and consumes.
         /// </summary>
         /// <param name="document">The HTML document where to get information</param>
-        private static void ReadConsumes(HtmlDocument document)
+        private void ReadConsumes(HtmlDocument document)
         {
             HtmlNode[] subnode = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Equals("current-user__infos")).ToArray()[0].Descendants().ToArray();
 
@@ -143,7 +143,7 @@ namespace Helpers
         /// code of the web page to get the activation status of the available options.
         /// </summary>
         /// <returns></returns>
-        public static async Task GetOptions()
+        public async Task GetOptions()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("OptionsURL")));
             response.EnsureSuccessStatusCode();
@@ -192,7 +192,7 @@ namespace Helpers
         /// code of the web page to get the activation status of the available services.
         /// </summary>
         /// <returns></returns>
-        public static async Task GetServices()
+        public async Task GetServices()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("ServicesURL")));
             response.EnsureSuccessStatusCode();
@@ -225,7 +225,7 @@ namespace Helpers
         /// service.
         /// </summary>
         /// <returns></returns>
-        private static async Task CheckRedirectToVoicemailUnknown()
+        private async Task CheckRedirectToVoicemailUnknown()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("AnonymousServiceURL")));
             response.EnsureSuccessStatusCode();
@@ -250,7 +250,7 @@ namespace Helpers
         /// <param name="target">The target number of the fast call</param>
         /// <param name="shortTarget">The abbreviation of the target number</param>
         /// <returns></returns>
-        public static async Task AddFastCall(string name, string target, string shortTarget)
+        public async Task AddFastCall(string name, string target, string shortTarget)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("AddFastCallURL"), WebUtility.UrlEncode(name), WebUtility.UrlEncode(target), shortTarget)));
             response.EnsureSuccessStatusCode();
@@ -261,7 +261,7 @@ namespace Helpers
         /// </summary>
         /// <param name="uri">The uri related to the fast call</param>
         /// <returns></returns>
-        public static async Task DeleteFastCall(string uri)
+        public async Task DeleteFastCall(string uri)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("DeleteFastCallURL"), uri)));
             response.EnsureSuccessStatusCode();
@@ -272,7 +272,7 @@ namespace Helpers
         /// code of the web page to get defined fast calls.
         /// </summary>
         /// <returns></returns>
-        public static async Task GetFastCalls()
+        public async Task GetFastCalls()
         {
             AccountDetails.ActiveServices.FastCallList.Clear();
 
@@ -305,7 +305,7 @@ namespace Helpers
         /// options.
         /// </summary>
         /// <returns></returns>
-        public static async Task GetMessages()
+        public async Task GetMessages()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("VoicemailURL")));
             response.EnsureSuccessStatusCode();
@@ -337,7 +337,7 @@ namespace Helpers
         /// </summary>
         /// <param name="ID">The ID of the message</param>
         /// <returns></returns>
-        public static async Task DeleteMessage(string ID)
+        public async Task DeleteMessage(string ID)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("DeleteVoicemailURL"), ID)));
             response.EnsureSuccessStatusCode();
@@ -348,7 +348,7 @@ namespace Helpers
         /// </summary>
         /// <param name="message">The voicemail message to download</param>
         /// <returns></returns>
-        public static async Task<StorageFile> DownloadMessage(Message message)
+        public async Task<StorageFile> DownloadMessage(Message message)
         {
             StorageFile file = await DownloadsFolder.CreateFileAsync(string.Format("{0} {1}.wav", message.Sender, message.DateTime.Replace(':', '-')), CreationCollisionOption.GenerateUniqueName);
 
@@ -365,7 +365,7 @@ namespace Helpers
         /// code of the web page to get defined notifications.
         /// </summary>
         /// <returns></returns>
-        public static async Task GetNotifications()
+        public async Task GetNotifications()
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(Resources.GetString("VoicemailURL")));
             response.EnsureSuccessStatusCode();
@@ -392,7 +392,7 @@ namespace Helpers
         /// <param name="mode">The mode of the notification</param>
         /// <param name="mail">The mail where to send the notification</param>
         /// <returns></returns>
-        public static async Task AddNotification(string mode, string mail)
+        public async Task AddNotification(string mode, string mail)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("AddNotificationURL"), mail, mode)));
             response.EnsureSuccessStatusCode();
@@ -403,7 +403,7 @@ namespace Helpers
         /// </summary>
         /// <param name="mail">The mail where to send the notification</param>
         /// <returns></returns>
-        public static async Task DeleteNotification(string mail)
+        public async Task DeleteNotification(string mail)
         {
             HttpResponseMessage response = await _client.GetAsync(new Uri(string.Format(Resources.GetString("DeleteNotificationURL"), mail)));
             response.EnsureSuccessStatusCode();
