@@ -23,7 +23,10 @@ namespace Project_Alphonse_Elric.Dialogs
         /// <param name="args"></param>
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            //
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("AnalyticsDisabled"))
+            {
+                ApplicationData.Current.LocalSettings.Values.Remove("AnalyticsDisabled");
+            }
         }
 
         /// <summary>

@@ -78,6 +78,16 @@ namespace Project_Alphonse_Elric.Views
         }
 
         /// <summary>
+        /// Method invoked when the user clicks on La tua privacy.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void HyperlinkButton_Click_3(object sender, RoutedEventArgs e)
+        {
+            await new PrivacyPolicyDialog().ShowAsync();
+        }
+
+        /// <summary>
         /// Method invoked when the user clicks on Cambia utente.
         /// Unregister the background task and removes all user data in order to allow
         /// another user to use the app.

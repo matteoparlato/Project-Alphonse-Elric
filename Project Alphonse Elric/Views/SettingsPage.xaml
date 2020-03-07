@@ -36,7 +36,7 @@
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Supporto" TextWrapping="Wrap" />
                     <HyperlinkButton Click="HyperlinkButton_Click" Content="Contatta il supporto" />
                     <HyperlinkButton Click="HyperlinkButton_Click" Content="Invia un feedback" />
-                    <HyperlinkButton x:Uid="PrivacyPolicy" Content="La tua privacy" />
+                    <HyperlinkButton Click="HyperlinkButton_Click_3" Content="La tua privacy" />
                     <HyperlinkButton Click="HyperlinkButton_Click_1" Content="Informazioni sull'app" />
                 </StackPanel>
                 <!--#endregion-->
