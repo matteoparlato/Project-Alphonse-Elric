@@ -111,11 +111,6 @@
     <Compile Include="UpdaterTask.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
-      <Version>2.9.8</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
     </PackageReference>
@@ -128,9 +123,9 @@
       <Project>{397449db-eb2d-4c6d-8286-eb65853d3157}</Project>
       <Name>Helpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{B958E9FF-3BA5-4B80-B516-65D757960736}</Project>
-      <Name>Models</Name>
+    <ProjectReference Include="..\Project Alphonse Elric.Core\Project Alphonse Elric.Core.csproj">
+      <Project>{92c5a770-c583-4114-b652-ee81e95b7202}</Project>
+      <Name>Project Alphonse Elric.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

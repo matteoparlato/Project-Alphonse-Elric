@@ -1,7 +1,8 @@
 ﻿using System;
 using Helpers;
 using Microsoft.Services.Store.Engagement;
-using Models;
+using Project_Alphonse_Elric.Core.Helpers;
+using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
@@ -77,6 +78,16 @@ namespace Project_Alphonse_Elric.Views
         }
 
         /// <summary>
+        /// Method invoked when the user clicks on La tua privacy.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void HyperlinkButton_Click_3(object sender, RoutedEventArgs e)
+        {
+            await new PrivacyPolicyDialog().ShowAsync();
+        }
+
+        /// <summary>
         /// Method invoked when the user clicks on Cambia utente.
         /// Unregister the background task and removes all user data in order to allow
         /// another user to use the app.
@@ -87,13 +98,13 @@ namespace Project_Alphonse_Elric.Views
         {
             try
             {
-                await ClientExtensions.Logout();
+                await Singleton<ClientExtensions>.Instance.Logout();
 
                 ShellPage.Current.SessionTimeout.Stop();
 
                 SecurityExtensions.RemoveCredentials();
 
-                ClientExtensions.AccountDetails = new Profile();
+                Singleton<ClientExtensions>.Instance.AccountDetails = new Profile();
 
                 NavigationService.Navigate(typeof(LockedPage));
 
@@ -118,18 +129,18 @@ namespace Project_Alphonse_Elric.Views
                 {
                     WindowsHelloCheckBox.IsChecked = true;
 
-                    SecurityExtensions.RegisterKey();
+                    SecurityExtensions.EnableWindowsHello();
                 }
                 else
                 {
                     WindowsHelloCheckBox.IsChecked = false;
 
-                    SecurityExtensions.RemoveKey();
+                    SecurityExtensions.DisableWindowsHello();
                 }
             }
             else
             {
-                SecurityExtensions.RemoveKey();
+                SecurityExtensions.DisableWindowsHello();
             }
         }
 

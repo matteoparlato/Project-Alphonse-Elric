@@ -1,7 +1,7 @@
 ﻿using Helpers;
-using Models;
+using Project_Alphonse_Elric.Core.Helpers;
+using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
-using Project_Alphonse_Elric.Helpers;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,7 +13,7 @@ namespace Project_Alphonse_Elric.Views
     /// </summary>
     public sealed partial class ServicesPage : Page
     {
-        internal Profile AccountDetails { get; private set; } = ClientExtensions.AccountDetails;
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
         /// Parameterless constructor of ServicesPage class.
@@ -33,8 +33,8 @@ namespace Project_Alphonse_Elric.Views
         {
             try
             {
-                await ClientExtensions.GetOptions();
-                await ClientExtensions.GetServices();
+                await Singleton<ClientExtensions>.Instance.GetOptions();
+                await Singleton<ClientExtensions>.Instance.GetServices();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
         }
@@ -51,11 +51,11 @@ namespace Project_Alphonse_Elric.Views
             {
                 if ((bool)checkBox.IsChecked) 
                 {
-                    await ClientExtensions.SendEnableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendEnableRequest((string)checkBox.CommandParameter);
                 }
                 else
                 {
-                    await ClientExtensions.SendDisableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendDisableRequest((string)checkBox.CommandParameter);
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
@@ -68,7 +68,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void HyperlinkButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            await new FastCallsEditor().ShowAsync();
+            await new FastCallsEditorDialog().ShowAsync();
         }
     }
 }

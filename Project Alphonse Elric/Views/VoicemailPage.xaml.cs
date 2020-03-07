@@ -1,11 +1,10 @@
 ﻿using Helpers;
-using Models;
+using Project_Alphonse_Elric.Core.Helpers;
+using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
-using Project_Alphonse_Elric.Helpers;
 using System;
 using Windows.ApplicationModel.Calls;
 using Windows.ApplicationModel.Chat;
-using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +17,7 @@ namespace Project_Alphonse_Elric.Views
     /// </summary>
     public sealed partial class VoicemailPage : Page
     {
-        internal Profile AccountDetails { get; private set; } = ClientExtensions.AccountDetails;
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
         /// Parameterless constructor of VoicemailPage class.
@@ -38,14 +37,14 @@ namespace Project_Alphonse_Elric.Views
         {
             try
             {
-                await ClientExtensions.GetMessages();
+                await Singleton<ClientExtensions>.Instance.GetMessages();
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 
             LoadingProgressRing.IsActive = false;
 
-            NoDataStackPanel.Visibility = ClientExtensions.AccountDetails.Voicemail.MessagesList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            DataGridView.ItemsSource = ClientExtensions.AccountDetails.Voicemail.MessagesList;
+            NoDataTextBlock.Opacity = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList.Count > 0 ? 0 : 0.6;
+            DataGridView.ItemsSource = Singleton<ClientExtensions>.Instance.AccountDetails.Voicemail.MessagesList;
         }
 
         /// <summary>
@@ -60,11 +59,11 @@ namespace Project_Alphonse_Elric.Views
             {
                 if ((bool)checkBox.IsChecked)
                 {
-                    await ClientExtensions.SendEnableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendEnableRequest((string)checkBox.CommandParameter);
                 }
                 else
                 {
-                    await ClientExtensions.SendDisableRequest((string)checkBox.CommandParameter);
+                    await Singleton<ClientExtensions>.Instance.SendDisableRequest((string)checkBox.CommandParameter);
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
@@ -77,7 +76,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void HyperlinkButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await new VoicemailNotificationEditor().ShowAsync();
+            await new VoicemailNotificationEditorDialog().ShowAsync();
         }
 
         /// <summary>
@@ -90,33 +89,20 @@ namespace Project_Alphonse_Elric.Views
             FrameworkElement element = (FrameworkElement)sender;
             Message message = (Message)element.DataContext;
 
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                UIExtensions.ShowProgressStatusBar("Sto scaricando il messaggio vocale...");
-            }
-            else
-            {
-                ShellPage.Current.AppNotification.Content = "Sto scaricando il messaggio vocale che hai scelto di ascoltare. Non appena il download verrà terminato il messaggio vocale verrà aperto automaticamente.";
-                ShellPage.Current.AppNotification.ShowDismissButton = false;
-                ShellPage.Current.AppNotification.Show();
-            }
+            ShellPage.Current.AppNotification.Title = "Download messaggio vocale";
+            ShellPage.Current.AppNotification.Subtitle = "Sto scaricando il messaggio vocale che hai scelto di ascoltare. Non appena il download verrà terminato il messaggio vocale verrà aperto automaticamente.";
+            ShellPage.Current.AppNotification.IsOpen = true;
 
             try
             {
-                if (!await Launcher.LaunchFileAsync(await ClientExtensions.DownloadMessage(message)))
+                if (!await Launcher.LaunchFileAsync(await Singleton<ClientExtensions>.Instance.DownloadMessage(message)))
                 {
-                    ShellPage.Current.AppNotification.Content = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area personale\" nella cartella \"Download\" del tuo account.";
+                    ShellPage.Current.AppNotification.Title = "Attenzione";
+                    ShellPage.Current.AppNotification.Subtitle = "Si è verificato un errore durante l'apertura del messaggio selezionato. Puoi provare ad aprire manualmente il file situato nella cartella \"Area personale\" nella cartella \"Download\".";
                 }
                 else
                 {
-                    if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-                    {
-                        UIExtensions.HideProgressStatusBar();
-                    }
-                    else
-                    {
-                        ShellPage.Current.AppNotification.Dismiss();
-                    }
+                    ShellPage.Current.AppNotification.IsOpen = false;
                 }
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
@@ -134,7 +120,7 @@ namespace Project_Alphonse_Elric.Views
 
             try
             {
-                await ClientExtensions.DeleteMessage(message.ID);
+                await Singleton<ClientExtensions>.Instance.DeleteMessage(message.ID);
             }
             catch (Exception ex) { ShellPage.Current.HandleExceptionNotification(ex); }
 

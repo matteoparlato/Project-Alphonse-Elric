@@ -1,31 +1,36 @@
-﻿using Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Helpers;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.Services.Store.Engagement;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using Microsoft.UI.Xaml.Controls;
+using Project_Alphonse_Elric.Core.Helpers;
+using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
 using Project_Alphonse_Elric.Helpers;
 using Project_Alphonse_Elric.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Windows.Foundation.Metadata;
+using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Resources;
 using Windows.Security.Credentials;
 using Windows.Security.Credentials.UI;
 using Windows.Storage;
 using Windows.System;
-using Windows.System.Profile;
-using Windows.UI.Core;
+using Windows.UI;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+
+using WinUI = Microsoft.UI.Xaml.Controls;
 
 namespace Project_Alphonse_Elric.Views
 {
@@ -33,52 +38,22 @@ namespace Project_Alphonse_Elric.Views
     {
         #region ShellPage
 
-        private const string PanoramicStateName = "PanoramicState";
-        private const string WideStateName = "WideState";
-        private const string NarrowStateName = "NarrowState";
-        private const double WideStateMinWindowWidth = 640;
-        private const double PanoramicStateMinWindowWidth = 1024;
+        private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);
+        private readonly KeyboardAccelerator _backKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.GoBack);
 
-        private bool _isPaneOpen;
+        private bool _isBackEnabled;
+        private WinUI.NavigationViewItem _selected;
 
-        public bool IsPaneOpen
+        public bool IsBackEnabled
         {
-            get { return _isPaneOpen; }
-            set { Set(ref _isPaneOpen, value); }
+            get { return _isBackEnabled; }
+            set { Set(ref _isBackEnabled, value); }
         }
 
-        private object _selected;
-
-        public object Selected
+        public WinUI.NavigationViewItem Selected
         {
             get { return _selected; }
             set { Set(ref _selected, value); }
-        }
-
-        private SplitViewDisplayMode _displayMode = SplitViewDisplayMode.CompactInline;
-
-        public SplitViewDisplayMode DisplayMode
-        {
-            get { return _displayMode; }
-            set { Set(ref _displayMode, value); }
-        }
-
-        private object _lastSelectedItem;
-
-        private ObservableCollection<ShellNavigationItem> _primaryItems = new ObservableCollection<ShellNavigationItem>();
-
-        public ObservableCollection<ShellNavigationItem> PrimaryItems
-        {
-            get { return _primaryItems; }
-            set { Set(ref _primaryItems, value); }
-        }
-
-        private ObservableCollection<ShellNavigationItem> _secondaryItems = new ObservableCollection<ShellNavigationItem>();
-
-        public ObservableCollection<ShellNavigationItem> SecondaryItems
-        {
-            get { return _secondaryItems; }
-            set { Set(ref _secondaryItems, value); }
         }
 
         public ShellPage()
@@ -87,155 +62,115 @@ namespace Project_Alphonse_Elric.Views
             DataContext = this;
             Initialize();
         }
-        
+
+        public string PaneTitle
+        {
+            get { return ResourceLoader.GetForCurrentView().GetString("AppName"); }
+        }
+
         private void Initialize()
         {
-            NavigationService.Frame = ShellFrame;
+            NavigationService.Frame = shellFrame;
+            NavigationService.NavigationFailed += Frame_NavigationFailed;
             NavigationService.Navigated += Frame_Navigated;
-            PopulateNavItems();
+            navigationView.BackRequested += OnBackRequested;
 
-            UIExtensions.SetTitleBarColor();
+            //
+            ApplicationView view = ApplicationView.GetForCurrentView();
+            view.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+            view.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
-            AppNotification = InAppNotification;
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+
+            navigationView.ItemInvoked += OnItemInvoked;
+
+            AppNotification = AppNotificationTeachingTip;
 
             Loader = LoadingControl;
 
             Loader.IsLoading = true;
-
-            InitializeState(Window.Current.Bounds.Width);
-
-            if (((ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion) & 0x00000000FFFF0000L) >> 16) == 14393)
-            {
-                DropShadowHeader.Visibility = Visibility.Collapsed;
-            }
-
-            if (UIExtensions.IsFluentAvailable)
-            {
-                NavigationMenu.Style = this.Resources["AcrylicWideHamburgerMenuStyle"] as Style;
-                CollectorGrid.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
-                Loader.Background = this.Resources["SystemControlChromeMediumLowAcrylicWindowMediumBrush"] as Brush;
-                LoginGrid.Background = Application.Current.Resources["CardBackground"] as Brush;
-                WideNavigation.Background = this.Resources["SystemControlAccentAcrylicWindowAccentMediumHighBrush"] as Brush;
-                //ConsumesAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //OptionsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //VoicemailAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //RechargeAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-                //SettingsAppBarButton.Style = this.Resources["AppBarButtonRevealStyle"] as Style;
-            }
-            else
-            {
-                DropShadowContent.ShadowOpacity = 0;
-            }
+            //
         }
 
-        private void InitializeState(double windowWith)
+        private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (windowWith < WideStateMinWindowWidth)
-            {
-                GoToState(NarrowStateName);
-            }
-            else if (windowWith < PanoramicStateMinWindowWidth)
-            {
-                GoToState(WideStateName);
-            }
-            else
-            {
-                GoToState(PanoramicStateName);
-            }
+            // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
+            // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
+            KeyboardAccelerators.Add(_altLeftKeyboardAccelerator);
+            KeyboardAccelerators.Add(_backKeyboardAccelerator);
+            await Task.CompletedTask;
+
+            //
+            Page_Loaded();
+            //
         }
-
-        private void PopulateNavItems()
+        private void Frame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            _primaryItems.Clear();
-
-            _primaryItems.Add(ShellNavigationItem.FromType<MainPage>("I tuoi consumi", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<ServicesPage>("Opzioni e servizi", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<VoicemailPage>("Segreteria telefonica", ''));
-            _primaryItems.Add(ShellNavigationItem.FromType<RechargePage>("Ricarica telefonica", ''));
-
-            _secondaryItems.Clear();
-
-            _secondaryItems.Add(ShellNavigationItem.FromType<SettingsPage>("Impostazioni", ''));
+            throw e.Exception;
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            var navigationItem = PrimaryItems?.FirstOrDefault(i => i.PageType == e?.SourcePageType);
-            if (navigationItem == null)
+            IsBackEnabled = NavigationService.CanGoBack;
+            if (e.SourcePageType == typeof(SettingsPage))
             {
-                navigationItem = SecondaryItems?.FirstOrDefault(i => i.PageType == e?.SourcePageType);
+                Selected = navigationView.SettingsItem as WinUI.NavigationViewItem;
+                return;
             }
 
-            if (navigationItem != null)
-            {
-                ChangeSelected(_lastSelectedItem, navigationItem);
-                _lastSelectedItem = navigationItem;
-            }
+            Selected = navigationView.MenuItems
+                            .OfType<WinUI.NavigationViewItem>()
+                            .FirstOrDefault(menuItem => IsMenuItemForPageType(menuItem, e.SourcePageType));
         }
 
-        private void ChangeSelected(object oldValue, object newValue)
+        private bool IsMenuItemForPageType(WinUI.NavigationViewItem menuItem, Type sourcePageType)
         {
-            if (oldValue != null)
-            {
-                (oldValue as ShellNavigationItem).IsSelected = false;
-            }
-
-            if (newValue != null)
-            {
-                (newValue as ShellNavigationItem).IsSelected = true;
-                Selected = newValue;
-            }
+            var pageType = menuItem.GetValue(NavHelper.NavigateToProperty) as Type;
+            return pageType == sourcePageType;
         }
 
-        private void Navigate(object item)
+        private void OnItemInvoked(WinUI.NavigationView sender, WinUI.NavigationViewItemInvokedEventArgs args)
         {
-            var navigationItem = item as ShellNavigationItem;
-            if (navigationItem != null)
+            if (args.IsSettingsInvoked)
             {
-                NavigationService.Navigate(navigationItem.PageType);
+                NavigationService.Navigate(typeof(SettingsPage));
+                return;
+            }
+            else if (args.InvokedItemContainer != null)
+            {
+
+                var item = navigationView.MenuItems
+                            .OfType<WinUI.NavigationViewItem>()
+                            .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
+                var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
+                NavigationService.Navigate(pageType, args.RecommendedNavigationTransitionInfo);
             }
         }
 
-        private void ItemClicked(object sender, ItemClickEventArgs e)
+        private void OnBackRequested(WinUI.NavigationView sender, WinUI.NavigationViewBackRequestedEventArgs args)
         {
-            if (DisplayMode == SplitViewDisplayMode.CompactOverlay || DisplayMode == SplitViewDisplayMode.Overlay)
+            NavigationService.GoBack();
+        }
+
+        private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
+        {
+            var keyboardAccelerator = new KeyboardAccelerator() { Key = key };
+            if (modifiers.HasValue)
             {
-                IsPaneOpen = false;
+                keyboardAccelerator.Modifiers = modifiers.Value;
             }
 
-            Navigate(e.ClickedItem);
+            keyboardAccelerator.Invoked += OnKeyboardAcceleratorInvoked;
+            return keyboardAccelerator;
         }
 
-        private void OpenPane_Click(object sender, RoutedEventArgs e)
+        private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
-            IsPaneOpen = !_isPaneOpen;
+            var result = NavigationService.GoBack();
+            args.Handled = result;
         }
-
-        private void WindowStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e) => GoToState(e.NewState.Name);
-
-        private void GoToState(string stateName)
-        {
-            switch (stateName)
-            {
-                case PanoramicStateName:
-                    DisplayMode = SplitViewDisplayMode.Overlay;
-                    if (UIExtensions.IsFluentAvailable) ShellGrid.Margin = new Thickness { Left = 0, Top = 0, Right = 0, Bottom = 0 };
-                    break;
-                case WideStateName:
-                    DisplayMode = SplitViewDisplayMode.Overlay;
-                    IsPaneOpen = false;
-                    if (UIExtensions.IsFluentAvailable) ShellGrid.Margin = new Thickness { Left = 0, Top = 0, Right = 0, Bottom = 0 };
-                    break;
-                case NarrowStateName:
-                    DisplayMode = SplitViewDisplayMode.Overlay;
-                    IsPaneOpen = false;
-                    if (UIExtensions.IsFluentAvailable) ShellGrid.Margin = new Thickness { Left = 0, Top = 32, Right = 0, Bottom = 0 };
-                    break;
-                default:
-                    break;
-            }
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
@@ -255,7 +190,7 @@ namespace Project_Alphonse_Elric.Views
 
         internal static ShellPage Current { get; set; }
 
-        internal InAppNotification AppNotification { get; private set; }
+        internal TeachingTip AppNotification { get; private set; }
 
         internal Loading Loader { get; private set; }
 
@@ -263,13 +198,15 @@ namespace Project_Alphonse_Elric.Views
 
         private bool _avoidCheck = false;
 
+        internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
+
         /// <summary>
         /// Method invoked once navigated to the page.
         /// Begins user login.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded()
         {
             if (SystemInformation.IsFirstRun) await new PrivacyPolicyDialog().ShowAsync();
 
@@ -294,15 +231,7 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                UIExtensions.ShowProgressStatusBar("Sto eseguendo l'accesso...");
-            }
-            else
-            {
-                StatusProgressBar.Visibility = Visibility.Visible;
-            }
-            ErrorStackPanel.Visibility = Visibility.Collapsed;
+            StatusProgressBar.Opacity = 1;
             UsernameTextBox.IsEnabled = false;
             PasswordPasswordBox.IsEnabled = false;
             LoginButton.IsEnabled = false;
@@ -315,7 +244,7 @@ namespace Project_Alphonse_Elric.Views
                     {
                         case UserConsentVerificationResult.Verified:
                             {
-                                await ClientExtensions.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
+                                await Singleton<ClientExtensions>.Instance.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
                                 break;
                             }
                         case UserConsentVerificationResult.DeviceNotPresent:
@@ -333,38 +262,30 @@ namespace Project_Alphonse_Elric.Views
                 }
                 else
                 {
-                    await ClientExtensions.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
+                    await Singleton<ClientExtensions>.Instance.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password);
                 }
 
                 SessionTimeout.Tick += (s, o) =>
                 {
-                    ClientExtensions.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password); // Never await this method!
+                    Singleton<ClientExtensions>.Instance.Authenticate(UsernameTextBox.Text, PasswordPasswordBox.Password); // Never await this method!
                 };
 
                 SecurityExtensions.AddCredentials(UsernameTextBox.Text, PasswordPasswordBox.Password);
 
-                AppNotification.Dismiss();
+                AppNotification.IsOpen = false;
 
-                NavigationService.Navigate(typeof(MainPage));
+                NavigationService.Navigate(typeof(MainPage), new EntranceNavigationTransitionInfo());
+                navigationView.SelectedItem = navigationView.MenuItems[0];
+                IsBackEnabled = false;
+                NavigationService.Frame.BackStack.Clear();
 
                 Loader.IsLoading = false;
 
                 SessionTimeout.Start();
             }
-            catch (IndexOutOfRangeException)
+            catch (Exception ex)
             {
-                ErrorTextBlock.Text = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                ErrorStackPanel.Visibility = Visibility.Visible;
-            }
-            catch (HttpRequestException)
-            {
-                ErrorTextBlock.Text = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                ErrorStackPanel.Visibility = Visibility.Visible;
-            }
-            catch (COMException)
-            {
-                ErrorTextBlock.Text = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                ErrorStackPanel.Visibility = Visibility.Visible;
+                HandleExceptionNotification(ex);
             }
 
             _avoidCheck = false;
@@ -372,8 +293,7 @@ namespace Project_Alphonse_Elric.Views
             UsernameTextBox.IsEnabled = true;
             PasswordPasswordBox.IsEnabled = true;
             LoginButton.IsEnabled = true;
-            StatusProgressBar.Visibility = Visibility.Collapsed;
-            UIExtensions.HideProgressStatusBar();
+            StatusProgressBar.Opacity = 0;
         }
 
         /// <summary>
@@ -406,23 +326,18 @@ namespace Project_Alphonse_Elric.Views
         /// <param name="ex">The generated exception</param>
         public void HandleExceptionNotification(Exception ex)
         {
+            Analytics.TrackEvent(ex.Message, new Dictionary<string, string> { { "exception", ex.ToString() } });
+
             if (ex is IndexOutOfRangeException)
             {
-                AppNotification.Content = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.Show();
+                AppNotification.Subtitle = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";                
             }
-            if (ex is HttpRequestException)
+            else
             {
-                AppNotification.Content = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.Show();
+                AppNotification.Subtitle = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
             }
-            if (ex is COMException)
-            {
-                AppNotification.Content = "Impossibile comunicare con il server remoto di iliad. Verifica di avere una connessione ad Internet attiva e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
-                AppNotification.Show();
-            }
-
-            Analytics.TrackEvent(ex.Message, new Dictionary<string, string> { { "exception", ex.ToString() } });
+            AppNotification.Title = "Attenzione";
+            AppNotification.IsOpen = true;
         }
 
         /// <summary>
@@ -433,68 +348,6 @@ namespace Project_Alphonse_Elric.Views
         private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
             await StoreServicesFeedbackLauncher.GetDefault().LaunchAsync();
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on I tuoi consumi.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(typeof(MainPage));
-            NavigationService.Frame.BackStack.Clear();
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on Opzioni e servizi.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(typeof(ServicesPage));
-            NavigationService.Frame.BackStack.Clear();
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on Segreteria telefonica.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AppBarButton_Click_2(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(typeof(VoicemailPage));
-            NavigationService.Frame.BackStack.Clear();
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on Ricarica.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AppBarButton_Click_3(object sender, RoutedEventArgs e)
-        {
-            AppNotification.Dismiss();
-            NavigationService.Navigate(typeof(RechargePage));
-            NavigationService.Frame.BackStack.Clear();
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-        }
-
-        /// <summary>
-        /// Method invoked when the user clicks on Impostazioni.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AppBarButton_Click_4(object sender, RoutedEventArgs e)
-        {
-            AppNotification.Dismiss();
-            NavigationService.Navigate(typeof(SettingsPage));
-            NavigationService.Frame.BackStack.Clear();
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         /// <summary>

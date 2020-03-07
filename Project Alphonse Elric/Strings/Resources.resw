@@ -126,6 +126,9 @@
   <data name="AnonymousServiceURL" xml:space="preserve">
     <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous</value>
   </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Area personale</value>
+  </data>
   <data name="BlockUnknown.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=</value>
   </data>
@@ -160,7 +163,7 @@
     <value>https://www.iliad.it/account/?logout=user</value>
   </data>
   <data name="MarketingAgreement.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni?update=consenso-di-marketing&amp;activate=1</value>
+    <value>https://www.iliad.it/account/le-mie-opzioni?update=consenso-di-marketing&amp;activate=</value>
   </data>
   <data name="NumberOptionsURL" xml:space="preserve">
     <value>https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="PersonalizedAdvert.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/segreteria-telefonica/Annuncio?update=3&amp;activate=</value>
+  </data>
+  <data name="PrivacyPolicy.NavigateUri" xml:space="preserve">
+    <value>http://neondev.altervista.org/Area_Personale/Privacy_Policy.html</value>
   </data>
   <data name="ProtectVoicemail.CommandParameter" xml:space="preserve">
     <value />
