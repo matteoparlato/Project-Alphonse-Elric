@@ -21,12 +21,19 @@
                 <TextBlock x:Name="VersionTextBlock" FontWeight="Light" Style="{StaticResource SubtitleTextBlockStyle}" Text=" Versione" TextWrapping="Wrap" />
             </StackPanel>-->
             <TextBlock Text="Area personale è l'app che ti consente di accedere in modo facile e veloce alla tua area personale iliad per consultare i contatori relativi alla tua offerta, le opzioni e i servizi attivati oltre che la segreteria telefonica." TextWrapping="Wrap" />
-            <TextBlock Margin="0,8,0,0" Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.." TextWrapping="Wrap" />
+            <TextBlock
+                Margin="0,8,0,0"
+                Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.."
+                TextWrapping="Wrap" />
             <!--<TextBlock Margin="0,8,0,0" Text="Il nome del progetto, il logo e tutti i riferimento Fullmetal Alchemist sono proprietà dello studio Bones." TextWrapping="Wrap" />-->
             <!--#endregion-->
 
             <!--#region Autori-->
-            <TextBlock Margin="0,18,0,0" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Autori" TextWrapping="Wrap" />
+            <TextBlock
+                Margin="0,18,0,0"
+                Style="{ThemeResource SubtitleTextBlockStyle}"
+                Text="Autori"
+                TextWrapping="Wrap" />
             <StackPanel>
                 <HyperlinkButton NavigateUri="mailto:matteo.parlato@outlook.it">Matteo Parlato</HyperlinkButton>
             </StackPanel>

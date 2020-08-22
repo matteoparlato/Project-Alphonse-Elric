@@ -16,9 +16,19 @@
     mc:Ignorable="d">
 
     <Grid>
-        <winui:NavigationView x:Name="navigationView" Background="{ThemeResource SystemControlBackgroundAltHighBrush}" IsBackButtonVisible="Visible" IsBackEnabled="{x:Bind IsBackEnabled, Mode=OneWay}" IsSettingsVisible="True" PaneTitle="{x:Bind PaneTitle}" SelectedItem="{x:Bind Selected, Mode=OneWay}">
+        <winui:NavigationView
+            x:Name="navigationView"
+            Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
+            IsBackButtonVisible="Visible"
+            IsBackEnabled="{x:Bind IsBackEnabled, Mode=OneWay}"
+            IsSettingsVisible="True"
+            PaneTitle="{x:Bind PaneTitle}"
+            SelectedItem="{x:Bind Selected, Mode=OneWay}">
             <winui:NavigationView.MenuItems>
-                <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:MainPage" Content="Home" Icon="Home" />
+                <winui:NavigationViewItem
+                    helpers:NavHelper.NavigateTo="views:MainPage"
+                    Content="Home"
+                    Icon="Home" />
                 <winui:NavigationViewItemSeparator />
                 <winui:NavigationViewItemHeader x:Name="MainPagesHeader" Content="{x:Bind AccountDetails.AccountName, Mode=OneWay}" />
                 <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:ServicesPage" Content="Opzioni e servizi">
@@ -26,7 +36,10 @@
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;" />
                     </winui:NavigationViewItem.Icon>
                 </winui:NavigationViewItem>
-                <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:VoicemailPage" Content="Segreteria telefonica" Icon="Memo" />
+                <winui:NavigationViewItem
+                    helpers:NavHelper.NavigateTo="views:VoicemailPage"
+                    Content="Segreteria telefonica"
+                    Icon="Memo" />
                 <winui:NavigationViewItem helpers:NavHelper.NavigateTo="views:RechargePage" Content="Ricarica telefonica">
                     <winui:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C7;" />
@@ -45,36 +58,93 @@
                 </behaviors:NavigationViewHeaderBehavior>
             </i:Interaction.Behaviors>-->
 
-            <Frame x:Name="shellFrame" Grid.Row="1" IsTabStop="True" />
+            <Frame
+                x:Name="shellFrame"
+                Grid.Row="1"
+                IsTabStop="True" />
         </winui:NavigationView>
 
         <!--#region Login-->
-        <controls:Loading x:Name="LoadingControl" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}" Canvas.ZIndex="2" IsLoading="True">
+        <controls:Loading
+            x:Name="LoadingControl"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"
+            Canvas.ZIndex="2"
+            IsLoading="True">
             <Border CornerRadius="4">
-                <controls:DropShadowPanel x:Name="DropShadowContent" BlurRadius="10" OffsetX="0" OffsetY="4" ShadowOpacity="0.5" Color="#545454">
-                    <Grid x:Name="LoginGrid" Grid.Row="1" Grid.Column="1" Background="{ThemeResource CardBackground}">
+                <controls:DropShadowPanel
+                    x:Name="DropShadowContent"
+                    BlurRadius="10"
+                    OffsetX="0"
+                    OffsetY="4"
+                    ShadowOpacity="0.5"
+                    Color="#545454">
+                    <Grid
+                        x:Name="LoginGrid"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Background="{ThemeResource CardBackground}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <ProgressBar x:Name="StatusProgressBar" Grid.Row="0" VerticalAlignment="Top" IsIndeterminate="True" Opacity="0">
+                        <ProgressBar
+                            x:Name="StatusProgressBar"
+                            Grid.Row="0"
+                            VerticalAlignment="Top"
+                            IsIndeterminate="True"
+                            Opacity="0">
                             <Windows10version1809:ProgressBar.OpacityTransition>
                                 <Windows10version1809:ScalarTransition />
                             </Windows10version1809:ProgressBar.OpacityTransition>
                         </ProgressBar>
 
-                        <StackPanel x:Name="LoginStackPanel" Grid.Row="1" Padding="35" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Margin="0,0,0,18" Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
+                        <StackPanel
+                            x:Name="LoginStackPanel"
+                            Grid.Row="1"
+                            Padding="35"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="0,0,0,18"
+                                Style="{ThemeResource SubheaderTextBlockStyle}"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap">
                                 <Run Text="Benvenuto in" />
                                 <Run Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="iliad" />
                             </TextBlock>
-                            <TextBlock Opacity="0.6" Style="{ThemeResource TitleTextBlockStyle}" Text="Inserisci le credenziali del tuo account" TextAlignment="Center" TextWrapping="Wrap" />
+                            <TextBlock
+                                Opacity="0.6"
+                                Style="{ThemeResource TitleTextBlockStyle}"
+                                Text="Inserisci le credenziali del tuo account"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
 
                             <StackPanel Margin="0,18,0,0">
-                                <TextBox x:Name="UsernameTextBox" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" PlaceholderText="Nome utente" TextChanged="TextBox_TextChanged" />
-                                <PasswordBox x:Name="PasswordPasswordBox" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" KeyDown="PasswordPasswordBox_KeyDown" PasswordChanged="PasswordBox_PasswordChanged" PlaceholderText="Password" />
-                                <Button x:Name="LoginButton" Margin="0,8,0,0" HorizontalAlignment="Center" Click="Button_Click" Content="Accedi" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" />
+                                <TextBox
+                                    x:Name="UsernameTextBox"
+                                    BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+                                    IsSpellCheckEnabled="False"
+                                    IsTextPredictionEnabled="False"
+                                    PlaceholderText="Nome utente"
+                                    TextChanged="TextBox_TextChanged" />
+                                <PasswordBox
+                                    x:Name="PasswordPasswordBox"
+                                    Margin="0,5,0,0"
+                                    BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+                                    KeyDown="PasswordPasswordBox_KeyDown"
+                                    PasswordChanged="PasswordBox_PasswordChanged"
+                                    PlaceholderText="Password" />
+                                <Button
+                                    x:Name="LoginButton"
+                                    Margin="0,8,0,0"
+                                    HorizontalAlignment="Center"
+                                    Click="Button_Click"
+                                    Content="Accedi"
+                                    IsEnabled="False"
+                                    Style="{StaticResource ButtonRevealStyle}" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>

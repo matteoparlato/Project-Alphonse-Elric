@@ -26,12 +26,47 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.ColumnSpan="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PlaceholderText="Nome" TextChanged="TextBox_TextChanged" />
-        <TextBox x:Name="TargetTextBox" Grid.Row="1" Grid.Column="0" Margin="0,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PlaceholderText="Numero della linea" Text="+39" TextChanged="TextBox_TextChanged" />
-        <TextBox x:Name="ShortTextBox" Grid.Row="1" Grid.Column="1" Margin="5,5,0,0" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}" PlaceholderText="Abbreviazione" TextChanged="TextBox_TextChanged" />
-        <Button x:Name="AddButton" Grid.Row="1" Grid.Column="2" Margin="5,5,0,0" VerticalAlignment="Stretch" Content="&#xE710;" FontFamily="Segoe MDL2 Assets" IsEnabled="False" Style="{StaticResource ButtonRevealStyle}" Tapped="Button_Tapped" />
+        <TextBox
+            x:Name="NameTextBox"
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+            PlaceholderText="Nome"
+            TextChanged="TextBox_TextChanged" />
+        <TextBox
+            x:Name="TargetTextBox"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="0,5,0,0"
+            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+            PlaceholderText="Numero della linea"
+            Text="+39"
+            TextChanged="TextBox_TextChanged" />
+        <TextBox
+            x:Name="ShortTextBox"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,5,0,0"
+            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+            PlaceholderText="Abbreviazione"
+            TextChanged="TextBox_TextChanged" />
+        <Button
+            x:Name="AddButton"
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="5,5,0,0"
+            VerticalAlignment="Stretch"
+            Content="&#xE710;"
+            FontFamily="Segoe MDL2 Assets"
+            IsEnabled="False"
+            Style="{StaticResource ButtonRevealStyle}"
+            Tapped="Button_Tapped" />
 
-        <RelativePanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,5,0,0">
+        <RelativePanel
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="0,5,0,0">
             <Viewbox Style="{StaticResource InformationViewBox}">
                 <Path Data="M 16 3 C 8.83203 3 3 8.83203 3 16 C 3 23.168 8.83203 29 16 29 C 23.168 29 29 23.168 29 16 C 29 8.83203 23.168 3 16 3 Z M 16 5 C 22.0859 5 27 9.91406 27 16 C 27 22.0859 22.0859 27 16 27 C 9.91406 27 5 22.0859 5 16 C 5 9.91406 9.91406 5 16 5 Z M 15 10 L 15 12 L 17 12 L 17 10 Z M 15 14 L 15 22 L 17 22 L 17 14 Z" Fill="{ThemeResource SystemControlForegroundAccentBrush}" />
             </Viewbox>
@@ -40,7 +75,11 @@
             </StackPanel>
         </RelativePanel>
 
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,18,0,0">
+        <Grid
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="0,18,0,0">
             <ListView x:Name="DataListView" SelectionMode="None">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -58,31 +97,62 @@
 
                             <StackPanel Grid.Column="0">
 
-                                <TextBlock Margin="0,5,0,0" FontWeight="ExtraBold" Opacity="0.6" Style="{StaticResource CaptionTextBlockStyle}" Text="{Binding Name}" TextWrapping="Wrap" />
-                                <TextBlock Margin="0,5,0,0" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap">
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontWeight="ExtraBold"
+                                    Opacity="0.6"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{Binding Name}"
+                                    TextWrapping="Wrap" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    Style="{StaticResource BodyTextBlockStyle}"
+                                    TextWrapping="Wrap">
                                     <Run Text="{Binding Target}" />
                                     <Run Text="-" />
                                     <Run Text="{Binding ShortTarget}" />
                                 </TextBlock>
                             </StackPanel>
 
-                            <HyperlinkButton Grid.Column="1" Margin="5,0,0,0" Content="Elimina" Tapped="Button_Tapped_1" />
+                            <HyperlinkButton
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                Content="Elimina"
+                                Tapped="Button_Tapped_1" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
             <!--#region Loading progress-->
-            <ProgressRing x:Name="LoadingProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="True" />
+            <ProgressRing
+                x:Name="LoadingProgressRing"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsActive="True" />
             <!--#endregion-->
 
             <!--#region NoData message-->
-            <StackPanel x:Name="NoDataStackPanel" Margin="0,48,0,48" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0">
+            <StackPanel
+                x:Name="NoDataStackPanel"
+                Margin="0,48,0,48"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Opacity="0">
                 <Windows10version1809:StackPanel.OpacityTransition>
                     <Windows10version1809:ScalarTransition />
                 </Windows10version1809:StackPanel.OpacityTransition>
-                <TextBlock x:Name="NoDataTextBlock" Style="{ThemeResource TitleTextBlockStyle}" Text="Nessuna chiamata rapida definita" TextAlignment="Center" TextWrapping="Wrap" />
-                <TextBlock Opacity="0.6" Style="{ThemeResource SubtitleTextBlockStyle}" TextAlignment="Center" TextWrapping="Wrap">
+                <TextBlock
+                    x:Name="NoDataTextBlock"
+                    Style="{ThemeResource TitleTextBlockStyle}"
+                    Text="Nessuna chiamata rapida definita"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Opacity="0.6"
+                    Style="{ThemeResource SubtitleTextBlockStyle}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
                     <Run Text="Tocca o fai click su" />
                     <Span FontFamily="Segoe MDL2 Assets" FontSize="18.667">&#xE710;</Span>
                     <Run Text="per aggiungerne una" />

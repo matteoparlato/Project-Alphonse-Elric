@@ -16,9 +16,19 @@
     <ScrollViewer>
         <StackPanel>
             <TextBlock Text="Prima di iniziare dovrai leggere attentamente alcune informazioni relative alla tua privacy." TextWrapping="Wrap" />
-            <TextBlock Margin="0,5,0,0" Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.." TextWrapping="Wrap" />
-            <TextBlock Margin="0,5,0,0" Text="Area personale utilizza servizi di terze parti per raccogliere dati di diagnostica che possono essere impiegati per migliorare l'esperienza d'uso e la stabilità dell'app." TextWrapping="Wrap" />
-            <HyperlinkButton x:Uid="PrivacyPolicy" Margin="5,0,0,0" HorizontalAlignment="Center" Content="Consulta l'informativa completa" />
+            <TextBlock
+                Margin="0,5,0,0"
+                Text="Area personale non rappresenta alcun software di Iliad S.A.. Il nome iliad e il relativo logo sono proprietà di Iliad S.A.."
+                TextWrapping="Wrap" />
+            <TextBlock
+                Margin="0,5,0,0"
+                Text="Area personale utilizza servizi di terze parti per raccogliere dati di diagnostica che possono essere impiegati per migliorare l'esperienza d'uso e la stabilità dell'app."
+                TextWrapping="Wrap" />
+            <HyperlinkButton
+                x:Uid="PrivacyPolicy"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                Content="Consulta l'informativa completa" />
         </StackPanel>
     </ScrollViewer>
 </ContentDialog>

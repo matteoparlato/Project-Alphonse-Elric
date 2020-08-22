@@ -34,9 +34,24 @@
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
-            <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{ThemeResource SystemChromeMediumColor}" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity=".5" />
-            <AcrylicBrush x:Key="NavigationViewTopPaneBackground" BackgroundSource="HostBackdrop" FallbackColor="{ThemeResource SystemChromeMediumColor}" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity=".5" />
-            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" BackgroundSource="HostBackdrop" FallbackColor="{ThemeResource SystemChromeMediumColor}" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity=".7" />
+            <AcrylicBrush
+                x:Key="NavigationViewDefaultPaneBackground"
+                BackgroundSource="Backdrop"
+                FallbackColor="{ThemeResource SystemChromeMediumColor}"
+                TintColor="{ThemeResource SystemChromeMediumColor}"
+                TintOpacity=".5" />
+            <AcrylicBrush
+                x:Key="NavigationViewTopPaneBackground"
+                BackgroundSource="HostBackdrop"
+                FallbackColor="{ThemeResource SystemChromeMediumColor}"
+                TintColor="{ThemeResource SystemChromeMediumColor}"
+                TintOpacity=".5" />
+            <AcrylicBrush
+                x:Key="NavigationViewExpandedPaneBackground"
+                BackgroundSource="HostBackdrop"
+                FallbackColor="{ThemeResource SystemChromeMediumColor}"
+                TintColor="{ThemeResource SystemChromeMediumColor}"
+                TintOpacity=".7" />
 
             <Style x:Key="InformationViewBox" TargetType="Viewbox">
                 <Setter Property="Width" Value="19.951171875" />
@@ -60,7 +75,10 @@
                 <Setter Property="Width" Value="100" />
             </Style>
 
-            <Style x:Key="TitleBarText" BasedOn="{StaticResource BaseTextBlockStyle}" TargetType="TextBlock">
+            <Style
+                x:Key="TitleBarText"
+                BasedOn="{StaticResource BaseTextBlockStyle}"
+                TargetType="TextBlock">
                 <Setter Property="CharacterSpacing" Value="0.075em" />
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
