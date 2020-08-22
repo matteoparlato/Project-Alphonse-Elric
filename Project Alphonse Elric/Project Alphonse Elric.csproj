@@ -114,6 +114,9 @@
     <Compile Include="Dialogs\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AdDialog.xaml.cs">
+      <DependentUpon>AdDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\FastCallsEditorDialog.xaml.cs">
       <DependentUpon>FastCallsEditorDialog.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <None Include="Project Alphonse Elric_StoreKey.pfx" />
+    <PRIResource Include="Strings\it-IT\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +223,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Dialogs\AboutDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\AdDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -283,6 +292,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AdsJumbo">
+      <Version>5.9.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Advertising.XAML">
       <Version>10.1811.22001</Version>
     </PackageReference>

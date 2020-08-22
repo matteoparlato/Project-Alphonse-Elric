@@ -117,106 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddFastCallURL" xml:space="preserve">
-    <value>"https://www.iliad.it/account/i-miei-servizi/numeros_abreges?action=add&amp;name={0}&amp;target={1}&amp;short={2}"</value>
+  <data name="AdDialog.CloseButtonText" xml:space="preserve">
+    <value>Chiudi</value>
   </data>
-  <data name="AddNotificationURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica/notifiche?email={0}&amp;action=add&amp;type={1}</value>
+  <data name="AdDialog.Title" xml:space="preserve">
+    <value>Supporta lo sviluppatore, clicca sulla pubblicità</value>
   </data>
-  <data name="AnonymousServiceURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous</value>
-  </data>
-  <data name="BlockUnknown.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=</value>
-  </data>
-  <data name="ConsumesURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/consumi-e-credito</value>
-  </data>
-  <data name="DataCeilingOptionsURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/data-ceiling</value>
-  </data>
-  <data name="DeleteFastCallURL" xml:space="preserve">
-    <value>https://www.iliad.it{0}&amp;action=delete</value>
-  </data>
-  <data name="DeleteNotificationURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica/notifiche?email={0}&amp;action=delete</value>
-  </data>
-  <data name="DeleteVoicemailURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica/messaggio_vocale?id={0}&amp;action=delete</value>
-  </data>
-  <data name="FastCalls.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi?update=speed_dial&amp;activate=</value>
-  </data>
-  <data name="FastCallsURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi/numeros_abreges</value>
-  </data>
-  <data name="Filter.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi?update=filter_rules&amp;activate=</value>
-  </data>
-  <data name="LoginURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/</value>
-  </data>
-  <data name="LogoutURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/?logout=user</value>
-  </data>
-  <data name="MarketingAgreement.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni?update=consenso-di-marketing&amp;activate=</value>
-  </data>
-  <data name="NumberOptionsURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento</value>
-  </data>
-  <data name="OptionsURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni</value>
-  </data>
-  <data name="PaidBankNumbers.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?bank=</value>
-  </data>
-  <data name="PaidNumbers.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/blocco-numeri-a-pagamento?premium=</value>
-  </data>
-  <data name="PersonalizedAdvert.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica/Annuncio?update=3&amp;activate=</value>
-  </data>
-  <data name="PrivacyPolicy.NavigateUri" xml:space="preserve">
-    <value>http://neondev.altervista.org/Area_Personale/Privacy_Policy.html</value>
-  </data>
-  <data name="ProtectVoicemail.CommandParameter" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PublishPhoneNumber.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni?update=elenco&amp;activate=</value>
-  </data>
-  <data name="RedirectToVoicemailUnknown.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi/block_anonymous?activate=1&amp;forward=</value>
-  </data>
-  <data name="ServicesURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi</value>
-  </data>
-  <data name="ShowCallerID.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica?update=0&amp;activate=</value>
-  </data>
-  <data name="ShowTimeDate.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica?update=1&amp;activate=</value>
-  </data>
-  <data name="TransferProtection.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi?update=block_redirect&amp;activate=</value>
-  </data>
-  <data name="TransferToVoicemail.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi/voicemail_roaming?activate=</value>
-  </data>
-  <data name="UnlockItaly.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/data-ceiling?billing=</value>
-  </data>
-  <data name="UnlockLocal.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/data-ceiling?fairuse=</value>
-  </data>
-  <data name="UnlockRoaming.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/le-mie-opzioni/data-ceiling?roaming=</value>
-  </data>
-  <data name="UserNotAvailable.CommandParameter" xml:space="preserve">
-    <value>https://www.iliad.it/account/i-miei-servizi?update=absent_subscriber&amp;activate=</value>
-  </data>
-  <data name="VoicemailURL" xml:space="preserve">
-    <value>https://www.iliad.it/account/segreteria-telefonica</value>
+  <data name="AppName" xml:space="preserve">
+    <value>Area personale</value>
   </data>
 </root>

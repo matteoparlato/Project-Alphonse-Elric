@@ -36,6 +36,9 @@
           </BackgroundTasks>
         </Extension>
       </Extensions>
+      <uap:ApplicationContentUriRules>
+        <uap:Rule Type="include" Match="https://adsjumbo.com" WindowsRuntimeAccess="none"/>
+      </uap:ApplicationContentUriRules>
     </Application>
   </Applications>
 

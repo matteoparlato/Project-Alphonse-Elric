@@ -1,6 +1,7 @@
 ﻿using Helpers;
 using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Core.Models;
+using Project_Alphonse_Elric.Dialogs;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +13,8 @@ namespace Project_Alphonse_Elric.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        internal static bool AdViewed { get; private set; }
+
         internal Profile AccountDetails { get; private set; } = Singleton<ClientExtensions>.Instance.AccountDetails;
 
         /// <summary>
@@ -24,7 +27,7 @@ namespace Project_Alphonse_Elric.Views
 
         /// <summary>
         /// Method invoked once navigated to the page.
-        /// Shows user consumes.
+        /// Shows user's consumes and shows AdDialog on first MainPage navigation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -46,6 +49,12 @@ namespace Project_Alphonse_Elric.Views
                 updateTimeout.Start();
             }
             catch (Exception) { }
+
+            if (!AdViewed)
+            {
+                AdViewed = true;
+                await new AdDialog().ShowAsync();
+            }
         }
     }
 }
