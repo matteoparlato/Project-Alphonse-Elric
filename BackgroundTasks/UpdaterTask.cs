@@ -1,10 +1,10 @@
 ﻿using Helpers;
 using Project_Alphonse_Elric.Core.Helpers;
+using Project_Alphonse_Elric.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel.Background;
-using Windows.ApplicationModel.Resources;
 using Windows.Security.Credentials;
 
 namespace BackgroundTasks
@@ -35,7 +35,7 @@ namespace BackgroundTasks
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
 
             IReadOnlyList<PasswordCredential> credentialList = new PasswordVault().RetrieveAll();
-            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals(ResourceLoader.GetForCurrentView().GetString("AppName"))))
+            foreach (PasswordCredential credential in credentialList.Where(item => item.Resource.Equals("AppName".GetLocalized())))
             {
                 credential.RetrievePassword();
 

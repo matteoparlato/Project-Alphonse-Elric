@@ -6,7 +6,6 @@ using Microsoft.Toolkit.Uwp.Helpers;
 using Project_Alphonse_Elric.Services;
 using Project_Alphonse_Elric.Views;
 using System;
-using System.Runtime.InteropServices;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 using Windows.UI.Notifications;
