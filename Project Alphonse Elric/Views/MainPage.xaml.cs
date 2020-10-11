@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using AdDealsUniversalSDKW81;
+using Helpers;
 using Project_Alphonse_Elric.Core.Helpers;
 using Project_Alphonse_Elric.Core.Models;
 using Project_Alphonse_Elric.Dialogs;
@@ -53,7 +54,9 @@ namespace Project_Alphonse_Elric.Views
             if (!AdViewed)
             {
                 AdViewed = true;
-                await new AdDialog().ShowAsync();
+                // AdJumbo ad network temporarily disabled
+                // await new AdDialog().ShowAsync();
+                ShellPage.Current.ShowPopupAd(AdManager.AdKind.FULLSCREENPOPUPAD);
             }
         }
     }
