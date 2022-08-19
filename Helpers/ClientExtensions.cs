@@ -316,7 +316,7 @@ namespace Helpers
 
             AccountDetails.Voicemail.MessagesList.Clear();
 
-            HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Equals("messages-list")).ToArray()[0].Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-l msg")).ToArray();
+            HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("id", "").Equals("messages-list")).First().Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-l msg")).ToArray();
 
             foreach (HtmlNode subnode in node)
             {
