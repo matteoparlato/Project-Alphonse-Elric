@@ -117,7 +117,7 @@
                         Grid.Row="1"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        Text="Mostra le ultime tre cifre dei numeri di telefono"
+                        Text="Mostra le ultime tre cifre dei numeri di telefono."
                         TextWrapping="Wrap" />
                     <TextBlock
                         Grid.Row="2"
