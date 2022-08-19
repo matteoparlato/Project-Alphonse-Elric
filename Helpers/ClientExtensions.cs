@@ -154,8 +154,8 @@ namespace Helpers
 
             HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveOptions.PublishPhoneNumber = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.MarketingAgreement = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.MarketingAgreement = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.ShowLastThreeNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
 
             response = await _client.GetAsync(new Uri(Resources.GetString("NumberOptionsURL")));
             response.EnsureSuccessStatusCode();
@@ -181,6 +181,17 @@ namespace Helpers
             AccountDetails.ActiveOptions.UnlockLocal = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
             AccountDetails.ActiveOptions.UnlockItaly = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
             AccountDetails.ActiveOptions.UnlockRoaming = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+
+            response = await _client.GetAsync(new Uri(Resources.GetString("MarineRoamingURL")));
+            response.EnsureSuccessStatusCode();
+
+            document = new HtmlDocument() { OptionFixNestedTags = true };
+
+            document.LoadHtml((await response.Content.ReadAsStringAsync()));
+
+            node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
+
+            AccountDetails.ActiveOptions.MarineRoaming = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
         }
 
         #endregion

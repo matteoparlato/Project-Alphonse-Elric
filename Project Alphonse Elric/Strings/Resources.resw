@@ -159,6 +159,12 @@
   <data name="LogoutURL" xml:space="preserve">
     <value>https://www.iliad.it/account/?logout=user</value>
   </data>
+  <data name="MarineRoaming.CommandParameter" xml:space="preserve">
+    <value>https://www.iliad.it/account/le-mie-opzioni/maritimo?activate=</value>
+  </data>
+  <data name="MarineRoamingURL" xml:space="preserve">
+    <value>https://www.iliad.it/account/le-mie-opzioni/maritimo</value>
+  </data>
   <data name="MarketingAgreement.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/le-mie-opzioni?update=consenso-di-marketing&amp;activate=</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="ShowCallerID.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/segreteria-telefonica?update=0&amp;activate=</value>
+  </data>
+  <data name="ShowLastThreeNumbers.CommandParameter" xml:space="preserve">
+    <value>https://www.iliad.it/account/le-mie-opzioni?update=fattura-dettagliata&amp;activate=</value>
   </data>
   <data name="ShowTimeDate.CommandParameter" xml:space="preserve">
     <value>https://www.iliad.it/account/segreteria-telefonica?update=1&amp;activate=</value>

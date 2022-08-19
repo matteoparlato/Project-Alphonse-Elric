@@ -7,11 +7,11 @@
     {
         public bool LTE { get; private set; } = true;
 
-        private bool _publishPhoneNumber;
-        public bool PublishPhoneNumber
+        private bool _showLastThreeNumbers;
+        public bool ShowLastThreeNumbers
         {
-            get => _publishPhoneNumber;
-            set => SetProperty(ref _publishPhoneNumber, value);
+            get => _showLastThreeNumbers;
+            set => SetProperty(ref _showLastThreeNumbers, value);
         }
 
         private bool _paidNumbers;
@@ -47,6 +47,13 @@
         {
             get => _unlockRoaming;
             set => SetProperty(ref _unlockRoaming, value);
+        }
+
+        private bool _marineRoaming;
+        public bool MarineRoaming
+        {
+            get => _marineRoaming;
+            set => SetProperty(ref _marineRoaming, value);
         }
 
         private bool _marketingAgreement;
