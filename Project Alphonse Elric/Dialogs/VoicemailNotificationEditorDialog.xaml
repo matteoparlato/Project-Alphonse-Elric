@@ -31,7 +31,6 @@
             Grid.ColumnSpan="2"
             Margin="0,5,0,0"
             HorizontalAlignment="Stretch"
-            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
             SelectedIndex="0">
             <x:String>Notifica inviata via email</x:String>
             <x:String>Notifica inviata via email + audio in allegato</x:String>
@@ -42,7 +41,6 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="0,5,0,0"
-            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
             PlaceholderText="Email"
             TextChanged="TextBox_TextChanged" />
         <Button
@@ -51,11 +49,9 @@
             Grid.Column="1"
             Margin="5,5,0,0"
             VerticalAlignment="Stretch"
-            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
             Content="&#xE710;"
             FontFamily="Segoe MDL2 Assets"
             IsEnabled="False"
-            Style="{StaticResource ButtonRevealStyle}"
             Tapped="Button_Tapped" />
 
         <Grid

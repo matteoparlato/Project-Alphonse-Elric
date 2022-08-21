@@ -127,7 +127,6 @@
                             <StackPanel Margin="0,18,0,0">
                                 <TextBox
                                     x:Name="UsernameTextBox"
-                                    BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
                                     IsSpellCheckEnabled="False"
                                     IsTextPredictionEnabled="False"
                                     PlaceholderText="Nome utente"
@@ -135,7 +134,6 @@
                                 <PasswordBox
                                     x:Name="PasswordPasswordBox"
                                     Margin="0,5,0,0"
-                                    BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
                                     KeyDown="PasswordPasswordBox_KeyDown"
                                     PasswordChanged="PasswordBox_PasswordChanged"
                                     PlaceholderText="Password" />
@@ -145,8 +143,7 @@
                                     HorizontalAlignment="Center"
                                     Click="Button_Click"
                                     Content="Accedi"
-                                    IsEnabled="False"
-                                    Style="{StaticResource ButtonRevealStyle}" />
+                                    IsEnabled="False" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>

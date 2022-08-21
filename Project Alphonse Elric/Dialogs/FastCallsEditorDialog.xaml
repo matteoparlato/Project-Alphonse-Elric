@@ -30,7 +30,6 @@
             x:Name="NameTextBox"
             Grid.Row="0"
             Grid.ColumnSpan="3"
-            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
             PlaceholderText="Nome"
             TextChanged="TextBox_TextChanged" />
         <TextBox
@@ -38,7 +37,6 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="0,5,0,0"
-            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
             PlaceholderText="Numero della linea"
             Text="+39"
             TextChanged="TextBox_TextChanged" />
@@ -47,7 +45,6 @@
             Grid.Row="1"
             Grid.Column="1"
             Margin="5,5,0,0"
-            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
             PlaceholderText="Abbreviazione"
             TextChanged="TextBox_TextChanged" />
         <Button
@@ -59,7 +56,6 @@
             Content="&#xE710;"
             FontFamily="Segoe MDL2 Assets"
             IsEnabled="False"
-            Style="{StaticResource ButtonRevealStyle}"
             Tapped="Button_Tapped" />
 
         <RelativePanel
