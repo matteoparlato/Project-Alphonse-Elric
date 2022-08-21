@@ -76,7 +76,7 @@
                         Text="Windows Hello è un nuovo sistema per eseguire l'accesso a dispositivi, app, servizi online e reti in modo sicuro. Abilitando l'autenticazione con Windows Hello l'app richiederà lo sblocco tramite PIN, impronta digitale o scansione dell'iride per eseguire l'accesso, in questo modo è possibile fornisce una maggiore protezione da accessi non autorizzati al tuo account iliad."
                         TextWrapping="Wrap" />
                     <HyperlinkButton NavigateUri="https://support.microsoft.com/it-it/help/17215">
-                        <TextBlock Foreground="{ThemeResource SystemControlForegroundAccentBrush}" TextWrapping="Wrap">
+                        <TextBlock TextWrapping="Wrap">
                             <Underline>
                                 <Run Text="Scopri di più sul funzionamento di Windows Hello e sui dispositivi compatibili" />
                             </Underline>
