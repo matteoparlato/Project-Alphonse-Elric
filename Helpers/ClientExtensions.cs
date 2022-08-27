@@ -154,8 +154,8 @@ namespace Helpers
 
             HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveOptions.MarketingAgreement = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.ShowLastThreeNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.MarketingAgreement = node[0].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveOptions.ShowLastThreeNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active");
 
             response = await _client.GetAsync(new Uri(Resources.GetString("NumberOptionsURL")));
             response.EnsureSuccessStatusCode();
@@ -166,8 +166,8 @@ namespace Helpers
 
             node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveOptions.PaidNumbers = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.PaidBankNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.PaidNumbers = node[0].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveOptions.PaidBankNumbers = node[2].GetAttributeValue("class", "").Contains("as__status--active");
 
             response = await _client.GetAsync(new Uri(Resources.GetString("DataCeilingOptionsURL")));
             response.EnsureSuccessStatusCode();
@@ -178,9 +178,9 @@ namespace Helpers
 
             node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveOptions.UnlockLocal = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.UnlockItaly = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveOptions.UnlockRoaming = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.UnlockLocal = node[0].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveOptions.UnlockItaly = node[2].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveOptions.UnlockRoaming = node[4].GetAttributeValue("class", "").Contains("as__status--active");
 
             response = await _client.GetAsync(new Uri(Resources.GetString("MarineRoamingURL")));
             response.EnsureSuccessStatusCode();
@@ -191,7 +191,7 @@ namespace Helpers
 
             node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveOptions.MarineRoaming = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveOptions.MarineRoaming = node[0].GetAttributeValue("class", "").Contains("as__status--active");
         }
 
         #endregion
@@ -214,12 +214,12 @@ namespace Helpers
 
             HtmlNode[] node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveServices.BlockUnknown = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveServices.TransferToVoicemail = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveServices.TransferProtection = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveServices.UserNotAvailable = node[6].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveServices.FastCalls = node[8].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.ActiveServices.Filter = node[10].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveServices.BlockUnknown = node[0].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveServices.TransferToVoicemail = node[2].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveServices.TransferProtection = node[4].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveServices.UserNotAvailable = node[6].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveServices.FastCalls = node[8].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.ActiveServices.Filter = node[10].GetAttributeValue("class", "").Contains("as__status--active");
 
             if (AccountDetails.ActiveServices.BlockUnknown)
             {
@@ -247,7 +247,7 @@ namespace Helpers
 
             HtmlNode[] subnode = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.ActiveServices.RedirectToVoicemailUnknown = subnode[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.ActiveServices.RedirectToVoicemailUnknown = subnode[2].GetAttributeValue("class", "").Contains("as__status--active");
         }
 
         #endregion
@@ -337,10 +337,10 @@ namespace Helpers
 
             node = document.DocumentNode.Descendants("div").Where(tag => tag.GetAttributeValue("class", "").Contains("grid-c w-2 w-desktop-2 w-tablet-4 as__cell as__status")).ToArray();
 
-            AccountDetails.Voicemail.ShowCallerID = node[0].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.Voicemail.ShowTimeDate = node[2].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.Voicemail.ProtectVoicemail = node[4].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
-            AccountDetails.Voicemail.PersonalizedAdvert = node[6].GetAttributeValue("class", "").Contains("as__status--active") ? true : false;
+            AccountDetails.Voicemail.ShowCallerID = node[0].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.Voicemail.ShowTimeDate = node[2].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.Voicemail.ProtectVoicemail = node[4].GetAttributeValue("class", "").Contains("as__status--active");
+            AccountDetails.Voicemail.PersonalizedAdvert = node[6].GetAttributeValue("class", "").Contains("as__status--active");
         }
 
         /// <summary>
