@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Project_Alphonse_Elric.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -39,25 +38,20 @@
                         MinHeight="204"
                         HorizontalAlignment="Center"
                         animations:ReorderGridAnimation.Duration="250"
-                        IsItemClickEnabled="False"
                         ScrollViewer.VerticalScrollMode="Disabled"
                         SelectionMode="None">
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <controls:DropShadowPanel
+                                <Border
                                     Margin="5,5"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    BlurRadius="10"
-                                    OffsetX="0"
-                                    OffsetY="4"
-                                    ShadowOpacity="0.1"
-                                    Color="{ThemeResource CardShadow}">
+                                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="8">
                                     <Grid
                                         Width="130"
                                         Padding="5,5"
-                                        VerticalAlignment="Stretch"
-                                        Background="{ThemeResource CardBackground}">
+                                        VerticalAlignment="Stretch">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
@@ -117,7 +111,7 @@
                                             </CommandBar.SecondaryCommands>
                                         </CommandBar>
                                     </Grid>
-                                </controls:DropShadowPanel>
+                                </Border>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

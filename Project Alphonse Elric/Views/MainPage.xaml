@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Project_Alphonse_Elric.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -36,22 +35,15 @@
                 <GridView
                     HorizontalAlignment="Center"
                     animations:ReorderGridAnimation.Duration="250"
-                    IsItemClickEnabled="False"
                     ScrollViewer.VerticalScrollMode="Disabled"
                     SelectionMode="None">
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -75,21 +67,15 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Local.VoiceExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -113,21 +99,15 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Local.SMSExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -153,21 +133,15 @@
                                     Text="{x:Bind AccountDetails.Local.MMSExtra, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -191,7 +165,7 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Local.DataExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
                 </GridView>
                 <!--#endregion-->
 
@@ -206,22 +180,15 @@
                 <GridView
                     HorizontalAlignment="Center"
                     animations:ReorderGridAnimation.Duration="250"
-                    IsItemClickEnabled="False"
                     ScrollViewer.VerticalScrollMode="Disabled"
                     SelectionMode="None">
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -245,21 +212,15 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Roaming.VoiceExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -283,21 +244,15 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Roaming.SMSExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -321,21 +276,15 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Roaming.MMSExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -359,7 +308,7 @@
                                 Foreground="{StaticResource SystemControlForegroundAccentBrush}"
                                 Text="{x:Bind AccountDetails.Roaming.DataExtra, Mode=TwoWay}" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
                 </GridView>
                 <!--#endregion-->
 
@@ -375,22 +324,15 @@
                     Margin="0,0,0,58"
                     HorizontalAlignment="Center"
                     animations:ReorderGridAnimation.Duration="250"
-                    IsItemClickEnabled="False"
                     ScrollViewer.VerticalScrollMode="Disabled"
                     SelectionMode="None">
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -410,21 +352,15 @@
                             <TextBlock HorizontalAlignment="Center" />
                             <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
 
-                    <controls:DropShadowPanel
+                    <Border
                         Margin="5,5"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BlurRadius="10"
-                        OffsetX="0"
-                        OffsetY="4"
-                        ShadowOpacity="0.1"
-                        Color="{ThemeResource CardShadow}">
-                        <StackPanel
-                            MinWidth="130"
-                            Padding="5,5"
-                            Background="{ThemeResource CardBackground}">
+                        Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <StackPanel MinWidth="130" Padding="5,5">
                             <Viewbox
                                 Width="32"
                                 Height="32"
@@ -444,7 +380,7 @@
                             <TextBlock HorizontalAlignment="Center" />
                             <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" />
                         </StackPanel>
-                    </controls:DropShadowPanel>
+                    </Border>
                 </GridView>
                 <!--#endregion-->
             </StackPanel>

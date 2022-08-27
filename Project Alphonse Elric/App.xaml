@@ -21,16 +21,10 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="MessageHighlight">#FFCC1020</SolidColorBrush>
-                    <Color x:Key="CardShadow">Black</Color>
-                    <Color x:Key="TitleShadow">Black</Color>
-                    <SolidColorBrush x:Key="CardBackground">White</SolidColorBrush>
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="MessageHighlight">#FFF000</SolidColorBrush>
-                    <Color x:Key="CardShadow">White</Color>
-                    <Color x:Key="TitleShadow">White</Color>
-                    <SolidColorBrush x:Key="CardBackground">#272727</SolidColorBrush>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 

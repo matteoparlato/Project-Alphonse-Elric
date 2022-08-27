@@ -71,81 +71,79 @@
             Background="{ThemeResource SystemControlChromeMediumLowAcrylicWindowMediumBrush}"
             Canvas.ZIndex="2"
             IsLoading="True">
-            <Border CornerRadius="4">
-                <controls:DropShadowPanel
-                    x:Name="DropShadowContent"
-                    BlurRadius="10"
-                    OffsetX="0"
-                    OffsetY="4"
-                    ShadowOpacity="0.5"
-                    Color="#545454">
-                    <Grid
-                        x:Name="LoginGrid"
+            <Border
+                Margin="5,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8">
+                <Grid
+                    x:Name="LoginGrid"
+                    Grid.Row="1"
+                    Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <winui:ProgressBar
+                        x:Name="StatusProgressBar"
+                        Grid.Row="0"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        IsIndeterminate="True"
+                        Opacity="0">
+                        <winui:ProgressBar.OpacityTransition>
+                            <ScalarTransition />
+                        </winui:ProgressBar.OpacityTransition>
+                    </winui:ProgressBar>
+
+                    <StackPanel
+                        x:Name="LoginStackPanel"
                         Grid.Row="1"
-                        Grid.Column="1"
-                        Background="{ThemeResource CardBackground}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                        Padding="35"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            Margin="0,0,0,18"
+                            Style="{ThemeResource SubheaderTextBlockStyle}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap">
+                            <Run Text="Benvenuto in" />
+                            <Run Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="iliad" />
+                        </TextBlock>
+                        <TextBlock
+                            Opacity="0.6"
+                            Style="{ThemeResource TitleTextBlockStyle}"
+                            Text="Inserisci le credenziali del tuo account"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
 
-                        <winui:ProgressBar
-                            x:Name="StatusProgressBar"
-                            Grid.Row="0"
-                            VerticalAlignment="Top"
-                            Background="Transparent"
-                            IsIndeterminate="True"
-                            Opacity="0">
-                            <winui:ProgressBar.OpacityTransition>
-                                <ScalarTransition />
-                            </winui:ProgressBar.OpacityTransition>
-                        </winui:ProgressBar>
-
-                        <StackPanel
-                            x:Name="LoginStackPanel"
-                            Grid.Row="1"
-                            Padding="35"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center">
-                            <TextBlock
-                                Margin="0,0,0,18"
-                                Style="{ThemeResource SubheaderTextBlockStyle}"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap">
-                                <Run Text="Benvenuto in" />
-                                <Run Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="iliad" />
-                            </TextBlock>
-                            <TextBlock
-                                Opacity="0.6"
-                                Style="{ThemeResource TitleTextBlockStyle}"
-                                Text="Inserisci le credenziali del tuo account"
-                                TextAlignment="Center"
-                                TextWrapping="Wrap" />
-
-                            <StackPanel Margin="0,18,0,0">
-                                <TextBox
-                                    x:Name="UsernameTextBox"
-                                    IsSpellCheckEnabled="False"
-                                    IsTextPredictionEnabled="False"
-                                    PlaceholderText="Nome utente"
-                                    TextChanged="TextBox_TextChanged" />
-                                <PasswordBox
-                                    x:Name="PasswordPasswordBox"
-                                    Margin="0,5,0,0"
-                                    KeyDown="PasswordPasswordBox_KeyDown"
-                                    PasswordChanged="PasswordBox_PasswordChanged"
-                                    PlaceholderText="Password" />
-                                <Button
-                                    x:Name="LoginButton"
-                                    Margin="0,8,0,0"
-                                    HorizontalAlignment="Center"
-                                    Click="Button_Click"
-                                    Content="Accedi"
-                                    IsEnabled="False" />
-                            </StackPanel>
+                        <StackPanel Margin="0,18,0,0">
+                            <TextBox
+                                x:Name="UsernameTextBox"
+                                IsSpellCheckEnabled="False"
+                                IsTextPredictionEnabled="False"
+                                PlaceholderText="Nome utente"
+                                TextChanged="TextBox_TextChanged" />
+                            <PasswordBox
+                                x:Name="PasswordPasswordBox"
+                                Margin="0,5,0,0"
+                                KeyDown="PasswordPasswordBox_KeyDown"
+                                PasswordChanged="PasswordBox_PasswordChanged"
+                                PlaceholderText="Password" />
+                            <Button
+                                x:Name="LoginButton"
+                                Margin="0,8,0,0"
+                                HorizontalAlignment="Center"
+                                Click="Button_Click"
+                                Content="Accedi"
+                                IsEnabled="False" />
                         </StackPanel>
-                    </Grid>
-                </controls:DropShadowPanel>
+                    </StackPanel>
+                </Grid>
             </Border>
         </controls:Loading>
         <!--#endregion-->
