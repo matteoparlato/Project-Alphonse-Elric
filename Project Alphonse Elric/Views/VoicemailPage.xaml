@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     IsTextScaleFactorEnabled="False"
     Loaded="Page_Loaded"
+    Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
 
     <!--#region Content-->
