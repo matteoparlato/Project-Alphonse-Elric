@@ -2,7 +2,6 @@
 
     <Style x:Key="PageStyle" TargetType="Page">
         <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-        <Setter Property="Padding" Value="24,0,24,24" />
     </Style>
 
 </ResourceDictionary>

@@ -27,6 +27,7 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -124,15 +125,37 @@ namespace Project_Alphonse_Elric.Views
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
             IsBackEnabled = NavigationService.CanGoBack;
+            //
             if (e.SourcePageType == typeof(SettingsPage))
             {
                 Selected = navigationView.SettingsItem as WinUI.NavigationViewItem;
                 return;
             }
+            //
+            var selectedItem = GetSelectedItem(navigationView.MenuItems, e.SourcePageType);
+            if (selectedItem != null)
+            {
+                Selected = selectedItem;
+            }
+        }
 
-            Selected = navigationView.MenuItems
-                            .OfType<WinUI.NavigationViewItem>()
-                            .FirstOrDefault(menuItem => IsMenuItemForPageType(menuItem, e.SourcePageType));
+        private WinUI.NavigationViewItem GetSelectedItem(IEnumerable<object> menuItems, Type pageType)
+        {
+            foreach (var item in menuItems.OfType<WinUI.NavigationViewItem>())
+            {
+                if (IsMenuItemForPageType(item, pageType))
+                {
+                    return item;
+                }
+
+                var selectedChild = GetSelectedItem(item.MenuItems, pageType);
+                if (selectedChild != null)
+                {
+                    return selectedChild;
+                }
+            }
+
+            return null;
         }
 
         private bool IsMenuItemForPageType(WinUI.NavigationViewItem menuItem, Type sourcePageType)
@@ -148,14 +171,15 @@ namespace Project_Alphonse_Elric.Views
                 NavigationService.Navigate(typeof(SettingsPage));
                 return;
             }
-            else if (args.InvokedItemContainer != null)
+            else
             {
+                var selectedItem = args.InvokedItemContainer as WinUI.NavigationViewItem;
+                var pageType = selectedItem?.GetValue(NavHelper.NavigateToProperty) as Type;
 
-                var item = navigationView.MenuItems
-                            .OfType<WinUI.NavigationViewItem>()
-                            .First(menuItem => (string)menuItem.Content == (string)args.InvokedItem);
-                var pageType = item.GetValue(NavHelper.NavigateToProperty) as Type;
-                NavigationService.Navigate(pageType, args.RecommendedNavigationTransitionInfo);
+                if (pageType != null)
+                {
+                    NavigationService.Navigate(pageType, null, args.RecommendedNavigationTransitionInfo);
+                }
             }
         }
 
@@ -181,10 +205,10 @@ namespace Project_Alphonse_Elric.Views
             var result = NavigationService.GoBack();
             args.Handled = result;
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
+        private void Set<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))
             {
@@ -341,7 +365,7 @@ namespace Project_Alphonse_Elric.Views
 
             if (ex is IndexOutOfRangeException)
             {
-                AppNotification.Subtitle = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";                
+                AppNotification.Subtitle = "Si è verificato un errore durante l'accesso all'account iliad. Controlla le credenziali inserite e riprova. Se il problema dovesse persistere contatta lo sviluppatore dell'app.";
             }
             else
             {

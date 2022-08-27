@@ -3,7 +3,7 @@
 namespace Project_Alphonse_Elric.Activation
 {
     // For more information on understanding and extending activation flow see
-    // https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/activation.md
+    // https://github.com/microsoft/TemplateStudio/blob/main/docs/UWP/activation.md
     internal abstract class ActivationHandler
     {
         public abstract bool CanHandle(object args);

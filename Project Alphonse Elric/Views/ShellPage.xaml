@@ -22,6 +22,7 @@
             IsBackEnabled="{x:Bind IsBackEnabled, Mode=OneWay}"
             IsSettingsVisible="True"
             IsTitleBarAutoPaddingEnabled="False"
+            ItemInvoked="OnItemInvoked"
             PaneTitle="{x:Bind PaneTitle}"
             SelectedItem="{x:Bind Selected, Mode=OneWay}">
             <winui:NavigationView.MenuItems>

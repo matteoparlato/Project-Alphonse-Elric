@@ -36,16 +36,18 @@ namespace Project_Alphonse_Elric
             }
 
             InitializeComponent();
+            UnhandledException += OnAppUnhandledException;
+
+            // Deferred execution until used. Check https://docs.microsoft.com/dotnet/api/system.lazy-1 for further info on Lazy<T> class.
 
             try
             {
                 TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //
             }
-            
 
             _activationService = new Lazy<ActivationService>(CreateActivationService);
         }
@@ -61,7 +63,12 @@ namespace Project_Alphonse_Elric
         protected override async void OnActivated(IActivatedEventArgs args)
         {
             await ActivationService.ActivateAsync(args);
-            NavigationService.Navigate(typeof(LockedPage));
+        }
+
+        private void OnAppUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            // TODO: Please log and handle the exception as appropriate to your scenario
+            // For more info see https://docs.microsoft.com/uwp/api/windows.ui.xaml.application.unhandledexception
         }
 
         private ActivationService CreateActivationService()

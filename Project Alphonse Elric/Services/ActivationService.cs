@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 namespace Project_Alphonse_Elric.Services
 {
     // For more information on understanding and extending activation flow see
-    // https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/activation.md
+    // https://github.com/microsoft/TemplateStudio/blob/main/docs/UWP/activation.md
     internal class ActivationService
     {
         private readonly App _app;
