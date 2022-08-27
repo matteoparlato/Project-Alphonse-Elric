@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Project_Alphonse_Elric.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     Title="Chiamate rapide"
     CloseButtonText="Chiudi"
     DefaultButton="Close"
@@ -120,7 +121,7 @@
             </ListView>
 
             <!--#region Loading progress-->
-            <ProgressRing
+            <winui:ProgressRing
                 x:Name="LoadingProgressRing"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"

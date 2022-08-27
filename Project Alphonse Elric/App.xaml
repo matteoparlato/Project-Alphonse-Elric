@@ -64,31 +64,6 @@
                 <Setter Property="FontWeight" Value="Thin" />
                 <Setter Property="Margin" Value="0,48,0,0" />
             </Style>
-
-            <Style x:Key="ProgressRingBrowser" TargetType="ProgressRing">
-                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
-                <Setter Property="Height" Value="100" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-                <Setter Property="IsActive" Value="True" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Width" Value="100" />
-            </Style>
-
-            <Style
-                x:Key="TitleBarText"
-                BasedOn="{StaticResource BaseTextBlockStyle}"
-                TargetType="TextBlock">
-                <Setter Property="CharacterSpacing" Value="0.075em" />
-                <Setter Property="FontWeight" Value="Bold" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-
-            <Style x:Key="TitleBarGrid" TargetType="Grid">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Height" Value="48" />
-                <Setter Property="VerticalAlignment" Value="Top" />
-            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
