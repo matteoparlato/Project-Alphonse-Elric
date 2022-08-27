@@ -21,6 +21,7 @@
             IsBackButtonVisible="Visible"
             IsBackEnabled="{x:Bind IsBackEnabled, Mode=OneWay}"
             IsSettingsVisible="True"
+            IsTitleBarAutoPaddingEnabled="False"
             PaneTitle="{x:Bind PaneTitle}"
             SelectedItem="{x:Bind Selected, Mode=OneWay}">
             <winui:NavigationView.MenuItems>
@@ -162,6 +163,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  Remove the next 3 lines for left-only navigation.  -->
+                        <Setter Target="navigationView.IsTitleBarAutoPaddingEnabled" Value="True" />
                         <Setter Target="navigationView.PaneDisplayMode" Value="Top" />
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed" />
                         <!--  Leave the next line for left-only navigation.  -->
@@ -174,6 +176,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!--  Remove the next 3 lines for left-only navigation.  -->
+                        <Setter Target="navigationView.IsTitleBarAutoPaddingEnabled" Value="False" />
                         <Setter Target="navigationView.PaneDisplayMode" Value="Left" />
                         <Setter Target="MainPagesHeader.Visibility" Value="Visible" />
                         <!--  Leave the next line for left-only navigation.  -->
